@@ -39,7 +39,7 @@ TBF
 
 ## Installation
 
-TBF
+[<img src="https://user-images.githubusercontent.com/663460/26973322-4ddf78a4-4d16-11e7-8b58-4c03b4bc2490.png" alt="Get it on Google Pla" height="60">](https://play.google.com/store/apps/details?id=com.flyvemdm.dashboard) [<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="60">](https://f-droid.org/app/com.flyvemdm.dashboard.ping) [<img src="https://user-images.githubusercontent.com/663460/26973090-f8fdc986-4d14-11e7-995a-e7c5e79ed925.png" alt="Download APK from GitHub" height="60">](https://github.com/itds-consulting/android-silent-ping-sms/releases/latest)
 
 ## Documentation
 

@@ -2,11 +2,11 @@
 
 ![Flyve MDM banner](https://user-images.githubusercontent.com/663460/26935464-54267e9c-4c6c-11e7-86df-8cfa6658133e.png)
 
-[![License](https://img.shields.io/github/license/flyve-mdm/flyve-mdm-android-inventory.svg?&label=License)](https://github.com/flyve-mdm/flyve-mdm-android-inventory/blob/master/LICENSE.md)
+[![License](https://img.shields.io/github/license/flyve-mdm/flyve-mdm-android-dashboard.svg?&label=License)](https://github.com/flyve-mdm/flyve-mdm-android-dashboard/blob/master/LICENSE.md)
 [![Follow twitter](https://img.shields.io/twitter/follow/FlyveMDM.svg?style=social&label=Twitter&style=flat-square)](https://twitter.com/FlyveMDM)
 [![Telegram Group](https://img.shields.io/badge/Telegram-Group-blue.svg)](https://t.me/flyvemdm)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
-[![GitHub release](https://img.shields.io/github/release/flyve-mdm/flyve-mdm-android-inventory.svg)](https://github.com/flyve-mdm/flyve-mdm-android-inventory/releases)
+[![GitHub release](https://img.shields.io/github/release/flyve-mdm/flyve-mdm-android-dashboard.svg)](https://github.com/flyve-mdm/flyve-mdm-android-dashboard/releases)
 
 Mobile device management software that enables you to secure and manage all the mobile devices of your business or family via a web-based console.
 
@@ -22,6 +22,8 @@ To get started, check out <https://flyve-mdm.com/>!
 * [Copying](#copying)
 
 ## Synopsis
+
+Flyve MDM Mobile Dashboard for Android
 
 TBF
 

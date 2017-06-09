@@ -1,4 +1,4 @@
-# Flyve MDM
+# Flyve MDM - Mobile Dashboard
 
 ![Flyve MDM banner](https://user-images.githubusercontent.com/663460/26935464-54267e9c-4c6c-11e7-86df-8cfa6658133e.png)
 
@@ -8,7 +8,7 @@
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![GitHub release](https://img.shields.io/github/release/flyve-mdm/flyve-mdm-android-dashboard.svg)](https://github.com/flyve-mdm/flyve-mdm-android-dashboard/releases)
 
-Mobile device management software that enables you to secure and manage all the mobile devices of your business or family via a web-based console.
+Flyve MDM is a mobile device management software that enables you to secure and manage all the mobile devices of your business or family via a web-based console.
 
 To get started, check out <https://flyve-mdm.com/>!
 
@@ -23,13 +23,7 @@ To get started, check out <https://flyve-mdm.com/>!
 
 ## Synopsis
 
-Flyve MDM Mobile Dashboard for Android
-
-TBF
-
-**What's included?**
-
-TBF
+Flyve MDM Mobile Dashboard for Android.
 
 ## Build Status
 

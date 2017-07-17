@@ -1,4 +1,4 @@
-package dashboard.flyve.org.admindashboard;
+package flyve.org.dashboard;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

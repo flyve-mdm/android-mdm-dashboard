@@ -1,4 +1,4 @@
-package dashboard.flyve.org.admindashboard;
+package flyve.org.admindashboard;
 
 import org.junit.Test;
 

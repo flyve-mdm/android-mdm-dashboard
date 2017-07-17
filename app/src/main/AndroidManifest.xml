@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="flyve.org.dashboard">
+    package="flyve.org.dashboard"
+    android:versionName="1.0.0"
+    android:versionCode="1"
+    >
 
     <application
         android:allowBackup="true"

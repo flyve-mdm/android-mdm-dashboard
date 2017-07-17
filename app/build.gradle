@@ -4,7 +4,7 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
     defaultConfig {
-        applicationId "flyve.org.dashboard"
+        applicationId "org.flyve.admin.dashboard"
         minSdkVersion 16
         targetSdkVersion 16
         versionCode 1

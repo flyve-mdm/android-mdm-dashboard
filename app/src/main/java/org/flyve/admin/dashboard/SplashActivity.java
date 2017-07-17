@@ -1,7 +1,9 @@
-package flyve.org.dashboard;
+package org.flyve.admin.dashboard;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import flyve.org.admin.dashboard.R;
 
 public class SplashActivity extends AppCompatActivity {
 

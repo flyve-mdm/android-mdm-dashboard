@@ -6,8 +6,10 @@ android:
   - android-$ANDROID_API
   - extra-android-m2repository
 install:
-- rvm install 2.3.4
-- gem install fastlane
+  - rvm install 2.3.4
+  - gem install fastlane
+script:
+  - ./gradle build
 after_success:
 - "./ci/deploy.sh"
 notifications:

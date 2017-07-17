@@ -8,7 +8,7 @@ install:
   - rvm install 2.3.4
   - gem install fastlane
 script:
-  - ./gradle build
+  - gradle build
 after_success:
 - "./ci/deploy.sh"
 notifications:

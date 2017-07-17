@@ -25,6 +25,7 @@ platform :android do
       alias: "admindashboard",
       storepass: options[:storepass],
       tsa: "http://timestamp.comodoca.com/rfc316",
+      keypass: options[:keypass],
     )
 
     zipalign(apk_path: "#{lane_context[SharedValues::SIGNED_APK_PATH]}")

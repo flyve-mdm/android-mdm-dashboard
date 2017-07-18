@@ -7,7 +7,6 @@
 [![Telegram Group](https://img.shields.io/badge/Telegram-Group-blue.svg)](https://t.me/flyvemdm)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![GitHub release](https://img.shields.io/github/release/flyve-mdm/flyve-mdm-android-admin-dashboard.svg)](https://github.com/flyve-mdm/flyve-mdm-android-admin-dashboard/releases)
-[![Maven Central](https://img.shields.io/maven-central/v/com.flyvemdm/inventory.svg)](https://bintray.com/flyve-mdm/inventory/flyve-mdm-android-admin-dashboard/)
 
 Flyve MDM is a Mobile device management software that enables you to secure and manage all the mobile devices of your business or family via a web-based console.
 

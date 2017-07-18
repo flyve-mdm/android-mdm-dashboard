@@ -1,0 +1,24 @@
+language: android
+android:
+  components:
+  - build-tools-$BUILD_TOOL
+  - android-$ANDROID_API
+  - extra-android-m2repository
+install:
+- rvm install 2.3.4
+- gem install fastlane
+script:
+- gradle assemble
+after_success:
+- "./ci/deploy.sh"
+notifications:
+  webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
+env:
+  global:
+  - BUILD_TOOL=22.0.1
+  - ANDROID_API=22
+  - secure: S6f9aipudUjgzHPoMC2Hv7qirTLP4Q9YjZqN3ubVz8zlreqplsnhHUEryJp2Yb2Dc3XpfWylgAcCqOqE/exyNpbmqFxuMsRZYIWJL1avS8IK0R98JdeVR2LF99duKuCC6oE8ZNPKcEkQEosqMM4Rjorq+eZBxufGr+kdgepbgMnStvrGr4Pd7AmJrydlFAqGjxPHbXzyWSaBYot8y3fTfE2NlMq+GaQIBD/lBboB1u5qJwhUjKe8zsfkKwDLKlIk9ziw/XrYCHCXDfDrqLX41fqzYLn0scAsHpNnw2ogKm3eznBy2CQ0MVvgjUkv2V/AOU4CvqdtXPR+9J+NXUMhkdQ4bGGHKuYWO5mFADQ2KmGKWsDQ8OjZXtBt2zx/jGvbyTXAPpRUQFUffw3021+61QXwEvXKzQxkJtMJBxVm2gf21X+bwK8lgN5KSLmcOReMBHbI78DMP5l2cFUdySPcV3dm6L8RZESKKteMOz8yVvfW1fLirwxaflvm5GRG0n700ZBNypScUQCexalI2DSHlfoaBAehw6Eqn4hJRh56zt4CAi3kA68DB/GGgA5Tv9IbVkWcjO2+uTIFWfrqX5o4Q3JQKhB4aT7aOhb6kYY8juz8rrO6XqA/nhXl08PO3noSHRjNM5uDKv5zOuM62XK5GYBfNXH/NoC12tN+hDa/WBw=
+  - secure: XWeRZoZdd4a20aTd7asLXSvUJL+aJmrSEY5pXowbmSJjll5k41fWumW8mPb9ncfDqFf0+39g4wyDB4YQBSRZqwC9712WO3Q4JggvRxeVPlXM/cf0OhavV1bSDmNmgT7o/Q4C7daDTZSFt/SQ5BsrcCAIb+KVEORovdk6Imm9S7LEUTGUpZcWI5oqGbyZCoG3WaDjiog3FwspZp9yh+iHr/zES3sVrc5uT8EE9QGksWjjpzC1Ku84HGcheenje3MMT/raatSwlzNtJm68MTcz49lr9tARb6pPNS0SxH5/yf9PKhpX7/viiNVIyxomN4bouEyijykLW9CXZO/bi+/RQvXTOHCda1IWgg8yrsJ6N7cBITIr4r+6MXMOOWQS6DWuADwB1vxUdGjItNmFbcQmxc/H4K7+B0LM+59sdvgMeYztDf2rwe9FuxWWHQGOqfGL5oMDwgfa1TJ3oOVMozsvVRyZkJcWIHHTQwVHY+xnQa4gKhXIqJ89C49WlLZDpy13C4HLabV/ZeysghxlrkFtIADj9vQgu5S/O9UOUjcvHnssyUsOqO62XaRW0ngY/rPBGCyJR1MOY8j9Y4gShZU67DsZji5/fnVMVwNif63v3cufGulZyexIboDUNoG5Z7xSa8OlfY7v++ywdP6tpCeY8kudQzzRGaZ28it4NpyMHvU=
+before_install:
+- openssl aes-256-cbc -K $encrypted_5cc6b3929336_key -iv $encrypted_5cc6b3929336_iv
+  -in google.tar.gz.enc -out ci/google.tar.gz -d

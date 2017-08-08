@@ -17,7 +17,7 @@
    style="enable-background:new 0 0 512 512;"
    xml:space="preserve"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="dashboard.svg"><metadata
+   sodipodi:docname="logo.svg"><metadata
      id="metadata28"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
@@ -30,13 +30,13 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="711"
-     inkscape:window-height="480"
+     inkscape:window-width="1288"
+     inkscape:window-height="641"
      id="namedview24"
      showgrid="false"
      inkscape:zoom="0.4609375"
-     inkscape:cx="285.83833"
-     inkscape:cy="176.57133"
+     inkscape:cx="481.64023"
+     inkscape:cy="136.97236"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -47,7 +47,8 @@
 	.st1{fill:#3E3E3E;}
 </style><g
      id="Settings_1_x40_2x.png_9_"
-     style="fill:#1a1a1a"><g
+     style="fill:#1a1a1a"
+     transform="matrix(0.75277685,0,0,0.73971308,61.458616,65.78327)"><g
        id="g10"
        style="fill:#1a1a1a"><path
          class="st0"
@@ -56,7 +57,8 @@
          inkscape:connector-curvature="0"
          style="fill:#1a1a1a" /></g></g><g
      id="g14"
-     style="fill:#ffffff"><g
+     style="fill:#ffffff"
+     transform="matrix(0.75277685,0,0,0.73971308,61.458616,65.78327)"><g
        id="g16"
        style="fill:#ffffff"><g
          id="g18"

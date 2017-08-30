@@ -1,6 +1,6 @@
-baseurl: "/flyve-mdm-android-admin-dashboard" 
-url: "https://flyve-mdm.github.io"  
-  
+email: ml-flyvemdm@teclib.com
+baseurl: "/flyve-mdm-android-admin-dashboard"
+url: "https://flyve-mdm.github.io"
 
 # Build settings
 markdown: kramdown

@@ -29,6 +29,13 @@
 gradle clean
 
 if [[ ("$TRAVIS_BRANCH" == "develop" ||  "$TRAVIS_BRANCH" == "master") && "$TRAVIS_RUN" == "true" ]]; then
+
+    # run device for testing
+    echo no | android create avd --force -n test -t android-$ANDROID_API --abi armeabi-v7a
+    emulator -avd test -no-audio -no-window &
+    android-wait-for-emulator
+    adb shell input keyevent 82 &
+
     # Runs all device checks on currently connected devices.
     gradle build connectedCheck
 else

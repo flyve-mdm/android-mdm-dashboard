@@ -120,7 +120,8 @@ configGit() {
 if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_RUN" == "true" ]]; then
 
     # decrypt deploy on google play file
-    openssl aes-256-cbc -K $encrypted_27dcfd0dda78_key -iv $encrypted_27dcfd0dda78_iv -in gplay.tar.gz.enc -out ci/gplay.tar.gz -d
+    openssl aes-256-cbc -K $encrypted_5cc6b3929336_key -iv $encrypted_5cc6b3929336_iv -in gplay.tar.gz.enc -out ci/gplay.tar.gz -d
+
 
     # uncompress cert file
     tar -zxvf ci/gplay.tar.gz -C ci/
@@ -153,7 +154,7 @@ fi
 if [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_RUN" == "true" ]]; then
 
     # decrypt deploy on google play file
-    openssl aes-256-cbc -K $encrypted_27dcfd0dda78_key -iv $encrypted_27dcfd0dda78_iv -in gplay.tar.gz.enc -out ci/gplay.tar.gz -d
+    openssl aes-256-cbc -K $encrypted_5cc6b3929336_key -iv $encrypted_5cc6b3929336_iv -in gplay.tar.gz.enc -out ci/gplay.tar.gz -d
 
     # uncompress cert file
     tar -zxvf ci/gplay.tar.gz -C ci/

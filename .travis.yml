@@ -1,24 +1,27 @@
 language: android
+dist: precise
+jdk: oraclejdk8
 android:
   components:
   - build-tools-$BUILD_TOOL
   - android-$ANDROID_API
   - extra-android-m2repository
 install:
-- rvm install 2.3.4
-- gem install fastlane
+  - source ./ci/install.sh
+before_script:
+  - source ./ci/before_script.sh
 script:
-- gradle assemble
+  - source ./ci/script.sh
 after_success:
-- "./ci/deploy.sh"
+  - source ./ci/deploy.sh
 notifications:
   webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
 env:
   global:
-  - BUILD_TOOL=22.0.1
-  - ANDROID_API=22
+  - BUILD_TOOL=23.0.3
+  - ANDROID_API=23
+  - GH_USER=flyve-mdm-bot
   - secure: S6f9aipudUjgzHPoMC2Hv7qirTLP4Q9YjZqN3ubVz8zlreqplsnhHUEryJp2Yb2Dc3XpfWylgAcCqOqE/exyNpbmqFxuMsRZYIWJL1avS8IK0R98JdeVR2LF99duKuCC6oE8ZNPKcEkQEosqMM4Rjorq+eZBxufGr+kdgepbgMnStvrGr4Pd7AmJrydlFAqGjxPHbXzyWSaBYot8y3fTfE2NlMq+GaQIBD/lBboB1u5qJwhUjKe8zsfkKwDLKlIk9ziw/XrYCHCXDfDrqLX41fqzYLn0scAsHpNnw2ogKm3eznBy2CQ0MVvgjUkv2V/AOU4CvqdtXPR+9J+NXUMhkdQ4bGGHKuYWO5mFADQ2KmGKWsDQ8OjZXtBt2zx/jGvbyTXAPpRUQFUffw3021+61QXwEvXKzQxkJtMJBxVm2gf21X+bwK8lgN5KSLmcOReMBHbI78DMP5l2cFUdySPcV3dm6L8RZESKKteMOz8yVvfW1fLirwxaflvm5GRG0n700ZBNypScUQCexalI2DSHlfoaBAehw6Eqn4hJRh56zt4CAi3kA68DB/GGgA5Tv9IbVkWcjO2+uTIFWfrqX5o4Q3JQKhB4aT7aOhb6kYY8juz8rrO6XqA/nhXl08PO3noSHRjNM5uDKv5zOuM62XK5GYBfNXH/NoC12tN+hDa/WBw=
   - secure: XWeRZoZdd4a20aTd7asLXSvUJL+aJmrSEY5pXowbmSJjll5k41fWumW8mPb9ncfDqFf0+39g4wyDB4YQBSRZqwC9712WO3Q4JggvRxeVPlXM/cf0OhavV1bSDmNmgT7o/Q4C7daDTZSFt/SQ5BsrcCAIb+KVEORovdk6Imm9S7LEUTGUpZcWI5oqGbyZCoG3WaDjiog3FwspZp9yh+iHr/zES3sVrc5uT8EE9QGksWjjpzC1Ku84HGcheenje3MMT/raatSwlzNtJm68MTcz49lr9tARb6pPNS0SxH5/yf9PKhpX7/viiNVIyxomN4bouEyijykLW9CXZO/bi+/RQvXTOHCda1IWgg8yrsJ6N7cBITIr4r+6MXMOOWQS6DWuADwB1vxUdGjItNmFbcQmxc/H4K7+B0LM+59sdvgMeYztDf2rwe9FuxWWHQGOqfGL5oMDwgfa1TJ3oOVMozsvVRyZkJcWIHHTQwVHY+xnQa4gKhXIqJ89C49WlLZDpy13C4HLabV/ZeysghxlrkFtIADj9vQgu5S/O9UOUjcvHnssyUsOqO62XaRW0ngY/rPBGCyJR1MOY8j9Y4gShZU67DsZji5/fnVMVwNif63v3cufGulZyexIboDUNoG5Z7xSa8OlfY7v++ywdP6tpCeY8kudQzzRGaZ28it4NpyMHvU=
-before_install:
-- openssl aes-256-cbc -K $encrypted_5cc6b3929336_key -iv $encrypted_5cc6b3929336_iv
-  -in google.tar.gz.enc -out ci/google.tar.gz -d
+  - secure: qT4Z11vOBcPaZm26gbfNbV1ZIveKlPEtuZtHoVkifNfucR4uVrUgkTqD6NtFPAiEzBQmpwWOXbuxmczO9JM8MUtQQQT7nzN6SLI6u8Y4Wbh4/GZKPKUu5Coi7QFZulYPYZY4MOhsPsLjHq2kbvIwoliR3i/EI+iCYygKkLVePpDmsdLrS7obNg8934K2a5jnbj1RXEX+e9yz6T+zT2kveckR3cVfdaUKVXRolBuLidkDHm2AoLSi+UsJzHwtql34DIbiO6tSiHzCFoV5WHcDOFeL5F9nfbfTENg8BOXWi7MZcT59fdfLrV3QZRpOeFFM+vm7yUwj3b7Y0Rx3VXZFAowh3tIhvGpdt7QpDcAT6+VIIN3oGYvQtqXFfTSuLr9BjkJNirjxlpSfIrfz4kP/qZuCxQUt8ackQ/wXfV2lR/6Fr9mYADZr3OYgjiddvUdZ6FGLue/uEB0SPEWR9AeY8FBlK0qW71jXGyd6IFdzd3vY6l6XRlKg6qZuocvZTvwCWI2IuixgLqG5p0QlwSzzHKKiIly7wMjiJviDJbHmLAQHJtttzNkxQT9Yh488cU11rWBCu+DNI8ABaUrTK6Ohq7Gx54HdC1Jn4TU553uNvhlr2v1mSg6ZWMFrAltoZAkB1JSmHTfWwSQ1nNqUVpto0c9Ldpt94n9zIZ0LGsWKNnk=
+  - secure: iIIGgS/3BI8ZbKyw84kcb8Ke7HtRWDajK3Mnbg36VLR7nSAgSrZCqfzsN5Dpa/fvTR9JlTXkkHPuzbtfbPqItw0fucwGyC9/WOMGEPLAM3O1JFqHku7CLcQwnEhr16GkAyEvDYhyH+Q0vX1DyC+kC2A4Y7PiVRv1RBmM4+fecf/IDjzt4x0Y0OoDrqnp0n5/0eTvyCgPPaBA2DehU74tCdtuCikmg+eG3WlxUARhDM/HYcdf/Xj0ieGLt87Ljzcr2kFPeJVz2WbLJ/kuYirh+har9e7FFcJjDXZZCF00QZv7PXDh8vp6QIlgn2vmDoryVGTyEs1Qj7pEjd+OxbglVJZNbKod5+Lh7nhLjZ61FBq4tjQqgLpXwOsFab+cIt/3HUJHwqPRcKT9RZJmecQb7ISUgn21qo0g1y3WBe4yakWfFmnuSeAkk+Or1jmIqc+pqTrvXHHqLN/CzbUDU6pL+HzyAvlLaijsXC5MN0ID/6TtBhX9qfwPjz9GYJE/Af4/9vzB2jgU6p15eHxSxUmi4HcvawQ7TwJmCsSoPuj1tbwQj67OhYjNBImPyKi8owjneRc1hzaEYcLo/2vI6BQ8k/sO8Qb/x/wjDdn/cGWAnR2DWazuRP6bEo6hrTLXJoog0QAxA6EthNDpNkJj4BlV0/7MtzhXZP99V6vPrtTTxiw=

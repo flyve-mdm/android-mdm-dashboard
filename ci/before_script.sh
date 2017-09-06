@@ -35,14 +35,20 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" && "$TR
     # Move to local branch
     git checkout $TRAVIS_BRANCH -f
 
+    # get transifex status
+    tx status
+
+    # pull all the new language with 80% complete
+    tx pull -a
+
+    # push local files to transifex
+    tx push -s -t
+
     # increment version on package.json, create tag and commit with changelog
     npm run release
 
     # Get version number from package.json
     export GIT_TAG=$(jq -r ".version" package.json)
-
-    # Revert last commit
-    git reset --hard HEAD~1
 
     # increment version code, need to be unique to send to store
     gradle updateVersionCode -P vCode=$TRAVIS_BUILD_NUMBER
@@ -61,15 +67,14 @@ if [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" && "$TRA
     # Move to local branch
     git checkout $TRAVIS_BRANCH -f
 
-
-    # increment version code, need to be unique to send to store
-    gradle updateVersionCode -P vCode=$TRAVIS_BUILD_NUMBER
-
     # increment version on package.json, create tag and commit with changelog
     npm run release -- -m "ci(release): generate **CHANGELOG.md** for version %s"
 
     # Get version number from package.json
     export GIT_TAG=$(jq -r ".version" package.json)
+
+    # increment version code, need to be unique to send to store
+    gradle updateVersionCode -P vCode=$TRAVIS_BUILD_NUMBER
 
     # update version name generate on package json
     gradle updateVersionName -P vName=$GIT_TAG

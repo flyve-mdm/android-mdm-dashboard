@@ -38,45 +38,50 @@ echo GIT_BRANCH=$TRAVIS_BRANCH >> .env
 # - Push this file to gh-pages branch
 updateGHPAGES() {
     # Generate javadoc this folder must be on .gitignore
-    javadoc -d ./javadoc -sourcepath ./app/src/main/java -subpackages .
+    javadoc -d ./reports$1/javadoc -sourcepath ./app/src/main/java -subpackages .
 
-    # Generate code coverage
+    # create code coverage report
     gradle createDebugCoverageReport
 
-    # get
+    # get gh-pages branch
     git fetch origin gh-pages
 
     # move to gh-pages
     git checkout gh-pages
 
     # add javadoc folder
-    git add javadoc
+    git add reports$1/javadoc
 
     # create commit for documentation
     git commit -m "docs(javadoc): update javadoc with version ${GIT_TAG}"
 
-    # add code coverage
-    git add app/build/reports/coverage
+    # move code coverage
+    mv -v app/build/reports/coverage reports$1
+
+    #move Android test
+    mv -v app/build/reports/androidTests reports$1
 
     # replace .resources with resource because github don't support folders with "_" or "." at the beginning
-    mv app/build/reports/coverage/debug/.resources app/build/reports/coverage/debug/resources
+    mv reports$1/coverage/debug/.resources reports$1/coverage/debug/resources
 
-    index=$(<app/build/reports/coverage/debug/index.html)
+    index=$(<reports$1/coverage/debug/index.html)
     newindex="${index//.resources/resources}"
-    echo $newindex > app/build/reports/coverage/debug/index.html
+    echo $newindex > reports$1/coverage/debug/index.html
 
-    # add new files processes
-    git add app/build/reports/coverage/debug/resources
-    git add app/build/reports/coverage/debug/index.html
+    # add code coverage
+    git add reports$1/coverage
 
     # add Android Tests
-    git add app/build/reports/androidTests
+    git add reports$1/androidTests
 
     # create commit
     git commit -m "docs(coverage): update code coverage with version ${GIT_TAG}"
 
     # clean unstage file on gh-pages to remove all others files gets on checkout
     git clean -fdx
+
+    # remove CHANGELOG.md
+    rm CHANGELOG.md
 
     # get changelog from branch
     git checkout $TRAVIS_BRANCH CHANGELOG.md
@@ -97,10 +102,10 @@ updateGHPAGES() {
     git add CHANGELOG.md
 
     # create commit
-    git commit -m "docs(changelog): update changelog with version ${GIT_TAG}"
+    git commit -m "docs(changelog): update changelog$1 with version ${GIT_TAG}"
 
     # push to branch
-    git push origin gh-pages --force
+    git push origin gh-pages
 }
 
 # Configure git with Flyve bot user to make commits on repositories
@@ -122,7 +127,6 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" && "$TR
     # decrypt deploy on google play file
     openssl aes-256-cbc -K $encrypted_5cc6b3929336_key -iv $encrypted_5cc6b3929336_iv -in gplay.tar.gz.enc -out ci/gplay.tar.gz -d
 
-
     # uncompress cert file
     tar -zxvf ci/gplay.tar.gz -C ci/
 
@@ -140,7 +144,7 @@ if [[ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_PULL_REQUEST" == "false" && "$TR
 
     #------------------------ GH-PAGES --------------------------
 
-    updateGHPAGES
+    updateGHPAGES "-beta"
 fi
 
 #-----------------------------------------------------------------

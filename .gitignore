@@ -102,3 +102,7 @@ freeline_project_description.json
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
 
+#javadoc and reports
+/reports
+/reports-beta
+

@@ -30,7 +30,7 @@ Flyve MDM Mobile Dashboard for Android.
 
 | **Release channel** | **Beta channel** |
 |:---:|:---:|
-| [![Build Status](https://travis-ci.org/flyve-mdm/flyve-mdm-android-dashboard.svg?branch=master)](https://travis-ci.org/flyve-mdm/flyve-mdm-android-dashboard) | [![Build Status](https://travis-ci.org/flyve-mdm/flyve-mdm-android-dashboard.svg?branch=develop)](https://travis-ci.org/flyve-mdm/flyve-mdm-android-dashboard) |
+| [![Build Status](https://circleci.com/gh/flyve-mdm/flyve-mdm-android-admin-dashboard/tree/master.svg?style=svg)](https://circleci.com/gh/flyve-mdm/flyve-mdm-admin-dashboard/tree/master) | [![Build Status](https://circleci.com/gh/flyve-mdm/flyve-mdm-android-admin-dashboard/tree/develop.svg?style=svg)](https://circleci.com/gh/flyve-mdm/flyve-mdm-admin-dashboard/tree/develop) |
 
 ## Installation
 

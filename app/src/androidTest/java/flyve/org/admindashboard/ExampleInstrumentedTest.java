@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("flyve.org.admindashboard", appContext.getPackageName());
+        assertEquals("org.flyve.admin.dashboard", appContext.getPackageName());
     }
 }

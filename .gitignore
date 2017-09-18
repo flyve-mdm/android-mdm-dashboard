@@ -79,10 +79,10 @@ node_modules
 local.properties
 build
 .idea/
-.gradle/
-gradle/
-gradlew
-gradlew.bat
+#.gradle/
+#gradle/
+#gradlew
+#gradlew.bat
 
 #fastlane
 /fastlane/README.md

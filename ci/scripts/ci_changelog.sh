@@ -2,9 +2,9 @@
 #
 #  Copyright (C) 2017 Teclib'
 #
-#  This file is part of Flyve MDM Inventory Agent Android.
+#  This file is part of Flyve MDM Admin Dashboard Android.
 #
-#  Flyve MDM Inventory Agent Android is a subproject of Flyve MDM. Flyve MDM is a mobile
+#  Flyve MDM Admin Dashboard Android is a subproject of Flyve MDM. Flyve MDM is a mobile
 #  device management software.
 #
 #  Flyve MDM Android is free software: you can redistribute it and/or
@@ -20,7 +20,7 @@
 #  @author    Rafael Hernandez - rafaelje
 #  @copyright Copyright (c) 2017 Flyve MDM
 #  @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
-#  @link      https://github.com/flyve-mdm/flyve-mdm-android-inventory-agent/
+#  @link      https://github.com/flyve-mdm/flyve-mdm-android-admin-dashboard
 #  @link      http://www.glpi-project.org/
 #  @link      https://flyve-mdm.com/
 #  ------------------------------------------------------------------------------

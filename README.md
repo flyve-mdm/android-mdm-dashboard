@@ -4,6 +4,7 @@
 
 [![License](https://img.shields.io/github/license/flyve-mdm/flyve-mdm-android-admin-dashboard.svg?&label=License)](https://github.com/flyve-mdm/flyve-mdm-android-admin-dashboard/blob/master/LICENSE.md)
 [![Follow twitter](https://img.shields.io/twitter/follow/FlyveMDM.svg?style=social&label=Twitter&style=flat-square)](https://twitter.com/FlyveMDM)
+[![Project Status: WIP](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/)
 [![Telegram Group](https://img.shields.io/badge/Telegram-Group-blue.svg)](https://t.me/flyvemdm)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![GitHub release](https://img.shields.io/github/release/flyve-mdm/flyve-mdm-android-admin-dashboard.svg)](https://github.com/flyve-mdm/flyve-mdm-android-admin-dashboard/releases)

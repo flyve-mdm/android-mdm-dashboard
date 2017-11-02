@@ -32,7 +32,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.view.WindowManager;
 
-import org.flyve.mdm.agent.ui.SplashActivity;
+import org.flyve.admin.dashboard.SplashActivity;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;

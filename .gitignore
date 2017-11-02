@@ -1,11 +1,6 @@
-# Log Files
-*.log
-
-# Android Studio Navigation editor temp files
-.navigation/
-
-# Android Studio captures folder
-captures/
+.idea
+.idea/libraries
+app/app.iml
 
 *.apk
 *.ap_
@@ -44,11 +39,6 @@ proguard/
 # Windows clutter
 Thumbs.db
 
-# Intellij
-*.iml
-.idea
-.idea/libraries
-app/app.iml
 .idea/workspace.xml
 .idea/tasks.xml
 .idea/datasources.xml
@@ -58,11 +48,14 @@ app/app.iml
 .idea/modules.xml
 .idea/vcs.xml
 
+
 # Node.js
+
 node_modules
 
 # Miscellaneous
 
+*.iml
 .gradle
 /local.properties
 /.idea/workspace.xml
@@ -78,6 +71,9 @@ node_modules
 /doc/
 local.properties
 build
+.env
+/ci/gplay.json
+/ci/gplay.tar.gz
 .idea/
 #.gradle/
 #gradle/
@@ -87,22 +83,8 @@ build
 #fastlane
 /fastlane/README.md
 /fastlane/report.xml
-
-# Google Services (e.g. APIs or Firebase)
-google-services.json
-
-# Freeline
-freeline.py
-freeline/
-freeline_project_description.json
-
-# Keystore files
-*.jks
-
-# External native build folder generated in Android Studio 2.2 and later
-.externalNativeBuild
+/fastlane/metadata
 
 #javadoc and reports
 /reports
 /reports-beta
-

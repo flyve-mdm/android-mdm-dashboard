@@ -2,7 +2,7 @@
 #
 #  Copyright (C) 2017 Teclib'
 #
-#  This file is part of Flyve MDM Admin Dashboard Android.
+#  This file is part of Flyve MDM.
 #
 #  Flyve MDM Admin Dashboard Android is a subproject of Flyve MDM. Flyve MDM is a mobile
 #  device management software.
@@ -25,9 +25,16 @@
 #  @link      https://flyve-mdm.com/
 #  ------------------------------------------------------------------------------
 #
+<<<<<<< HEAD
 # increment version code, need to be unique to send to store
 # this factor is used if you need increase you version code to deploy on Google Play by default is 0
 export BUILD_INCREMENT_FACTOR=70
+=======
+
+# increment version code, need to be unique to send to store
+# this factor is used if you need increase you version code to deploy on Google Play by default is 0
+export BUILD_INCREMENT_FACTOR=600
+>>>>>>> b4e53cc... ci(circleci): add circleci scripts
 ./gradlew updateVersionCode -P vCode=$(($CIRCLE_BUILD_NUM + $BUILD_INCREMENT_FACTOR))
 
 # increment version on package.json, create tag and commit with changelog

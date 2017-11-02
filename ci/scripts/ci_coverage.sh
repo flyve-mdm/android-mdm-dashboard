@@ -2,7 +2,7 @@
 #
 #  Copyright (C) 2017 Teclib'
 #
-#  This file is part of Flyve MDM Admin Dashboard Android.
+#  This file is part of Flyve MDM.
 #
 #  Flyve MDM Admin Dashboard Android is a subproject of Flyve MDM. Flyve MDM is a mobile
 #  device management software.
@@ -26,6 +26,10 @@
 #  ------------------------------------------------------------------------------
 #
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b4e53cc... ci(circleci): add circleci scripts
 # create code coverage report
 ./gradlew createDebugCoverageReport
 

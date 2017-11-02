@@ -26,41 +26,28 @@
 #  ------------------------------------------------------------------------------
 #
 
-# get gh-pages branch
-git fetch origin gh-pages
+# Push commits and tags to origin branch
+git push --follow-tags origin $CIRCLE_BRANCH
 
-# move to gh-pages
-git checkout gh-pages
+# Merge back the develop branch step
 
-# clean unstage file on gh-pages to remove all others files gets on checkout
-sudo git clean -fdx
+# delete branch
+git branch -D develop
 
-# remove local CHANGELOG.md on gh-pages
-rm CHANGELOG.md
+# get fresh branch
+git fetch origin develop
 
-# get changelog from branch
-git checkout $CIRCLE_BRANCH CHANGELOG.md
+# go to develop
+git checkout develop
 
-# Create header content to work with gh-pages templates
-HEADER="---"$'\r'"layout: modal"$'\r'"title: changelog"$'\r'"---"$'\r\r'
+# review some change
+git pull origin develop
 
-# Duplicate CHANGELOG.md
-cp CHANGELOG.md CHANGELOG_COPY.md
+# merge with master
+git merge master
 
-# Add header to CHANGELOG.md
-(echo $HEADER ; cat CHANGELOG_COPY.md) > CHANGELOG.md
+# push develop
+git push origin develop --force
 
-# Remove CHANGELOG_COPY.md
-rm CHANGELOG_COPY.md
-
-# add
-git add CHANGELOG.md
-
-# create commit
-git commit -m "docs(changelog): update changelog$1 with version ${GIT_TAG}"
-
-# push to branch
-git push origin gh-pages
-
-# got back to original branch
-git checkout $CIRCLE_BRANCH
+# return to master
+git checkout master

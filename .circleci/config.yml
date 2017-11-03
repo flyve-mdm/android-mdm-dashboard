@@ -18,11 +18,7 @@ jobs:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-<<<<<<< HEAD
-  test_api_version_25:
-=======
   test_api_v25:
->>>>>>> b4e53cc... ci(circleci): add circleci scripts
     working_directory: ~/flyve_mdm
     docker:
         - image: circleci/android:api-26-alpha
@@ -53,11 +49,7 @@ jobs:
           destination: reports
       - store_test_results:
           path: app/build/test-results
-<<<<<<< HEAD
-  test_api_version_16:
-=======
   test_api_v16:
->>>>>>> b4e53cc... ci(circleci): add circleci scripts
       working_directory: ~/flyve_mdm
       docker:
           - image: circleci/android:api-26-alpha
@@ -88,8 +80,6 @@ jobs:
             destination: reports
         - store_test_results:
             path: app/build/test-results
-<<<<<<< HEAD
-=======
   screenshot_api_16:
       working_directory: ~/flyve_mdm
       docker:
@@ -140,7 +130,6 @@ jobs:
             paths:
               - ~/.gradle
             key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
->>>>>>> b4e53cc... ci(circleci): add circleci scripts
   deploy_beta:
     working_directory: ~/flyve_mdm
     docker:
@@ -159,12 +148,9 @@ jobs:
           name: Update version and code
           command: source ci/scripts/ci_updateversion.sh
       - run:
-<<<<<<< HEAD
-=======
           name: Update about information
           command: source ci/scripts/ci_about.sh
       - run:
->>>>>>> b4e53cc... ci(circleci): add circleci scripts
           name: Transifex
           command: source ci/scripts/ci_transifex.sh
       - run:
@@ -195,12 +181,9 @@ jobs:
             name: Update version and code
             command: source ci/scripts/ci_updateversion.sh
         - run:
-<<<<<<< HEAD
-=======
             name: Update about information
             command: source ci/scripts/ci_about.sh
         - run:
->>>>>>> b4e53cc... ci(circleci): add circleci scripts
             name: Create apk
             command: ./gradlew assemble
         - run:

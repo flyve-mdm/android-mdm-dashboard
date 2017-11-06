@@ -25,9 +25,5 @@
 #  @link      https://flyve-mdm.com/
 #  ------------------------------------------------------------------------------
 #
-<<<<<<< HEAD
-=======
-
->>>>>>> b4e53cc... ci(circleci): add circleci scripts
 # send to google play
 fastlane android $1 storepass:'$KEYSTORE' keypass:'$ALIAS'

@@ -26,10 +26,6 @@
 #  ------------------------------------------------------------------------------
 #
 
-<<<<<<< HEAD
-=======
-
->>>>>>> b4e53cc... ci(circleci): add circleci scripts
 # create code coverage report
 ./gradlew createDebugCoverageReport
 

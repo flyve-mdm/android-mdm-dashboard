@@ -25,9 +25,5 @@
 #  @link      https://flyve-mdm.com/
 #  ------------------------------------------------------------------------------
 #
-<<<<<<< HEAD
-=======
-
->>>>>>> b4e53cc... ci(circleci): add circleci scripts
 # push tag to github
 conventional-github-releaser -t $GH_TOKEN -r 0

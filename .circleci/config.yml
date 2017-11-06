@@ -271,14 +271,6 @@ workflows:
             branches:
               only:
                 - develop
-      - screenshot_api_16:
-          requires:
-            - test_api_v16
-            - test_api_v25
-          filters:
-            branches:
-              only:
-                - develop
       - deploy_production:
           filters:
             branches:

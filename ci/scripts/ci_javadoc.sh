@@ -25,10 +25,6 @@
 #  @link      https://flyve-mdm.com/
 #  ------------------------------------------------------------------------------
 #
-<<<<<<< HEAD
-=======
-
->>>>>>> b4e53cc... ci(circleci): add circleci scripts
 # Generate javadoc this folder must be on .gitignore
 javadoc -d ./reports$1/javadoc -sourcepath ./app/src/main/java -subpackages .
 

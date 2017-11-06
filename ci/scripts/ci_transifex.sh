@@ -25,10 +25,6 @@
 #  @link      https://flyve-mdm.com/
 #  ------------------------------------------------------------------------------
 #
-<<<<<<< HEAD
-=======
-
->>>>>>> b4e53cc... ci(circleci): add circleci scripts
 # install transifex CLI
 sudo apt-get -y install python-pip
 sudo pip install transifex-client

@@ -31,8 +31,12 @@ javadoc -d ./reports/javadoc -sourcepath ./app/src/main/java -subpackages . -non
 # delete the index.html file
 sudo rm ./reports/javadoc/index.html
 
-# rename the overview-summary.html file toindex.html
-mv ./reports/javadoc/overview-summary.html ./reports/javadoc/index.html
+# rename the overview-summary.html file to index.html
+if [ -e ./reports/javadoc/overview-summary.html ]; then
+    mv ./reports/javadoc/overview-summary.html ./reports/javadoc/index.html
+else
+    mv ./reports/javadoc/org/flyve/admin/dashboard/package-summary.html ./reports/javadoc/index.html
+fi
 
 # add reports
 git add reports -f

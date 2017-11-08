@@ -26,10 +26,16 @@
 #  ------------------------------------------------------------------------------
 #
 # Generate javadoc this folder must be on .gitignore
-javadoc -d ./reports$1/javadoc -sourcepath ./app/src/main/java -subpackages .
+javadoc -d ./reports/javadoc -sourcepath ./app/src/main/java -subpackages . -nonavbar
+
+# delete the index.html file
+sudo rm ./reports/javadoc/index.html
+
+# rename the overview-summary.html file toindex.html
+mv ./reports/javadoc/overview-summary.html ./reports/javadoc/index.html
 
 # add reports
-git add reports$1 -f
+git add reports -f
 
 # create commit with temporary report folder
 git commit -m "tmp report commit"
@@ -40,14 +46,35 @@ git fetch origin gh-pages
 # move to gh-pages
 git checkout gh-pages
 
-# get javadoc folder
-git checkout $CIRCLE_BRANCH reports$1/javadoc
+# delete old javadoc folder
+sudo rm -R reports/javadoc
+
+# get fresh javadoc folder
+git checkout $CIRCLE_BRANCH reports/javadoc
+
+# remove default stylesheet.css
+sudo rm ./reports/javadoc/stylesheet.css
+
+# add new css
+cp ./css/javadoc.css ./reports/javadoc/stylesheet.css
 
 # git add javadoc folder
-git add reports$1/javadoc
+git add reports/javadoc
+
+# git add
+git add ./reports/javadoc/stylesheet.css
 
 # create commit for documentation
 git commit -m "docs(javadoc): update javadoc"
+
+# change headers
+ruby ci/add_header.rb
+
+# git add
+git add .
+
+# git commit
+git commit -m "docs(headers): update headers"
 
 # push to branch
 git push origin gh-pages

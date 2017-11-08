@@ -30,20 +30,19 @@
 ./gradlew createDebugCoverageReport
 
 # move code coverage
-mv -v app/build/reports/coverage reports$1
+mv -v app/build/reports/coverage reports
 
 #move Android test
-mv -v app/build/reports/androidTests reports$1
+mv -v app/build/reports/androidTests reports
 
 # replace .resources with resource because github don't support folders with "_" or "." at the beginning
-mv reports$1/debug/.resources reports$1/debug/resources
+mv reports/debug/.resources reports/debug/resources
 
-index=$(<reports$1/debug/index.html)
-newindex="${index//.resources/resources}"
-echo $newindex > reports$1/debug/index.html
+# replace .sessions
+mv reports/debug/.sessions.html reports/debug/sessions.html
 
 # add code coverage and test result
-git add reports$1 -f
+git add reports -f
 
 # temporal commit
 git commit -m "tmp reports"
@@ -57,8 +56,26 @@ git checkout gh-pages
 # clean
 sudo git clean -fdx
 
+# remove report folder
+sudo rm -R reports
+
 # get documentation folder
-git checkout $CIRCLE_BRANCH reports$1
+git checkout $CIRCLE_BRANCH reports
+
+# remove css
+sudo rm ./reports/debug/resources/report.css
+sudo rm ./reports/androidTests/connected/css/base-style.css
+sudo rm ./reports/androidTests/connected/css/style.css
+
+# add new css
+cp ./css/coverage.css ./reports/debug/resources/report.css
+cp ./css/androidTests.css ./reports/androidTests/connected/css/style.css
+touch ./reports/androidTests/connected/css/base-style.css
+
+# add
+git add ./reports/debug/resources/report.css
+git add ./reports/androidTests/connected/css/style.css
+git add ./reports/androidTests/connected/css/base-style.css
 
 # create commit
 git commit -m "docs(coverage): update code coverage and test result"

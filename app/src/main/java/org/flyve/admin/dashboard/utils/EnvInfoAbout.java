@@ -2,7 +2,6 @@ package org.flyve.admin.dashboard.utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-
 import java.io.InputStream;
 import java.util.Properties;
 

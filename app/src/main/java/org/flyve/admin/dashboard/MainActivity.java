@@ -69,18 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
         txtToolbarTitle.setText(item.get("name").toUpperCase());
 
-        // Information
-        if (item.get("id").equals("1")) {
-            DashboardFragment f = new DashboardFragment();
-            fragmentTransaction.replace(R.id.containerView, f).commit();
-            return;
-        }
-
-        // About
-        if (item.get("id").equals("8")) {
-            FragmentAbout f = new FragmentAbout();
-            fragmentTransaction.replace(R.id.containerView, f).commit();
-        }
     }
 
     /**
@@ -130,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
         map.put("id", "6");
         map.put("name", getResources().getString(R.string.drawer_users));
         map.put("img", "ic_users");
-        map.put("separator", "true");
         arrDrawer.add(map);
 
         // Settings
@@ -138,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
         map.put("id", "7");
         map.put("name", getResources().getString(R.string.drawer_settings));
         map.put("img", "ic_settings");
+        map.put("separator", "true");
         arrDrawer.add(map);
 
         // About

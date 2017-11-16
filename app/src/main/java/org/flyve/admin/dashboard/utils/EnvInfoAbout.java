@@ -1,4 +1,4 @@
-package org.flyve.mdm.agent.utils;
+package org.flyve.admin.dashboard.utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;

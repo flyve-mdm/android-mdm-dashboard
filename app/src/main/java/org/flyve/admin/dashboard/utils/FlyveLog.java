@@ -23,11 +23,14 @@
  * @link      http://www.glpi-project.org/
  * ------------------------------------------------------------------------------
  */
-package org.flyve.mdm.agent.utils;
+package org.flyve.admin.dashboard.utils;
 
 import android.os.Environment;
+
 import com.orhanobut.logger.Logger;
-import org.flyve.mdm.agent.ui.MDMAgent;
+
+import org.flyve.admin.dashboard.DashboardAgent;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -39,9 +42,9 @@ import java.io.PrintWriter;
  */
 public class FlyveLog {
 
-    private static final String FILE_NAME_FEEDBACK = "FlyveMDMFeedback.txt";
-    public static final String FILE_NAME_LOG = "FlyveMDMLog.txt";
-    public static final String FLYVE_PATH = Environment.getExternalStorageDirectory().getPath() + "/FlyveMDM";
+    private static final String FILE_NAME_FEEDBACK = "FlyveDashboardFeedback.txt";
+    public static final String FILE_NAME_LOG = "FlyveDashboardLog.txt";
+    public static final String FLYVE_PATH = Environment.getExternalStorageDirectory().getPath() + "/FlyveDashboard";
 
     /**
      * private constructor to prevent instances of this class
@@ -54,7 +57,7 @@ public class FlyveLog {
      * @param object Object to write
      */
     public static void d(Object object) {
-        if(MDMAgent.getIsDebuggable()){
+        if(DashboardAgent.getIsDebuggable()){
             Logger.d(object);
         }
     }
@@ -65,7 +68,7 @@ public class FlyveLog {
      * @param args Objects
      */
     public static void d(String message, Object... args) {
-        if(MDMAgent.getIsDebuggable() && message != null){
+        if(DashboardAgent.getIsDebuggable() && message != null){
             // do something for a debug build
             Logger.d(message,args);
         }
@@ -77,7 +80,7 @@ public class FlyveLog {
      * @param args Objects
      */
     public static void v(String message, Object... args) {
-        if(MDMAgent.getIsDebuggable() && message != null){
+        if(DashboardAgent.getIsDebuggable() && message != null){
             Logger.v(message, args);
         }
     }
@@ -88,7 +91,7 @@ public class FlyveLog {
      * @param args Objects
      */
     public static void i(String message, Object... args) {
-        if(MDMAgent.getIsDebuggable() && message != null) {
+        if(DashboardAgent.getIsDebuggable() && message != null) {
             Logger.i(message, args);
         }
     }
@@ -100,7 +103,7 @@ public class FlyveLog {
      * @param args Objects
      */
     public static void e(Throwable throwable, String message, Object... args) {
-        if(MDMAgent.getIsDebuggable() && message != null) {
+        if(DashboardAgent.getIsDebuggable() && message != null) {
             Logger.e(throwable, message, args);
             f(message, FILE_NAME_FEEDBACK);
         }
@@ -112,7 +115,7 @@ public class FlyveLog {
      * @param args Objects
      */
     public static void e(String message, Object... args) {
-        if(MDMAgent.getIsDebuggable() && message != null) {
+        if(DashboardAgent.getIsDebuggable() && message != null) {
             Logger.e(message, args);
             f(message, FILE_NAME_FEEDBACK);
         }
@@ -124,7 +127,7 @@ public class FlyveLog {
      * @param args Objects
      */
     public static void wtf(String message, Object... args) {
-        if(MDMAgent.getIsDebuggable() && message != null) {
+        if(DashboardAgent.getIsDebuggable() && message != null) {
             Logger.wtf(message, args);
         }
     }
@@ -134,7 +137,7 @@ public class FlyveLog {
      * @param json String the json to show
      */
     public static void json(String json) {
-        if(MDMAgent.getIsDebuggable() && json != null) {
+        if(DashboardAgent.getIsDebuggable() && json != null) {
             Logger.json(json);
         }
     }
@@ -144,7 +147,7 @@ public class FlyveLog {
      * @param xml String the xml to show
      */
     public static void xml(String xml) {
-        if(MDMAgent.getIsDebuggable() && xml != null) {
+        if(DashboardAgent.getIsDebuggable() && xml != null) {
             Logger.xml(xml);
         }
     }

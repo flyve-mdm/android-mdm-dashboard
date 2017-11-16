@@ -25,8 +25,7 @@
  * ------------------------------------------------------------------------------
  */
 
-package org.flyve.mdm.agent.ui;
-
+package org.flyve.admin.dashboard;
 
 import android.app.Application;
 import android.content.pm.ApplicationInfo;
@@ -35,15 +34,15 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
-import org.flyve.mdm.agent.data.DataStorage;
+import org.flyve.admin.dashboard.data.DataStorage;
 
 /**
  * All the application configuration
  */
-public class MDMAgent extends Application {
+public class DashboardAgent extends Application {
 
     private DataStorage cache;
-    private static MDMAgent instance;
+    private static DashboardAgent instance;
     private static Boolean isDebuggable;
 
     /**
@@ -76,7 +75,7 @@ public class MDMAgent extends Application {
      * Get application instance
      * @return MDMAgent object
      */
-    public static MDMAgent getInstance(){
+    public static DashboardAgent getInstance(){
         return instance;
     }
 

@@ -1,4 +1,4 @@
-package org.flyve.mdm.agent.adapter;
+package org.flyve.admin.dashboard.adapter;
 
 /*
  *   Copyright (C) 2017 Teclib. All rights reserved.
@@ -35,7 +35,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import org.flyve.mdm.agent.R;
+
+import org.flyve.admin.dashboard.R;
+
 import java.util.HashMap;
 import java.util.List;
 

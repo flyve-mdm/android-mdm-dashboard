@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/item1"
+        android:title="sort"
+        android:enabled="true"
+        android:icon="@drawable/ic_sort"
+        />
+
+    <item android:id="@+id/item2"
+        android:title="reload"
+        android:enabled="true"
+        android:icon="@drawable/ic_reload"
+        />
+
+    <item android:id="@+id/item3"
+        android:title="add"
+        android:enabled="true"
+        android:icon="@drawable/ic_add"
+        />
+
+</menu>

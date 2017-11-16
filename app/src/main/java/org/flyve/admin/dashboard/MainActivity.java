@@ -69,6 +69,46 @@ public class MainActivity extends AppCompatActivity {
 
         txtToolbarTitle.setText(item.get("name").toUpperCase());
 
+        // Dashboard
+        if (item.get("id").equals("1")) {
+            DashboardFragment f = new DashboardFragment();
+            fragmentTransaction.replace(R.id.containerView, f).commit();
+            return;
+        }
+
+        // Devices
+        if (item.get("id").equals("2")) {
+            DeviceFragment f = new DeviceFragment();
+            fragmentTransaction.replace(R.id.containerView, f).commit();
+            return;
+        }
+
+        // Fleets
+        if (item.get("id").equals("3")) {
+            FleetFragment f = new FleetFragment();
+            fragmentTransaction.replace(R.id.containerView, f).commit();
+            return;
+        }
+
+        // Files
+        if (item.get("id").equals("4")) {
+            FileFragment f = new FileFragment();
+            fragmentTransaction.replace(R.id.containerView, f).commit();
+            return;
+        }
+
+        // User
+        if (item.get("id").equals("6")) {
+            UserFragment f = new UserFragment();
+            fragmentTransaction.replace(R.id.containerView, f).commit();
+            return;
+        }
+
+        // About
+        if (item.get("id").equals("8")) {
+            FragmentAbout f = new FragmentAbout();
+            fragmentTransaction.replace(R.id.containerView, f).commit();
+        }
     }
 
     /**

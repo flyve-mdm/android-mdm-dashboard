@@ -85,7 +85,6 @@ public class DeviceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
 
         public void bindData(HashMap<String, String> model) {
-
             name.setText( Html.fromHtml( model.get("UserRealName")) );
             email.setText( Html.fromHtml( model.get("email") ));
             serial.setText( Html.fromHtml( model.get("ComputerSerial") ));

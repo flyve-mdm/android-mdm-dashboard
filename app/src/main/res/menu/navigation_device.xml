@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+<<<<<<< HEAD
     <item android:id="@+id/item1"
         android:title="sort"
         android:enabled="true"
@@ -17,5 +18,7 @@
         android:enabled="true"
         android:icon="@drawable/ic_add"
         />
+=======
+>>>>>>> bbf63ea... build(gradle): update dependecies
 
 </menu>

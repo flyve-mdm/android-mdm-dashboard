@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MainActivity.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debugAndroidTest</a> &gt; <a href="index.source.html" class="el_package">org.flyve.admin.dashboard</a> &gt; <span class="el_source">MainActivity.java</span></div><h1>MainActivity.java</h1><pre class="source lang-java linenums">package org.flyve.admin.dashboard;
+
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import org.flyve.admin.dashboard.adapter.DrawerAdapter;
+import org.flyve.admin.dashboard.utils.FlyveLog;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+<span class="nc" id="L20">public class MainActivity extends AppCompatActivity {</span>
+
+    private DrawerLayout mDrawerLayout;
+    private FragmentManager mFragmentManager;
+    private ListView lstDrawer;
+    private ArrayList&lt;HashMap&lt;String, String&gt;&gt; arrDrawer;
+    private HashMap&lt;String, String&gt; selectedItem;
+    private TextView txtToolbarTitle;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+<span class="nc" id="L31">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L32">        setContentView(R.layout.activity_main);</span>
+
+        // Setup the DrawerLayout and NavigationView
+<span class="nc" id="L35">        txtToolbarTitle = (TextView) findViewById(R.id.txtToolbarTitle);</span>
+<span class="nc" id="L36">        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);</span>
+
+<span class="nc" id="L38">        lstDrawer = (ListView) findViewById(R.id.lstNV);</span>
+<span class="nc" id="L39">        lstDrawer.setOnItemClickListener(new AdapterView.OnItemClickListener() {</span>
+            @Override
+            public void onItemClick(AdapterView&lt;?&gt; parent, View view, int position, long id) {
+<span class="nc" id="L42">                mDrawerLayout.closeDrawers();</span>
+<span class="nc" id="L43">                selectedItem = arrDrawer.get(position);</span>
+<span class="nc" id="L44">                loadFragment(selectedItem);</span>
+<span class="nc" id="L45">            }</span>
+        });
+
+<span class="nc" id="L48">        mFragmentManager = getSupportFragmentManager();</span>
+
+        // Setup Drawer Toggle of the Toolbar
+<span class="nc" id="L51">        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);</span>
+<span class="nc" id="L52">        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout, toolbar,R.string.app_name,</span>
+                R.string.app_name);
+
+<span class="nc" id="L55">        mDrawerLayout.setDrawerListener(mDrawerToggle);</span>
+
+<span class="nc" id="L57">        mDrawerToggle.syncState();</span>
+
+<span class="nc" id="L59">        loadListDrawer();</span>
+<span class="nc" id="L60">    }</span>
+
+    /**
+     * Loads the Fragment
+     * @param item
+     */
+    private void loadFragment(HashMap&lt;String, String&gt; item) {
+
+<span class="nc" id="L68">        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();</span>
+
+<span class="nc" id="L70">        txtToolbarTitle.setText(item.get(&quot;name&quot;).toUpperCase());</span>
+
+        // Information
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (item.get(&quot;id&quot;).equals(&quot;1&quot;)) {</span>
+<span class="nc" id="L74">            DashboardFragment f = new DashboardFragment();</span>
+<span class="nc" id="L75">            fragmentTransaction.replace(R.id.containerView, f).commit();</span>
+<span class="nc" id="L76">            return;</span>
+        }
+
+        // About
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if (item.get(&quot;id&quot;).equals(&quot;8&quot;)) {</span>
+<span class="nc" id="L81">            FragmentAbout f = new FragmentAbout();</span>
+<span class="nc" id="L82">            fragmentTransaction.replace(R.id.containerView, f).commit();</span>
+        }
+<span class="nc" id="L84">    }</span>
+
+    /**
+     * Load the list drawer
+     */
+    public void loadListDrawer() {
+
+<span class="nc" id="L91">        arrDrawer = new ArrayList&lt;&gt;();</span>
+
+        // Dashboard
+<span class="nc" id="L94">        HashMap&lt;String, String&gt; map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L95">        map.put(&quot;id&quot;, &quot;1&quot;);</span>
+<span class="nc" id="L96">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_dashboard));</span>
+<span class="nc" id="L97">        map.put(&quot;img&quot;, &quot;ic_dashboard&quot;);</span>
+<span class="nc" id="L98">        arrDrawer.add(map);</span>
+
+        // Devices
+<span class="nc" id="L101">        map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L102">        map.put(&quot;id&quot;, &quot;2&quot;);</span>
+<span class="nc" id="L103">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_devices));</span>
+<span class="nc" id="L104">        map.put(&quot;img&quot;, &quot;ic_devices&quot;);</span>
+<span class="nc" id="L105">        arrDrawer.add(map);</span>
+
+        // Fleets
+<span class="nc" id="L108">        map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L109">        map.put(&quot;id&quot;, &quot;3&quot;);</span>
+<span class="nc" id="L110">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_fleets));</span>
+<span class="nc" id="L111">        map.put(&quot;img&quot;, &quot;ic_fleets&quot;);</span>
+<span class="nc" id="L112">        arrDrawer.add(map);</span>
+
+        // Files
+<span class="nc" id="L115">        map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L116">        map.put(&quot;id&quot;, &quot;4&quot;);</span>
+<span class="nc" id="L117">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_files));</span>
+<span class="nc" id="L118">        map.put(&quot;img&quot;, &quot;ic_files&quot;);</span>
+<span class="nc" id="L119">        arrDrawer.add(map);</span>
+
+        // Applications
+<span class="nc" id="L122">        map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L123">        map.put(&quot;id&quot;, &quot;5&quot;);</span>
+<span class="nc" id="L124">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_applications));</span>
+<span class="nc" id="L125">        map.put(&quot;img&quot;, &quot;ic_applications&quot;);</span>
+<span class="nc" id="L126">        arrDrawer.add(map);</span>
+
+        // User
+<span class="nc" id="L129">        map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L130">        map.put(&quot;id&quot;, &quot;6&quot;);</span>
+<span class="nc" id="L131">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_users));</span>
+<span class="nc" id="L132">        map.put(&quot;img&quot;, &quot;ic_users&quot;);</span>
+<span class="nc" id="L133">        map.put(&quot;separator&quot;, &quot;true&quot;);</span>
+<span class="nc" id="L134">        arrDrawer.add(map);</span>
+
+        // Settings
+<span class="nc" id="L137">        map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L138">        map.put(&quot;id&quot;, &quot;7&quot;);</span>
+<span class="nc" id="L139">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_settings));</span>
+<span class="nc" id="L140">        map.put(&quot;img&quot;, &quot;ic_settings&quot;);</span>
+<span class="nc" id="L141">        arrDrawer.add(map);</span>
+
+        // About
+<span class="nc" id="L144">        map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L145">        map.put(&quot;id&quot;, &quot;8&quot;);</span>
+<span class="nc" id="L146">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_about));</span>
+<span class="nc" id="L147">        map.put(&quot;img&quot;, &quot;ic_about&quot;);</span>
+<span class="nc" id="L148">        arrDrawer.add(map);</span>
+
+        try {
+            // lad adapter
+<span class="nc" id="L152">            DrawerAdapter adapter = new DrawerAdapter(this, arrDrawer);</span>
+<span class="nc" id="L153">            lstDrawer.setAdapter(adapter);</span>
+
+            // Select Information on load //
+<span class="nc" id="L156">            selectedItem = arrDrawer.get(0);</span>
+<span class="nc" id="L157">            loadFragment(selectedItem);</span>
+<span class="nc" id="L158">        } catch(Exception ex) {</span>
+<span class="nc" id="L159">            FlyveLog.e(ex.getMessage());</span>
+<span class="nc" id="L160">        }</span>
+<span class="nc" id="L161">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span>Generated by the Android Gradle plugin 2.3.3</div></body></html>

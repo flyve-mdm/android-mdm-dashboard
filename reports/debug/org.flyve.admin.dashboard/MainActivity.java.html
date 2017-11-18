@@ -69,96 +69,124 @@ import java.util.HashMap;
 
 <span class="nc" id="L70">        txtToolbarTitle.setText(item.get(&quot;name&quot;).toUpperCase());</span>
 
-        // Information
+        // Dashboard
 <span class="nc bnc" id="L73" title="All 2 branches missed.">        if (item.get(&quot;id&quot;).equals(&quot;1&quot;)) {</span>
 <span class="nc" id="L74">            DashboardFragment f = new DashboardFragment();</span>
 <span class="nc" id="L75">            fragmentTransaction.replace(R.id.containerView, f).commit();</span>
 <span class="nc" id="L76">            return;</span>
         }
 
-        // About
-<span class="nc bnc" id="L80" title="All 2 branches missed.">        if (item.get(&quot;id&quot;).equals(&quot;8&quot;)) {</span>
-<span class="nc" id="L81">            FragmentAbout f = new FragmentAbout();</span>
+        // Devices
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if (item.get(&quot;id&quot;).equals(&quot;2&quot;)) {</span>
+<span class="nc" id="L81">            DeviceFragment f = new DeviceFragment();</span>
 <span class="nc" id="L82">            fragmentTransaction.replace(R.id.containerView, f).commit();</span>
+<span class="nc" id="L83">            return;</span>
         }
-<span class="nc" id="L84">    }</span>
+
+        // Fleets
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        if (item.get(&quot;id&quot;).equals(&quot;3&quot;)) {</span>
+<span class="nc" id="L88">            FleetFragment f = new FleetFragment();</span>
+<span class="nc" id="L89">            fragmentTransaction.replace(R.id.containerView, f).commit();</span>
+<span class="nc" id="L90">            return;</span>
+        }
+
+        // Files
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        if (item.get(&quot;id&quot;).equals(&quot;4&quot;)) {</span>
+<span class="nc" id="L95">            FileFragment f = new FileFragment();</span>
+<span class="nc" id="L96">            fragmentTransaction.replace(R.id.containerView, f).commit();</span>
+<span class="nc" id="L97">            return;</span>
+        }
+
+        // User
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        if (item.get(&quot;id&quot;).equals(&quot;6&quot;)) {</span>
+<span class="nc" id="L102">            UserFragment f = new UserFragment();</span>
+<span class="nc" id="L103">            fragmentTransaction.replace(R.id.containerView, f).commit();</span>
+<span class="nc" id="L104">            return;</span>
+        }
+
+        // About
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        if (item.get(&quot;id&quot;).equals(&quot;8&quot;)) {</span>
+<span class="nc" id="L109">            FragmentAbout f = new FragmentAbout();</span>
+<span class="nc" id="L110">            fragmentTransaction.replace(R.id.containerView, f).commit();</span>
+        }
+<span class="nc" id="L112">    }</span>
 
     /**
      * Load the list drawer
      */
     public void loadListDrawer() {
 
-<span class="nc" id="L91">        arrDrawer = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L119">        arrDrawer = new ArrayList&lt;&gt;();</span>
 
         // Dashboard
-<span class="nc" id="L94">        HashMap&lt;String, String&gt; map = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L95">        map.put(&quot;id&quot;, &quot;1&quot;);</span>
-<span class="nc" id="L96">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_dashboard));</span>
-<span class="nc" id="L97">        map.put(&quot;img&quot;, &quot;ic_dashboard&quot;);</span>
-<span class="nc" id="L98">        arrDrawer.add(map);</span>
-
-        // Devices
-<span class="nc" id="L101">        map = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L102">        map.put(&quot;id&quot;, &quot;2&quot;);</span>
-<span class="nc" id="L103">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_devices));</span>
-<span class="nc" id="L104">        map.put(&quot;img&quot;, &quot;ic_devices&quot;);</span>
-<span class="nc" id="L105">        arrDrawer.add(map);</span>
-
-        // Fleets
-<span class="nc" id="L108">        map = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L109">        map.put(&quot;id&quot;, &quot;3&quot;);</span>
-<span class="nc" id="L110">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_fleets));</span>
-<span class="nc" id="L111">        map.put(&quot;img&quot;, &quot;ic_fleets&quot;);</span>
-<span class="nc" id="L112">        arrDrawer.add(map);</span>
-
-        // Files
-<span class="nc" id="L115">        map = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L116">        map.put(&quot;id&quot;, &quot;4&quot;);</span>
-<span class="nc" id="L117">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_files));</span>
-<span class="nc" id="L118">        map.put(&quot;img&quot;, &quot;ic_files&quot;);</span>
-<span class="nc" id="L119">        arrDrawer.add(map);</span>
-
-        // Applications
-<span class="nc" id="L122">        map = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L123">        map.put(&quot;id&quot;, &quot;5&quot;);</span>
-<span class="nc" id="L124">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_applications));</span>
-<span class="nc" id="L125">        map.put(&quot;img&quot;, &quot;ic_applications&quot;);</span>
+<span class="nc" id="L122">        HashMap&lt;String, String&gt; map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L123">        map.put(&quot;id&quot;, &quot;1&quot;);</span>
+<span class="nc" id="L124">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_dashboard));</span>
+<span class="nc" id="L125">        map.put(&quot;img&quot;, &quot;ic_dashboard&quot;);</span>
 <span class="nc" id="L126">        arrDrawer.add(map);</span>
 
-        // User
+        // Devices
 <span class="nc" id="L129">        map = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L130">        map.put(&quot;id&quot;, &quot;6&quot;);</span>
-<span class="nc" id="L131">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_users));</span>
-<span class="nc" id="L132">        map.put(&quot;img&quot;, &quot;ic_users&quot;);</span>
-<span class="nc" id="L133">        map.put(&quot;separator&quot;, &quot;true&quot;);</span>
-<span class="nc" id="L134">        arrDrawer.add(map);</span>
+<span class="nc" id="L130">        map.put(&quot;id&quot;, &quot;2&quot;);</span>
+<span class="nc" id="L131">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_devices));</span>
+<span class="nc" id="L132">        map.put(&quot;img&quot;, &quot;ic_devices&quot;);</span>
+<span class="nc" id="L133">        arrDrawer.add(map);</span>
+
+        // Fleets
+<span class="nc" id="L136">        map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L137">        map.put(&quot;id&quot;, &quot;3&quot;);</span>
+<span class="nc" id="L138">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_fleets));</span>
+<span class="nc" id="L139">        map.put(&quot;img&quot;, &quot;ic_fleets&quot;);</span>
+<span class="nc" id="L140">        arrDrawer.add(map);</span>
+
+        // Files
+<span class="nc" id="L143">        map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L144">        map.put(&quot;id&quot;, &quot;4&quot;);</span>
+<span class="nc" id="L145">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_files));</span>
+<span class="nc" id="L146">        map.put(&quot;img&quot;, &quot;ic_files&quot;);</span>
+<span class="nc" id="L147">        arrDrawer.add(map);</span>
+
+        // Applications
+<span class="nc" id="L150">        map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L151">        map.put(&quot;id&quot;, &quot;5&quot;);</span>
+<span class="nc" id="L152">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_applications));</span>
+<span class="nc" id="L153">        map.put(&quot;img&quot;, &quot;ic_applications&quot;);</span>
+<span class="nc" id="L154">        arrDrawer.add(map);</span>
+
+        // User
+<span class="nc" id="L157">        map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L158">        map.put(&quot;id&quot;, &quot;6&quot;);</span>
+<span class="nc" id="L159">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_users));</span>
+<span class="nc" id="L160">        map.put(&quot;img&quot;, &quot;ic_users&quot;);</span>
+<span class="nc" id="L161">        arrDrawer.add(map);</span>
 
         // Settings
-<span class="nc" id="L137">        map = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L138">        map.put(&quot;id&quot;, &quot;7&quot;);</span>
-<span class="nc" id="L139">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_settings));</span>
-<span class="nc" id="L140">        map.put(&quot;img&quot;, &quot;ic_settings&quot;);</span>
-<span class="nc" id="L141">        arrDrawer.add(map);</span>
+<span class="nc" id="L164">        map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L165">        map.put(&quot;id&quot;, &quot;7&quot;);</span>
+<span class="nc" id="L166">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_settings));</span>
+<span class="nc" id="L167">        map.put(&quot;img&quot;, &quot;ic_settings&quot;);</span>
+<span class="nc" id="L168">        map.put(&quot;separator&quot;, &quot;true&quot;);</span>
+<span class="nc" id="L169">        arrDrawer.add(map);</span>
 
         // About
-<span class="nc" id="L144">        map = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L145">        map.put(&quot;id&quot;, &quot;8&quot;);</span>
-<span class="nc" id="L146">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_about));</span>
-<span class="nc" id="L147">        map.put(&quot;img&quot;, &quot;ic_about&quot;);</span>
-<span class="nc" id="L148">        arrDrawer.add(map);</span>
+<span class="nc" id="L172">        map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L173">        map.put(&quot;id&quot;, &quot;8&quot;);</span>
+<span class="nc" id="L174">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_about));</span>
+<span class="nc" id="L175">        map.put(&quot;img&quot;, &quot;ic_about&quot;);</span>
+<span class="nc" id="L176">        arrDrawer.add(map);</span>
 
         try {
             // lad adapter
-<span class="nc" id="L152">            DrawerAdapter adapter = new DrawerAdapter(this, arrDrawer);</span>
-<span class="nc" id="L153">            lstDrawer.setAdapter(adapter);</span>
+<span class="nc" id="L180">            DrawerAdapter adapter = new DrawerAdapter(this, arrDrawer);</span>
+<span class="nc" id="L181">            lstDrawer.setAdapter(adapter);</span>
 
             // Select Information on load //
-<span class="nc" id="L156">            selectedItem = arrDrawer.get(0);</span>
-<span class="nc" id="L157">            loadFragment(selectedItem);</span>
-<span class="nc" id="L158">        } catch(Exception ex) {</span>
-<span class="nc" id="L159">            FlyveLog.e(ex.getMessage());</span>
-<span class="nc" id="L160">        }</span>
-<span class="nc" id="L161">    }</span>
+<span class="nc" id="L184">            selectedItem = arrDrawer.get(0);</span>
+<span class="nc" id="L185">            loadFragment(selectedItem);</span>
+<span class="nc" id="L186">        } catch(Exception ex) {</span>
+<span class="nc" id="L187">            FlyveLog.e(ex.getMessage());</span>
+<span class="nc" id="L188">        }</span>
+<span class="nc" id="L189">    }</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span>Generated by the Android Gradle plugin 2.3.3</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span>Generated by the Android Gradle plugin 3.0.0</div></body></html>

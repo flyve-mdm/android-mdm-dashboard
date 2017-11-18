@@ -28,12 +28,16 @@
 package org.flyve.admin.dashboard;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.support.multidex.MultiDex;
 import android.util.Log;
+
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
+
 import org.flyve.admin.dashboard.data.DataStorage;
 
 /**
@@ -44,6 +48,11 @@ public class DashboardAgent extends Application {
     private DataStorage cache;
     private static DashboardAgent instance;
     private static Boolean isDebuggable;
+
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     /**
      * Called when the application is starting before any activity, service or receiver objects have been created

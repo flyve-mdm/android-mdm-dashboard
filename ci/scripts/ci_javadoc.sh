@@ -26,7 +26,7 @@
 #  ------------------------------------------------------------------------------
 #
 # Generate javadoc this folder must be on .gitignore
-javadoc -d ./reports/javadoc -sourcepath ./app/src/main/java -subpackages . -nonavbar
+javadoc -d ./reports/javadoc -sourcepath ./app/src/main/java -subpackages . -bootclasspath $ANDROID_HOME/platforms/android-26/android.jar
 
 # delete the index.html file
 sudo rm ./reports/javadoc/index.html

@@ -87,8 +87,6 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             email = itemView.findViewById(R.id.email);
             viewBackground = itemView.findViewById(R.id.view_background);
             viewForeground = itemView.findViewById(R.id.view_foreground);
-
-
         }
 
         public void bindData(HashMap<String, String> model) {

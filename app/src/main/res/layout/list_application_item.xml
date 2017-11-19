@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:src="@drawable/device_placeholder"
         />
 
@@ -18,15 +18,23 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/img"
         android:layout_marginLeft="15dp"
-        android:text="without name"
         android:textStyle="bold"
         />
 
     <TextView
-        android:id="@+id/email"
+        android:id="@+id/packages"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/name"
+        android:layout_toRightOf="@+id/img"
+        android:layout_marginLeft="15dp"
+        />
+
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/packages"
         android:layout_toRightOf="@+id/img"
         android:layout_marginLeft="15dp"
         />

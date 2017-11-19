@@ -1,11 +1,9 @@
-package org.flyve.admin.dashboard;
+package org.flyve.admin.dashboard.adapter;
 
 import android.graphics.Canvas;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
-
-import org.flyve.admin.dashboard.adapter.UserAdapter;
 
 public class UserTouchHelper extends ItemTouchHelper.SimpleCallback {
     private RecyclerItemTouchHelperListener listener;

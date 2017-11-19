@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import org.flyve.admin.dashboard.adapter.UserAdapter;
+import org.flyve.admin.dashboard.adapter.UserTouchHelper;
 import org.flyve.admin.dashboard.utils.FlyveLog;
 import org.json.JSONArray;
 import org.json.JSONObject;

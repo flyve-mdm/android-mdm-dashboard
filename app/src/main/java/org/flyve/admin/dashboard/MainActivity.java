@@ -97,6 +97,13 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        // Application
+        if (item.get("id").equals("5")) {
+            ApplicationFragment f = new ApplicationFragment();
+            fragmentTransaction.replace(R.id.containerView, f).commit();
+            return;
+        }
+
         // User
         if (item.get("id").equals("6")) {
             UserFragment f = new UserFragment();

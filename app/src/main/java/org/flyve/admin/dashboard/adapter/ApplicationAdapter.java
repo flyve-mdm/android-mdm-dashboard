@@ -1,10 +1,14 @@
 package org.flyve.admin.dashboard.adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.flyve.admin.dashboard.R;
@@ -13,14 +17,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class FileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class ApplicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private ArrayList<HashMap<String, String>> data;
 
     private static final int ITEM_TYPE_DATA = 0;
     private static final int ITEM_TYPE_HEADER = 1;
 
-    public FileAdapter(ArrayList<HashMap<String, String>> data) {
+    public ApplicationAdapter(ArrayList<HashMap<String, String>> data) {
         this.data = data;
     }
 
@@ -37,12 +41,12 @@ public class FileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
         if(viewType == ITEM_TYPE_DATA) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_file_item, viewGroup, false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_application_item, viewGroup, false);
             return new DataViewHolder(v);
         }
 
         else if (viewType == ITEM_TYPE_HEADER) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_file_header, viewGroup, false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_application_header, viewGroup, false);
             return new HeaderViewHolder(v);
         }
 
@@ -75,18 +79,28 @@ public class FileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     }
 
     public class DataViewHolder extends RecyclerView.ViewHolder {
+        ImageView img;
         TextView name;
-        TextView size;
+        TextView packages;
+        TextView version;
 
         DataViewHolder(View itemView) {
             super(itemView);
+            img = (ImageView)itemView.findViewById(R.id.img);
             name = (TextView)itemView.findViewById(R.id.name);
-            size = (TextView)itemView.findViewById(R.id.size);
+            packages = (TextView)itemView.findViewById(R.id.packages);
+            version = (TextView)itemView.findViewById(R.id.version);
         }
 
         public void bindData(HashMap<String, String> model) {
+
+            byte[] decodedString = Base64.decode( model.get("icon").getBytes(), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            img.setImageBitmap(decodedByte);
+
             name.setText( Html.fromHtml( model.get("name")) );
-            size.setText( Html.fromHtml( model.get("size") ));
+            packages.setText( Html.fromHtml( model.get("package") ));
+            version.setText( Html.fromHtml( "v." +  model.get("version") ));
         }
     }
 

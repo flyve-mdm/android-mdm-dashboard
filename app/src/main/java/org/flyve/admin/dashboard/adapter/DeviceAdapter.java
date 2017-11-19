@@ -5,20 +5,23 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import org.flyve.admin.dashboard.R;
-import java.util.ArrayList;
+
 import java.util.HashMap;
+import java.util.List;
 
 
 public class DeviceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private ArrayList<HashMap<String, String>> data;
+    private List<HashMap<String, String>> data;
 
     private static final int ITEM_TYPE_DATA = 0;
     private static final int ITEM_TYPE_HEADER = 1;
 
-    public DeviceAdapter(ArrayList<HashMap<String, String>> data) {
+    public DeviceAdapter(List<HashMap<String, String>> data) {
         this.data = data;
     }
 
@@ -77,11 +80,16 @@ public class DeviceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         TextView email;
         TextView serial;
 
+        public RelativeLayout viewBackground;
+        public RelativeLayout viewForeground;
+
         DataViewHolder(View itemView) {
             super(itemView);
             name = (TextView)itemView.findViewById(R.id.name);
             email = (TextView)itemView.findViewById(R.id.email);
             serial = (TextView)itemView.findViewById(R.id.serial);
+            viewBackground = itemView.findViewById(R.id.view_background);
+            viewForeground = itemView.findViewById(R.id.view_foreground);
         }
 
         public void bindData(HashMap<String, String> model) {
@@ -104,5 +112,18 @@ public class DeviceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
+    public void removeItem(int position) {
+        data.remove(position);
+        // notify the item removed by position
+        // to perform recycler view delete animations
+        // NOTE: don't call notifyDataSetChanged()
+        notifyItemRemoved(position);
+    }
+
+    public void restoreItem(HashMap<String, String> item, int position) {
+        data.add(position, item);
+        // notify item added by position
+        notifyItemInserted(position);
+    }
 
 }

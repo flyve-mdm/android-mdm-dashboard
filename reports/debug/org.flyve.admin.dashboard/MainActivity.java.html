@@ -1,7 +1,4 @@
----
-layout: coverage
----
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../resources/report.css" type="text/css"/><link rel="shortcut icon" href="../resources/report.gif" type="image/gif"/><title>MainActivity.java</title><link rel="stylesheet" href="../resources/prettify.css" type="text/css"/><script type="text/javascript" src="../resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debugAndroidTest</a> &gt; <a href="index.source.html" class="el_package">org.flyve.admin.dashboard</a> &gt; <span class="el_source">MainActivity.java</span></div><h1>MainActivity.java</h1><pre class="source lang-java linenums">package org.flyve.admin.dashboard;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MainActivity.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debugAndroidTest</a> &gt; <a href="index.source.html" class="el_package">org.flyve.admin.dashboard</a> &gt; <span class="el_source">MainActivity.java</span></div><h1>MainActivity.java</h1><pre class="source lang-java linenums">package org.flyve.admin.dashboard;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -100,96 +97,103 @@ import java.util.HashMap;
 <span class="nc" id="L97">            return;</span>
         }
 
-        // User
-<span class="nc bnc" id="L101" title="All 2 branches missed.">        if (item.get(&quot;id&quot;).equals(&quot;6&quot;)) {</span>
-<span class="nc" id="L102">            UserFragment f = new UserFragment();</span>
+        // Application
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        if (item.get(&quot;id&quot;).equals(&quot;5&quot;)) {</span>
+<span class="nc" id="L102">            ApplicationFragment f = new ApplicationFragment();</span>
 <span class="nc" id="L103">            fragmentTransaction.replace(R.id.containerView, f).commit();</span>
 <span class="nc" id="L104">            return;</span>
         }
 
-        // About
-<span class="nc bnc" id="L108" title="All 2 branches missed.">        if (item.get(&quot;id&quot;).equals(&quot;8&quot;)) {</span>
-<span class="nc" id="L109">            FragmentAbout f = new FragmentAbout();</span>
+        // User
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        if (item.get(&quot;id&quot;).equals(&quot;6&quot;)) {</span>
+<span class="nc" id="L109">            UserFragment f = new UserFragment();</span>
 <span class="nc" id="L110">            fragmentTransaction.replace(R.id.containerView, f).commit();</span>
+<span class="nc" id="L111">            return;</span>
         }
-<span class="nc" id="L112">    }</span>
+
+        // About
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        if (item.get(&quot;id&quot;).equals(&quot;8&quot;)) {</span>
+<span class="nc" id="L116">            FragmentAbout f = new FragmentAbout();</span>
+<span class="nc" id="L117">            fragmentTransaction.replace(R.id.containerView, f).commit();</span>
+        }
+<span class="nc" id="L119">    }</span>
 
     /**
      * Load the list drawer
      */
     public void loadListDrawer() {
 
-<span class="nc" id="L119">        arrDrawer = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L126">        arrDrawer = new ArrayList&lt;&gt;();</span>
 
         // Dashboard
-<span class="nc" id="L122">        HashMap&lt;String, String&gt; map = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L123">        map.put(&quot;id&quot;, &quot;1&quot;);</span>
-<span class="nc" id="L124">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_dashboard));</span>
-<span class="nc" id="L125">        map.put(&quot;img&quot;, &quot;ic_dashboard&quot;);</span>
-<span class="nc" id="L126">        arrDrawer.add(map);</span>
-
-        // Devices
-<span class="nc" id="L129">        map = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L130">        map.put(&quot;id&quot;, &quot;2&quot;);</span>
-<span class="nc" id="L131">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_devices));</span>
-<span class="nc" id="L132">        map.put(&quot;img&quot;, &quot;ic_devices&quot;);</span>
+<span class="nc" id="L129">        HashMap&lt;String, String&gt; map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L130">        map.put(&quot;id&quot;, &quot;1&quot;);</span>
+<span class="nc" id="L131">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_dashboard));</span>
+<span class="nc" id="L132">        map.put(&quot;img&quot;, &quot;ic_dashboard&quot;);</span>
 <span class="nc" id="L133">        arrDrawer.add(map);</span>
 
-        // Fleets
+        // Devices
 <span class="nc" id="L136">        map = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L137">        map.put(&quot;id&quot;, &quot;3&quot;);</span>
-<span class="nc" id="L138">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_fleets));</span>
-<span class="nc" id="L139">        map.put(&quot;img&quot;, &quot;ic_fleets&quot;);</span>
+<span class="nc" id="L137">        map.put(&quot;id&quot;, &quot;2&quot;);</span>
+<span class="nc" id="L138">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_devices));</span>
+<span class="nc" id="L139">        map.put(&quot;img&quot;, &quot;ic_devices&quot;);</span>
 <span class="nc" id="L140">        arrDrawer.add(map);</span>
 
-        // Files
+        // Fleets
 <span class="nc" id="L143">        map = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L144">        map.put(&quot;id&quot;, &quot;4&quot;);</span>
-<span class="nc" id="L145">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_files));</span>
-<span class="nc" id="L146">        map.put(&quot;img&quot;, &quot;ic_files&quot;);</span>
+<span class="nc" id="L144">        map.put(&quot;id&quot;, &quot;3&quot;);</span>
+<span class="nc" id="L145">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_fleets));</span>
+<span class="nc" id="L146">        map.put(&quot;img&quot;, &quot;ic_fleets&quot;);</span>
 <span class="nc" id="L147">        arrDrawer.add(map);</span>
 
-        // Applications
+        // Files
 <span class="nc" id="L150">        map = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L151">        map.put(&quot;id&quot;, &quot;5&quot;);</span>
-<span class="nc" id="L152">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_applications));</span>
-<span class="nc" id="L153">        map.put(&quot;img&quot;, &quot;ic_applications&quot;);</span>
+<span class="nc" id="L151">        map.put(&quot;id&quot;, &quot;4&quot;);</span>
+<span class="nc" id="L152">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_files));</span>
+<span class="nc" id="L153">        map.put(&quot;img&quot;, &quot;ic_files&quot;);</span>
 <span class="nc" id="L154">        arrDrawer.add(map);</span>
 
-        // User
+        // Applications
 <span class="nc" id="L157">        map = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L158">        map.put(&quot;id&quot;, &quot;6&quot;);</span>
-<span class="nc" id="L159">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_users));</span>
-<span class="nc" id="L160">        map.put(&quot;img&quot;, &quot;ic_users&quot;);</span>
+<span class="nc" id="L158">        map.put(&quot;id&quot;, &quot;5&quot;);</span>
+<span class="nc" id="L159">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_applications));</span>
+<span class="nc" id="L160">        map.put(&quot;img&quot;, &quot;ic_applications&quot;);</span>
 <span class="nc" id="L161">        arrDrawer.add(map);</span>
 
-        // Settings
+        // User
 <span class="nc" id="L164">        map = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L165">        map.put(&quot;id&quot;, &quot;7&quot;);</span>
-<span class="nc" id="L166">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_settings));</span>
-<span class="nc" id="L167">        map.put(&quot;img&quot;, &quot;ic_settings&quot;);</span>
-<span class="nc" id="L168">        map.put(&quot;separator&quot;, &quot;true&quot;);</span>
-<span class="nc" id="L169">        arrDrawer.add(map);</span>
+<span class="nc" id="L165">        map.put(&quot;id&quot;, &quot;6&quot;);</span>
+<span class="nc" id="L166">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_users));</span>
+<span class="nc" id="L167">        map.put(&quot;img&quot;, &quot;ic_users&quot;);</span>
+<span class="nc" id="L168">        arrDrawer.add(map);</span>
+
+        // Settings
+<span class="nc" id="L171">        map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L172">        map.put(&quot;id&quot;, &quot;7&quot;);</span>
+<span class="nc" id="L173">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_settings));</span>
+<span class="nc" id="L174">        map.put(&quot;img&quot;, &quot;ic_settings&quot;);</span>
+<span class="nc" id="L175">        map.put(&quot;separator&quot;, &quot;true&quot;);</span>
+<span class="nc" id="L176">        arrDrawer.add(map);</span>
 
         // About
-<span class="nc" id="L172">        map = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L173">        map.put(&quot;id&quot;, &quot;8&quot;);</span>
-<span class="nc" id="L174">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_about));</span>
-<span class="nc" id="L175">        map.put(&quot;img&quot;, &quot;ic_about&quot;);</span>
-<span class="nc" id="L176">        arrDrawer.add(map);</span>
+<span class="nc" id="L179">        map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L180">        map.put(&quot;id&quot;, &quot;8&quot;);</span>
+<span class="nc" id="L181">        map.put(&quot;name&quot;, getResources().getString(R.string.drawer_about));</span>
+<span class="nc" id="L182">        map.put(&quot;img&quot;, &quot;ic_about&quot;);</span>
+<span class="nc" id="L183">        arrDrawer.add(map);</span>
 
         try {
             // lad adapter
-<span class="nc" id="L180">            DrawerAdapter adapter = new DrawerAdapter(this, arrDrawer);</span>
-<span class="nc" id="L181">            lstDrawer.setAdapter(adapter);</span>
+<span class="nc" id="L187">            DrawerAdapter adapter = new DrawerAdapter(this, arrDrawer);</span>
+<span class="nc" id="L188">            lstDrawer.setAdapter(adapter);</span>
 
             // Select Information on load //
-<span class="nc" id="L184">            selectedItem = arrDrawer.get(0);</span>
-<span class="nc" id="L185">            loadFragment(selectedItem);</span>
-<span class="nc" id="L186">        } catch(Exception ex) {</span>
-<span class="nc" id="L187">            FlyveLog.e(ex.getMessage());</span>
-<span class="nc" id="L188">        }</span>
-<span class="nc" id="L189">    }</span>
+<span class="nc" id="L191">            selectedItem = arrDrawer.get(0);</span>
+<span class="nc" id="L192">            loadFragment(selectedItem);</span>
+<span class="nc" id="L193">        } catch(Exception ex) {</span>
+<span class="nc" id="L194">            FlyveLog.e(ex.getMessage());</span>
+<span class="nc" id="L195">        }</span>
+<span class="nc" id="L196">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span>Generated by the Android Gradle plugin 3.0.0</div></body></html>

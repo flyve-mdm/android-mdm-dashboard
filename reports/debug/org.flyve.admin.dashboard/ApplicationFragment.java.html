@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>FleetFragment.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debugAndroidTest</a> &gt; <a href="index.source.html" class="el_package">org.flyve.admin.dashboard</a> &gt; <span class="el_source">FleetFragment.java</span></div><h1>FleetFragment.java</h1><pre class="source lang-java linenums">package org.flyve.admin.dashboard;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ApplicationFragment.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debugAndroidTest</a> &gt; <a href="index.source.html" class="el_package">org.flyve.admin.dashboard</a> &gt; <span class="el_source">ApplicationFragment.java</span></div><h1>ApplicationFragment.java</h1><pre class="source lang-java linenums">package org.flyve.admin.dashboard;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import org.flyve.admin.dashboard.adapter.FleetAdapter;
+import org.flyve.admin.dashboard.adapter.ApplicationAdapter;
 import org.flyve.admin.dashboard.utils.FlyveLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -19,7 +19,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-<span class="nc" id="L22">public class FleetFragment extends Fragment {</span>
+<span class="nc" id="L22">public class ApplicationFragment extends Fragment {</span>
 
     private ProgressBar pb;
     private RecyclerView lst;
@@ -27,14 +27,14 @@ import java.util.HashMap;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-<span class="nc" id="L30">        View v = inflater.inflate(R.layout.fragment_fleet, container, false);</span>
+<span class="nc" id="L30">        View v = inflater.inflate(R.layout.fragment_application, container, false);</span>
 
 <span class="nc" id="L32">        pb = (ProgressBar) v.findViewById(R.id.pb);</span>
 <span class="nc" id="L33">        pb.setVisibility(View.VISIBLE);</span>
 
 <span class="nc" id="L35">        lst = v.findViewById(R.id.lst);</span>
 
-<span class="nc" id="L37">        LinearLayoutManager llm = new LinearLayoutManager(FleetFragment.this.getActivity());</span>
+<span class="nc" id="L37">        LinearLayoutManager llm = new LinearLayoutManager(ApplicationFragment.this.getActivity());</span>
 <span class="nc" id="L38">        lst.setLayoutManager(llm);</span>
 
 <span class="nc" id="L40">        load(loadJSONFromAsset());</span>
@@ -45,7 +45,7 @@ import java.util.HashMap;
     public String loadJSONFromAsset() {
 <span class="nc" id="L46">        String json = null;</span>
         try {
-<span class="nc" id="L48">            InputStream is = getActivity().getAssets().open(&quot;json/fleets.json&quot;);</span>
+<span class="nc" id="L48">            InputStream is = getActivity().getAssets().open(&quot;json/packages.json&quot;);</span>
 <span class="nc" id="L49">            int size = is.available();</span>
 <span class="nc" id="L50">            byte[] buffer = new byte[size];</span>
 <span class="nc" id="L51">            is.read(buffer);</span>
@@ -72,21 +72,24 @@ import java.util.HashMap;
 <span class="nc" id="L72">                HashMap&lt;String, String&gt; c = new HashMap&lt;&gt;();</span>
 
 <span class="nc" id="L74">                c.put(&quot;type&quot;, &quot;data&quot;); // clasify the item if data or header</span>
-<span class="nc" id="L75">                c.put(&quot;name&quot;, obj.getString(&quot;PluginFlyvemdmFleet.name&quot;));</span>
+<span class="nc" id="L75">                c.put(&quot;name&quot;, obj.getString(&quot;PluginFlyvemdmPackage.alias&quot;));</span>
+<span class="nc" id="L76">                c.put(&quot;package&quot;, obj.getString(&quot;PluginFlyvemdmPackage.name&quot;));</span>
+<span class="nc" id="L77">                c.put(&quot;icon&quot;, obj.getString(&quot;PluginFlyvemdmPackage.icon&quot;));</span>
+<span class="nc" id="L78">                c.put(&quot;version&quot;, obj.getString(&quot;PluginFlyvemdmPackage.version&quot;));</span>
 
-<span class="nc" id="L77">                data.add(c);</span>
+<span class="nc" id="L80">                data.add(c);</span>
             }
 
-<span class="nc" id="L80">            pb.setVisibility(View.GONE);</span>
+<span class="nc" id="L83">            pb.setVisibility(View.GONE);</span>
 
-<span class="nc" id="L82">            FleetAdapter mAdapter = new FleetAdapter(data);</span>
-<span class="nc" id="L83">            lst.setAdapter(mAdapter);</span>
+<span class="nc" id="L85">            ApplicationAdapter mAdapter = new ApplicationAdapter(data);</span>
+<span class="nc" id="L86">            lst.setAdapter(mAdapter);</span>
 
-<span class="nc" id="L85">        } catch (Exception ex) {</span>
-<span class="nc" id="L86">            pb.setVisibility(View.GONE);</span>
-<span class="nc" id="L87">            FlyveLog.e(ex.getMessage());</span>
-<span class="nc" id="L88">        }</span>
+<span class="nc" id="L88">        } catch (Exception ex) {</span>
+<span class="nc" id="L89">            pb.setVisibility(View.GONE);</span>
+<span class="nc" id="L90">            FlyveLog.e(ex.getMessage());</span>
+<span class="nc" id="L91">        }</span>
 
-<span class="nc" id="L90">    }</span>
+<span class="nc" id="L93">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span>Generated by the Android Gradle plugin 3.0.0</div></body></html>

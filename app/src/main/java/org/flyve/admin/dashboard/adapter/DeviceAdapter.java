@@ -85,9 +85,9 @@ public class DeviceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         DataViewHolder(View itemView) {
             super(itemView);
-            name = (TextView)itemView.findViewById(R.id.name);
-            email = (TextView)itemView.findViewById(R.id.email);
-            serial = (TextView)itemView.findViewById(R.id.serial);
+            name = itemView.findViewById(R.id.name);
+            email = itemView.findViewById(R.id.email);
+            serial = itemView.findViewById(R.id.serial);
             viewBackground = itemView.findViewById(R.id.view_background);
             viewForeground = itemView.findViewById(R.id.view_foreground);
         }

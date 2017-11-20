@@ -1,7 +1,4 @@
----
-layout: coverage
----
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../resources/report.css" type="text/css"/><link rel="shortcut icon" href="../resources/report.gif" type="image/gif"/><title>UserAdapter.java</title><link rel="stylesheet" href="../resources/prettify.css" type="text/css"/><script type="text/javascript" src="../resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debugAndroidTest</a> &gt; <a href="index.source.html" class="el_package">org.flyve.admin.dashboard.adapter</a> &gt; <span class="el_source">UserAdapter.java</span></div><h1>UserAdapter.java</h1><pre class="source lang-java linenums">package org.flyve.admin.dashboard.adapter;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>UserAdapter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debugAndroidTest</a> &gt; <a href="index.source.html" class="el_package">org.flyve.admin.dashboard.adapter</a> &gt; <span class="el_source">UserAdapter.java</span></div><h1>UserAdapter.java</h1><pre class="source lang-java linenums">package org.flyve.admin.dashboard.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -90,42 +87,40 @@ public class UserAdapter extends RecyclerView.Adapter&lt;RecyclerView.ViewHolder
 <span class="nc" id="L87">            email = itemView.findViewById(R.id.email);</span>
 <span class="nc" id="L88">            viewBackground = itemView.findViewById(R.id.view_background);</span>
 <span class="nc" id="L89">            viewForeground = itemView.findViewById(R.id.view_foreground);</span>
-
-
-<span class="nc" id="L92">        }</span>
+<span class="nc" id="L90">        }</span>
 
         public void bindData(HashMap&lt;String, String&gt; model) {
-<span class="nc" id="L95">            name.setText( Html.fromHtml( model.get(&quot;UserRealName&quot;)) );</span>
-<span class="nc" id="L96">            email.setText( Html.fromHtml( model.get(&quot;email&quot;) ));</span>
-<span class="nc" id="L97">        }</span>
+<span class="nc" id="L93">            name.setText( Html.fromHtml( model.get(&quot;UserRealName&quot;)) );</span>
+<span class="nc" id="L94">            email.setText( Html.fromHtml( model.get(&quot;email&quot;) ));</span>
+<span class="nc" id="L95">        }</span>
     }
 
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
         TextView title;
 
-<span class="nc" id="L103">        HeaderViewHolder(View itemView) {</span>
-<span class="nc" id="L104">            super(itemView);</span>
-<span class="nc" id="L105">            title = itemView.findViewById(R.id.title);</span>
-<span class="nc" id="L106">        }</span>
+<span class="nc" id="L101">        HeaderViewHolder(View itemView) {</span>
+<span class="nc" id="L102">            super(itemView);</span>
+<span class="nc" id="L103">            title = itemView.findViewById(R.id.title);</span>
+<span class="nc" id="L104">        }</span>
 
         public void bindData(HashMap&lt;String, String&gt; model) {
-<span class="nc" id="L109">            title.setText( Html.fromHtml( model.get(&quot;title&quot;) ));</span>
-<span class="nc" id="L110">        }</span>
+<span class="nc" id="L107">            title.setText( Html.fromHtml( model.get(&quot;title&quot;) ));</span>
+<span class="nc" id="L108">        }</span>
     }
 
     public void removeItem(int position) {
-<span class="nc" id="L114">        data.remove(position);</span>
+<span class="nc" id="L112">        data.remove(position);</span>
         // notify the item removed by position
         // to perform recycler view delete animations
         // NOTE: don't call notifyDataSetChanged()
-<span class="nc" id="L118">        notifyItemRemoved(position);</span>
-<span class="nc" id="L119">    }</span>
+<span class="nc" id="L116">        notifyItemRemoved(position);</span>
+<span class="nc" id="L117">    }</span>
 
     public void restoreItem(HashMap&lt;String, String&gt; item, int position) {
-<span class="nc" id="L122">        data.add(position, item);</span>
+<span class="nc" id="L120">        data.add(position, item);</span>
         // notify item added by position
-<span class="nc" id="L124">        notifyItemInserted(position);</span>
-<span class="nc" id="L125">    }</span>
+<span class="nc" id="L122">        notifyItemInserted(position);</span>
+<span class="nc" id="L123">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span>Generated by the Android Gradle plugin 3.0.0</div></body></html>

@@ -9,22 +9,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import org.flyve.admin.dashboard.R;
-
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class ApplicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private ArrayList<HashMap<String, String>> data;
+    private List<HashMap<String, String>> data;
 
     private static final int ITEM_TYPE_DATA = 0;
     private static final int ITEM_TYPE_HEADER = 1;
 
-    public ApplicationAdapter(ArrayList<HashMap<String, String>> data) {
+    public ApplicationAdapter(List<HashMap<String, String>> data) {
         this.data = data;
     }
 
@@ -83,13 +82,17 @@ public class ApplicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         TextView name;
         TextView packages;
         TextView version;
+        public RelativeLayout viewBackground;
+        public RelativeLayout viewForeground;
 
         DataViewHolder(View itemView) {
             super(itemView);
-            img = (ImageView)itemView.findViewById(R.id.img);
-            name = (TextView)itemView.findViewById(R.id.name);
-            packages = (TextView)itemView.findViewById(R.id.packages);
-            version = (TextView)itemView.findViewById(R.id.version);
+            img = itemView.findViewById(R.id.img);
+            name = itemView.findViewById(R.id.name);
+            packages = itemView.findViewById(R.id.packages);
+            version = itemView.findViewById(R.id.version);
+            viewBackground = itemView.findViewById(R.id.view_background);
+            viewForeground = itemView.findViewById(R.id.view_foreground);
         }
 
         public void bindData(HashMap<String, String> model) {
@@ -109,7 +112,7 @@ public class ApplicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         HeaderViewHolder(View itemView) {
             super(itemView);
-            title = (TextView)itemView.findViewById(R.id.title);
+            title = itemView.findViewById(R.id.title);
         }
 
         public void bindData(HashMap<String, String> model) {
@@ -117,5 +120,18 @@ public class ApplicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
+    public void removeItem(int position) {
+        data.remove(position);
+        // notify the item removed by position
+        // to perform recycler view delete animations
+        // NOTE: don't call notifyDataSetChanged()
+        notifyItemRemoved(position);
+    }
+
+    public void restoreItem(HashMap<String, String> item, int position) {
+        data.add(position, item);
+        // notify item added by position
+        notifyItemInserted(position);
+    }
 
 }

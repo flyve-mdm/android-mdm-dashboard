@@ -38,7 +38,7 @@ public class FileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_file, container, false);
 
-        pb = (ProgressBar) v.findViewById(R.id.pb);
+        pb = v.findViewById(R.id.pb);
         pb.setVisibility(View.VISIBLE);
 
         lst = v.findViewById(R.id.lst);

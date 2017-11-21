@@ -1,4 +1,4 @@
-package org.flyve.admin.dashboard;
+package org.flyve.admin.dashboard.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,8 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import org.flyve.admin.dashboard.adapter.ApplicationAdapter;
-import org.flyve.admin.dashboard.adapter.ApplicationTouchHelper;
+import org.flyve.admin.dashboard.R;
+import org.flyve.admin.dashboard.adapter.UserAdapter;
+import org.flyve.admin.dashboard.adapter.UserTouchHelper;
 import org.flyve.admin.dashboard.utils.FlyveLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,34 +27,34 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ApplicationFragment extends Fragment {
+public class UserFragment extends Fragment {
 
     private ProgressBar pb;
     private RecyclerView lst;
     private List<HashMap<String, String>> data;
-    private ApplicationAdapter mAdapter;
+    UserAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_application, container, false);
+        View v = inflater.inflate(R.layout.fragment_user, container, false);
 
         pb = v.findViewById(R.id.pb);
         pb.setVisibility(View.VISIBLE);
 
         lst = v.findViewById(R.id.lst);
 
-        LinearLayoutManager llm = new LinearLayoutManager(ApplicationFragment.this.getActivity());
+        LinearLayoutManager llm = new LinearLayoutManager(UserFragment.this.getActivity());
         lst.setLayoutManager(llm);
 
         lst.setItemAnimator(new DefaultItemAnimator());
-        lst.addItemDecoration(new DividerItemDecoration(ApplicationFragment.this.getContext(), DividerItemDecoration.VERTICAL));
+        lst.addItemDecoration(new DividerItemDecoration(UserFragment.this.getContext(), DividerItemDecoration.VERTICAL));
 
         // adding item touch helper
         // only ItemTouchHelper.LEFT added to detect Right to Left swipe
         // if you want both Right -> Left and Left -> Right
         // add pass ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT as param
-        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ApplicationTouchHelper(0, ItemTouchHelper.LEFT, new ApplicationTouchHelper.RecyclerItemTouchHelperListener() {
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new UserTouchHelper(0, ItemTouchHelper.LEFT, new UserTouchHelper.RecyclerItemTouchHelperListener() {
 
             /**
              * callback when recycler view is swiped
@@ -62,7 +63,7 @@ public class ApplicationFragment extends Fragment {
              */
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-                if (viewHolder instanceof ApplicationAdapter.DataViewHolder) {
+                if (viewHolder instanceof UserAdapter.DataViewHolder) {
                     // get the removed item name to display it in snack bar
                     String name = data.get(viewHolder.getAdapterPosition()).get("name");
 
@@ -75,7 +76,7 @@ public class ApplicationFragment extends Fragment {
 
                     // showing snack bar with Undo option
                     Snackbar snackbar = Snackbar
-                            .make(ApplicationFragment.this.getView(), name + " removed from list", Snackbar.LENGTH_LONG);
+                            .make(UserFragment.this.getView(), " removed from list", Snackbar.LENGTH_LONG);
                     snackbar.setAction("UNDO", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -91,6 +92,7 @@ public class ApplicationFragment extends Fragment {
         });
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(lst);
 
+
         load(loadJSONFromAsset());
 
         return v;
@@ -99,7 +101,7 @@ public class ApplicationFragment extends Fragment {
     public String loadJSONFromAsset() {
         String json = null;
         try {
-            InputStream is = getActivity().getAssets().open("json/packages.json");
+            InputStream is = getActivity().getAssets().open("json/users.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -113,7 +115,6 @@ public class ApplicationFragment extends Fragment {
     }
 
     public void load(String jsonStr) {
-
         data = new ArrayList<>();
 
         try {
@@ -126,17 +127,22 @@ public class ApplicationFragment extends Fragment {
                 HashMap<String, String> c = new HashMap<>();
 
                 c.put("type", "data"); // clasify the item if data or header
-                c.put("name", obj.getString("PluginFlyvemdmPackage.alias"));
-                c.put("package", obj.getString("PluginFlyvemdmPackage.name"));
-                c.put("icon", obj.getString("PluginFlyvemdmPackage.icon"));
-                c.put("version", obj.getString("PluginFlyvemdmPackage.version"));
+                c.put("email", obj.getString("User.name"));
 
-                data.add(c);
+                if(obj.getString("User.realname").trim().equalsIgnoreCase("")) {
+                    c.put("UserRealName", "without name");
+                } else {
+                    c.put("UserRealName", obj.getString("User.realname"));
+                }
+
+                if(!obj.getString("User.realname").equalsIgnoreCase("null")) {
+                    data.add(c);
+                }
             }
 
             pb.setVisibility(View.GONE);
 
-            mAdapter = new ApplicationAdapter(data);
+            mAdapter = new UserAdapter(data);
             lst.setAdapter(mAdapter);
 
         } catch (Exception ex) {

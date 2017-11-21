@@ -25,7 +25,7 @@
  * ------------------------------------------------------------------------------
  */
 
-package org.flyve.admin.dashboard;
+package org.flyve.admin.dashboard.ui;
 
 import android.app.Application;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package org.flyve.admin.dashboard;
+package org.flyve.admin.dashboard.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,8 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import org.flyve.admin.dashboard.adapter.FleetAdapter;
-import org.flyve.admin.dashboard.adapter.FleetTouchHelper;
+import org.flyve.admin.dashboard.R;
+import org.flyve.admin.dashboard.adapter.FileAdapter;
+import org.flyve.admin.dashboard.adapter.FileTouchHelper;
 import org.flyve.admin.dashboard.utils.FlyveLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,34 +27,34 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class FleetFragment extends Fragment {
+public class FileFragment extends Fragment {
 
     private ProgressBar pb;
     private RecyclerView lst;
     private List<HashMap<String, String>> data;
-    private FleetAdapter mAdapter;
+    private FileAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_fleet, container, false);
+        View v = inflater.inflate(R.layout.fragment_file, container, false);
 
         pb = v.findViewById(R.id.pb);
         pb.setVisibility(View.VISIBLE);
 
         lst = v.findViewById(R.id.lst);
 
-        LinearLayoutManager llm = new LinearLayoutManager(FleetFragment.this.getActivity());
+        LinearLayoutManager llm = new LinearLayoutManager(FileFragment.this.getActivity());
         lst.setLayoutManager(llm);
 
         lst.setItemAnimator(new DefaultItemAnimator());
-        lst.addItemDecoration(new DividerItemDecoration(FleetFragment.this.getContext(), DividerItemDecoration.VERTICAL));
+        lst.addItemDecoration(new DividerItemDecoration(FileFragment.this.getContext(), DividerItemDecoration.VERTICAL));
 
         // adding item touch helper
         // only ItemTouchHelper.LEFT added to detect Right to Left swipe
         // if you want both Right -> Left and Left -> Right
         // add pass ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT as param
-        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new FleetTouchHelper(0, ItemTouchHelper.LEFT, new FleetTouchHelper.RecyclerItemTouchHelperListener() {
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new FileTouchHelper(0, ItemTouchHelper.LEFT, new FileTouchHelper.RecyclerItemTouchHelperListener() {
 
             /**
              * callback when recycler view is swiped
@@ -62,7 +63,7 @@ public class FleetFragment extends Fragment {
              */
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-                if (viewHolder instanceof FleetAdapter.DataViewHolder) {
+                if (viewHolder instanceof FileAdapter.DataViewHolder) {
                     // get the removed item name to display it in snack bar
                     String name = data.get(viewHolder.getAdapterPosition()).get("name");
 
@@ -75,7 +76,7 @@ public class FleetFragment extends Fragment {
 
                     // showing snack bar with Undo option
                     Snackbar snackbar = Snackbar
-                            .make(FleetFragment.this.getView(), name + " removed from list", Snackbar.LENGTH_LONG);
+                            .make(FileFragment.this.getView(), " removed from list", Snackbar.LENGTH_LONG);
                     snackbar.setAction("UNDO", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -99,7 +100,7 @@ public class FleetFragment extends Fragment {
     public String loadJSONFromAsset() {
         String json = null;
         try {
-            InputStream is = getActivity().getAssets().open("json/fleets.json");
+            InputStream is = getActivity().getAssets().open("json/files.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -126,14 +127,17 @@ public class FleetFragment extends Fragment {
                 HashMap<String, String> c = new HashMap<>();
 
                 c.put("type", "data"); // clasify the item if data or header
-                c.put("name", obj.getString("PluginFlyvemdmFleet.name"));
+                c.put("name", obj.getString("PluginFlyvemdmFile.name"));
+
+                long fileKb = Long.parseLong(obj.getString("PluginFlyvemdmFile.filesize")) / 1024;
+                c.put("size", String.valueOf(fileKb) + " KB");
 
                 data.add(c);
             }
 
             pb.setVisibility(View.GONE);
 
-            mAdapter = new FleetAdapter(data);
+            mAdapter = new FileAdapter(data);
             lst.setAdapter(mAdapter);
 
         } catch (Exception ex) {

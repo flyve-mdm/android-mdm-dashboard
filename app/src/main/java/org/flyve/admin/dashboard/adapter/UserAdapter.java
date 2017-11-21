@@ -17,12 +17,14 @@ import java.util.List;
 public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private List<HashMap<String, String>> data;
+    private final OnItemClickListener listener;
 
     private static final int ITEM_TYPE_DATA = 0;
     private static final int ITEM_TYPE_HEADER = 1;
 
-    public UserAdapter(List<HashMap<String, String>> data) {
+    public UserAdapter(List<HashMap<String, String>> data, OnItemClickListener listener) {
         this.data = data;
+        this.listener = listener;
     }
 
     @Override
@@ -89,9 +91,15 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             viewForeground = itemView.findViewById(R.id.view_foreground);
         }
 
-        public void bindData(HashMap<String, String> model) {
+        public void bindData(final HashMap<String, String> model) {
             name.setText( Html.fromHtml( model.get("UserRealName")) );
             email.setText( Html.fromHtml( model.get("email") ));
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(model);
+                }
+            });
         }
     }
 
@@ -120,6 +128,10 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         data.add(position, item);
         // notify item added by position
         notifyItemInserted(position);
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(HashMap<String, String> item);
     }
 
 }

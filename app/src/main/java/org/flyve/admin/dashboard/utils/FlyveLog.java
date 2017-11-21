@@ -29,7 +29,7 @@ import android.os.Environment;
 
 import com.orhanobut.logger.Logger;
 
-import org.flyve.admin.dashboard.DashboardAgent;
+import org.flyve.admin.dashboard.ui.DashboardAgent;
 
 import java.io.BufferedWriter;
 import java.io.File;

@@ -1,4 +1,4 @@
-package org.flyve.admin.dashboard;
+package org.flyve.admin.dashboard.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,45 +13,48 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import org.flyve.admin.dashboard.adapter.DeviceAdapter;
-import org.flyve.admin.dashboard.adapter.DeviceTouchHelper;
+
+import org.flyve.admin.dashboard.R;
+import org.flyve.admin.dashboard.adapter.ApplicationAdapter;
+import org.flyve.admin.dashboard.adapter.ApplicationTouchHelper;
 import org.flyve.admin.dashboard.utils.FlyveLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class DeviceFragment extends Fragment {
+public class ApplicationFragment extends Fragment {
 
     private ProgressBar pb;
     private RecyclerView lst;
     private List<HashMap<String, String>> data;
-    private DeviceAdapter mAdapter;
+    private ApplicationAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_device, container, false);
+        View v = inflater.inflate(R.layout.fragment_application, container, false);
 
         pb = v.findViewById(R.id.pb);
         pb.setVisibility(View.VISIBLE);
 
         lst = v.findViewById(R.id.lst);
 
-        LinearLayoutManager llm = new LinearLayoutManager(DeviceFragment.this.getActivity());
+        LinearLayoutManager llm = new LinearLayoutManager(ApplicationFragment.this.getActivity());
         lst.setLayoutManager(llm);
 
         lst.setItemAnimator(new DefaultItemAnimator());
-        lst.addItemDecoration(new DividerItemDecoration(DeviceFragment.this.getContext(), DividerItemDecoration.VERTICAL));
+        lst.addItemDecoration(new DividerItemDecoration(ApplicationFragment.this.getContext(), DividerItemDecoration.VERTICAL));
 
         // adding item touch helper
         // only ItemTouchHelper.LEFT added to detect Right to Left swipe
         // if you want both Right -> Left and Left -> Right
         // add pass ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT as param
-        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new DeviceTouchHelper(0, ItemTouchHelper.LEFT, new DeviceTouchHelper.RecyclerItemTouchHelperListener() {
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ApplicationTouchHelper(0, ItemTouchHelper.LEFT, new ApplicationTouchHelper.RecyclerItemTouchHelperListener() {
 
             /**
              * callback when recycler view is swiped
@@ -60,9 +63,9 @@ public class DeviceFragment extends Fragment {
              */
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-                if (viewHolder instanceof DeviceAdapter.DataViewHolder) {
+                if (viewHolder instanceof ApplicationAdapter.DataViewHolder) {
                     // get the removed item name to display it in snack bar
-                    String name = data.get(viewHolder.getAdapterPosition()).get("UserRealName");
+                    String name = data.get(viewHolder.getAdapterPosition()).get("name");
 
                     // backup of removed item for undo purpose
                     final HashMap<String, String> deletedItem = data.get(viewHolder.getAdapterPosition());
@@ -73,7 +76,7 @@ public class DeviceFragment extends Fragment {
 
                     // showing snack bar with Undo option
                     Snackbar snackbar = Snackbar
-                            .make(DeviceFragment.this.getView(), name + " removed from list", Snackbar.LENGTH_LONG);
+                            .make(ApplicationFragment.this.getView(), name + " removed from list", Snackbar.LENGTH_LONG);
                     snackbar.setAction("UNDO", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -89,7 +92,6 @@ public class DeviceFragment extends Fragment {
         });
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(lst);
 
-
         load(loadJSONFromAsset());
 
         return v;
@@ -98,7 +100,7 @@ public class DeviceFragment extends Fragment {
     public String loadJSONFromAsset() {
         String json = null;
         try {
-            InputStream is = getActivity().getAssets().open("json/agents.json");
+            InputStream is = getActivity().getAssets().open("json/packages.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -125,24 +127,17 @@ public class DeviceFragment extends Fragment {
                 HashMap<String, String> c = new HashMap<>();
 
                 c.put("type", "data"); // clasify the item if data or header
-                c.put("id", obj.getString("PluginFlyvemdmAgent.id"));
-                c.put("email", obj.getString("PluginFlyvemdmAgent.name"));
-                c.put("fleetName", obj.getString("PluginFlyvemdmAgent.PluginFlyvemdmFleet.name"));
-                c.put("ComputerId", obj.getString("PluginFlyvemdmAgent.Computer.id"));
-                c.put("ComputerSerial", obj.getString("PluginFlyvemdmAgent.Computer.serial"));
-                c.put("UserId", obj.getString("PluginFlyvemdmAgent.Computer.User.id"));
-                c.put("FleetId", obj.getString("PluginFlyvemdmAgent.PluginFlyvemdmFleet.id"));
-                c.put("lastContact", obj.getString("PluginFlyvemdmAgent.last_contact"));
-                c.put("UserRealName", obj.getString("PluginFlyvemdmAgent.Computer.User.realname"));
-                c.put("AgentVersion", obj.getString("PluginFlyvemdmAgent.version"));
-                c.put("isOnline", obj.getString("PluginFlyvemdmAgent.is_online"));
+                c.put("name", obj.getString("PluginFlyvemdmPackage.alias"));
+                c.put("package", obj.getString("PluginFlyvemdmPackage.name"));
+                c.put("icon", obj.getString("PluginFlyvemdmPackage.icon"));
+                c.put("version", obj.getString("PluginFlyvemdmPackage.version"));
 
                 data.add(c);
             }
 
             pb.setVisibility(View.GONE);
 
-            mAdapter = new DeviceAdapter(data);
+            mAdapter = new ApplicationAdapter(data);
             lst.setAdapter(mAdapter);
 
         } catch (Exception ex) {

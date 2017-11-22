@@ -99,7 +99,7 @@ public class ApplicationFragment extends Fragment {
     }
 
     public String loadJSONFromAsset() {
-        String json = null;
+        String json;
         try {
             InputStream is = getActivity().getAssets().open("json/packages.json");
             int size = is.available();
@@ -153,7 +153,7 @@ public class ApplicationFragment extends Fragment {
     }
 
     private void openDetail(HashMap<String, String> item) {
-        Intent miIntent = new Intent(ApplicationFragment.this.getActivity(), UserDetailActivity.class);
+        Intent miIntent = new Intent(ApplicationFragment.this.getActivity(), ApplicationDetailActivity.class);
         ApplicationFragment.this.startActivity(miIntent);
     }
 

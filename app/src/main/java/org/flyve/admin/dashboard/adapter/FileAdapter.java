@@ -15,12 +15,12 @@ import java.util.List;
 public class FileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private List<HashMap<String, String>> data;
-    private final DeviceAdapter.OnItemClickListener listener;
+    private final FileAdapter.OnItemClickListener listener;
 
     private static final int ITEM_TYPE_DATA = 0;
     private static final int ITEM_TYPE_HEADER = 1;
 
-    public FileAdapter(List<HashMap<String, String>> data, DeviceAdapter.OnItemClickListener listener) {
+    public FileAdapter(List<HashMap<String, String>> data, FileAdapter.OnItemClickListener listener) {
         this.data = data;
         this.listener = listener;
     }

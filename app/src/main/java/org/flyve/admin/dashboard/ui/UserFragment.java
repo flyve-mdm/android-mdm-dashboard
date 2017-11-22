@@ -100,7 +100,7 @@ public class UserFragment extends Fragment {
     }
 
     public String loadJSONFromAsset() {
-        String json = null;
+        String json;
         try {
             InputStream is = getActivity().getAssets().open("json/users.json");
             int size = is.available();

@@ -99,7 +99,7 @@ public class FleetFragment extends Fragment {
     }
 
     public String loadJSONFromAsset() {
-        String json = null;
+        String json;
         try {
             InputStream is = getActivity().getAssets().open("json/fleets.json");
             int size = is.available();

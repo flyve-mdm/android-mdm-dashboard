@@ -100,7 +100,7 @@ public class DeviceFragment extends Fragment {
     }
 
     public String loadJSONFromAsset() {
-        String json = null;
+        String json;
         try {
             InputStream is = getActivity().getAssets().open("json/agents.json");
             int size = is.available();
@@ -161,7 +161,7 @@ public class DeviceFragment extends Fragment {
     }
 
     private void openDetail(HashMap<String, String> item) {
-        Intent miIntent = new Intent(DeviceFragment.this.getActivity(), UserDetailActivity.class);
+        Intent miIntent = new Intent(DeviceFragment.this.getActivity(), DeviceDetailActivity.class);
         DeviceFragment.this.startActivity(miIntent);
     }
 

@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import org.flyve.admin.dashboard.R;
-import org.flyve.admin.dashboard.adapter.DeviceAdapter;
 import org.flyve.admin.dashboard.adapter.FileAdapter;
 import org.flyve.admin.dashboard.adapter.FileTouchHelper;
 import org.flyve.admin.dashboard.utils.FlyveLog;
@@ -100,7 +99,7 @@ public class FileFragment extends Fragment {
     }
 
     public String loadJSONFromAsset() {
-        String json = null;
+        String json;
         try {
             InputStream is = getActivity().getAssets().open("json/files.json");
             int size = is.available();
@@ -139,7 +138,7 @@ public class FileFragment extends Fragment {
 
             pb.setVisibility(View.GONE);
 
-            mAdapter = new FileAdapter(data, new DeviceAdapter.OnItemClickListener() {
+            mAdapter = new FileAdapter(data, new FileAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(HashMap<String, String> item) {
                     openDetail(item);
@@ -155,7 +154,7 @@ public class FileFragment extends Fragment {
     }
 
     private void openDetail(HashMap<String, String> item) {
-        Intent miIntent = new Intent(FileFragment.this.getActivity(), UserDetailActivity.class);
+        Intent miIntent = new Intent(FileFragment.this.getActivity(), FileDetailActivity.class);
         FileFragment.this.startActivity(miIntent);
     }
 

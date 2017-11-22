@@ -1,5 +1,6 @@
 package org.flyve.admin.dashboard.ui;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -20,6 +21,7 @@ import org.flyve.admin.dashboard.adapter.DeviceTouchHelper;
 import org.flyve.admin.dashboard.utils.FlyveLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -144,13 +146,23 @@ public class DeviceFragment extends Fragment {
 
             pb.setVisibility(View.GONE);
 
-            mAdapter = new DeviceAdapter(data);
+            mAdapter = new DeviceAdapter(data, new DeviceAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(HashMap<String, String> item) {
+                    openDetail(item)
+;                }
+            });
             lst.setAdapter(mAdapter);
 
         } catch (Exception ex) {
             pb.setVisibility(View.GONE);
             FlyveLog.e(ex.getMessage());
         }
-
     }
+
+    private void openDetail(HashMap<String, String> item) {
+        Intent miIntent = new Intent(DeviceFragment.this.getActivity(), UserDetailActivity.class);
+        DeviceFragment.this.startActivity(miIntent);
+    }
+
 }

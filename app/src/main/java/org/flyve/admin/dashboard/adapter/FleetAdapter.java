@@ -9,27 +9,27 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.flyve.admin.dashboard.R;
+import org.flyve.admin.dashboard.model.FleetModel;
 
-import java.util.HashMap;
 import java.util.List;
 
 
 public class FleetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private List<HashMap<String, String>> data;
+    private List<FleetModel> data;
     private final FleetAdapter.OnItemClickListener listener;
 
     private static final int ITEM_TYPE_DATA = 0;
     private static final int ITEM_TYPE_HEADER = 1;
 
-    public FleetAdapter(List<HashMap<String, String>> data, FleetAdapter.OnItemClickListener listener) {
+    public FleetAdapter(List<FleetModel> data, FleetAdapter.OnItemClickListener listener) {
         this.data = data;
         this.listener = listener;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if((data.get(position)).get("type").equals("header")) {
+        if(!(data.get(position)).getHeader().equals(FleetModel.NO_HEADER)) {
             return ITEM_TYPE_HEADER;
         } else {
             return ITEM_TYPE_DATA;
@@ -54,7 +54,7 @@ public class FleetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        HashMap<String, String> response = data.get(position);
+        FleetModel response = data.get(position);
 
         final int itemType = getItemViewType(position);
 
@@ -88,8 +88,8 @@ public class FleetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             name = itemView.findViewById(R.id.name);
         }
 
-        public void bindData(final HashMap<String, String> model) {
-            name.setText( Html.fromHtml( model.get("name")) );
+        public void bindData(final FleetModel model) {
+            name.setText( Html.fromHtml( model.getName()) );
             viewBackground = itemView.findViewById(R.id.view_background);
             viewForeground = itemView.findViewById(R.id.view_foreground);
 
@@ -110,8 +110,8 @@ public class FleetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             title = itemView.findViewById(R.id.title);
         }
 
-        public void bindData(HashMap<String, String> model) {
-            title.setText( Html.fromHtml( model.get("title") ));
+        public void bindData(FleetModel model) {
+            title.setText( Html.fromHtml( model.getHeader() ));
         }
     }
 
@@ -123,14 +123,14 @@ public class FleetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         notifyItemRemoved(position);
     }
 
-    public void restoreItem(HashMap<String, String> item, int position) {
+    public void restoreItem(FleetModel item, int position) {
         data.add(position, item);
         // notify item added by position
         notifyItemInserted(position);
     }
 
     public interface OnItemClickListener {
-        void onItemClick(HashMap<String, String> item);
+        void onItemClick(FleetModel item);
     }
 
 

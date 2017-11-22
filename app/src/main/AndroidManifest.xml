@@ -35,7 +35,8 @@
         <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.UserDetailActivity" />
         <activity android:name=".ui.ApplicationDetailActivity" />
-        <activity android:name=".ui.DeviceDetailActivity"></activity>
+        <activity android:name=".ui.DeviceDetailActivity" />
+        <activity android:name=".ui.FileDetailActivity"></activity>
     </application>
 
 </manifest>

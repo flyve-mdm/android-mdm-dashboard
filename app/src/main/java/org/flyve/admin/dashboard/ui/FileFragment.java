@@ -1,5 +1,6 @@
 package org.flyve.admin.dashboard.ui;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import org.flyve.admin.dashboard.R;
+import org.flyve.admin.dashboard.adapter.DeviceAdapter;
 import org.flyve.admin.dashboard.adapter.FileAdapter;
 import org.flyve.admin.dashboard.adapter.FileTouchHelper;
 import org.flyve.admin.dashboard.utils.FlyveLog;
@@ -137,13 +139,24 @@ public class FileFragment extends Fragment {
 
             pb.setVisibility(View.GONE);
 
-            mAdapter = new FileAdapter(data);
+            mAdapter = new FileAdapter(data, new DeviceAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(HashMap<String, String> item) {
+                    openDetail(item);
+                }
+            });
+
             lst.setAdapter(mAdapter);
 
         } catch (Exception ex) {
             pb.setVisibility(View.GONE);
             FlyveLog.e(ex.getMessage());
         }
-
     }
+
+    private void openDetail(HashMap<String, String> item) {
+        Intent miIntent = new Intent(FileFragment.this.getActivity(), UserDetailActivity.class);
+        FileFragment.this.startActivity(miIntent);
+    }
+
 }

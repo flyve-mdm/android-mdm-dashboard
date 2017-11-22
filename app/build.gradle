@@ -78,6 +78,7 @@ task updateVersionCode {
 
 
 
+
 task updateVersionName {
     doLast {
         if (project.hasProperty("vName")) {

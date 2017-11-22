@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import org.flyve.admin.dashboard.R;
 import org.flyve.admin.dashboard.adapter.DeviceAdapter;
 import org.flyve.admin.dashboard.adapter.DeviceTouchHelper;
+import org.flyve.admin.dashboard.model.DeviceModel;
 import org.flyve.admin.dashboard.utils.FlyveLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,14 +26,13 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class DeviceFragment extends Fragment {
 
     private ProgressBar pb;
     private RecyclerView lst;
-    private List<HashMap<String, String>> data;
+    private List<DeviceModel> data;
     private DeviceAdapter mAdapter;
 
     @Override
@@ -66,10 +66,10 @@ public class DeviceFragment extends Fragment {
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
                 if (viewHolder instanceof DeviceAdapter.DataViewHolder) {
                     // get the removed item name to display it in snack bar
-                    String name = data.get(viewHolder.getAdapterPosition()).get("UserRealName");
+                    String name = data.get(viewHolder.getAdapterPosition()).getUserRealName();
 
                     // backup of removed item for undo purpose
-                    final HashMap<String, String> deletedItem = data.get(viewHolder.getAdapterPosition());
+                    final DeviceModel deletedItem = data.get(viewHolder.getAdapterPosition());
                     final int deletedIndex = viewHolder.getAdapterPosition();
 
                     // remove the item from recycler view
@@ -126,29 +126,29 @@ public class DeviceFragment extends Fragment {
             for (int y = 0; y < items.length(); y++) {
 
                 JSONObject obj = items.getJSONObject(y);
-                HashMap<String, String> c = new HashMap<>();
 
-                c.put("type", "data"); // clasify the item if data or header
-                c.put("id", obj.getString("PluginFlyvemdmAgent.id"));
-                c.put("email", obj.getString("PluginFlyvemdmAgent.name"));
-                c.put("fleetName", obj.getString("PluginFlyvemdmAgent.PluginFlyvemdmFleet.name"));
-                c.put("ComputerId", obj.getString("PluginFlyvemdmAgent.Computer.id"));
-                c.put("ComputerSerial", obj.getString("PluginFlyvemdmAgent.Computer.serial"));
-                c.put("UserId", obj.getString("PluginFlyvemdmAgent.Computer.User.id"));
-                c.put("FleetId", obj.getString("PluginFlyvemdmAgent.PluginFlyvemdmFleet.id"));
-                c.put("lastContact", obj.getString("PluginFlyvemdmAgent.last_contact"));
-                c.put("UserRealName", obj.getString("PluginFlyvemdmAgent.Computer.User.realname"));
-                c.put("AgentVersion", obj.getString("PluginFlyvemdmAgent.version"));
-                c.put("isOnline", obj.getString("PluginFlyvemdmAgent.is_online"));
+                DeviceModel model = new DeviceModel(DeviceModel.NO_HEADER);
 
-                data.add(c);
+                model.setId(obj.getString("PluginFlyvemdmAgent.id"));
+                model.setEmail(obj.getString("PluginFlyvemdmAgent.name"));
+                model.setFleetName(obj.getString("PluginFlyvemdmAgent.PluginFlyvemdmFleet.name"));
+                model.setComputerId(obj.getString("PluginFlyvemdmAgent.Computer.id"));
+                model.setComputerSerial(obj.getString("PluginFlyvemdmAgent.Computer.serial"));
+                model.setUserId(obj.getString("PluginFlyvemdmAgent.Computer.User.id"));
+                model.setFleetId(obj.getString("PluginFlyvemdmAgent.PluginFlyvemdmFleet.id"));
+                model.setLastContact(obj.getString("PluginFlyvemdmAgent.last_contact"));
+                model.setUserRealName(obj.getString("PluginFlyvemdmAgent.Computer.User.realname"));
+                model.setAgentVersion(obj.getString("PluginFlyvemdmAgent.version"));
+                model.setIsOnline(obj.getString("PluginFlyvemdmAgent.is_online"));
+
+                data.add(model);
             }
 
             pb.setVisibility(View.GONE);
 
             mAdapter = new DeviceAdapter(data, new DeviceAdapter.OnItemClickListener() {
                 @Override
-                public void onItemClick(HashMap<String, String> item) {
+                public void onItemClick(DeviceModel item) {
                     openDetail(item)
 ;                }
             });
@@ -160,7 +160,7 @@ public class DeviceFragment extends Fragment {
         }
     }
 
-    private void openDetail(HashMap<String, String> item) {
+    private void openDetail(DeviceModel item) {
         Intent miIntent = new Intent(DeviceFragment.this.getActivity(), DeviceDetailActivity.class);
         DeviceFragment.this.startActivity(miIntent);
     }

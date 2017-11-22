@@ -9,27 +9,27 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.flyve.admin.dashboard.R;
+import org.flyve.admin.dashboard.model.DeviceModel;
 
-import java.util.HashMap;
 import java.util.List;
 
 
 public class DeviceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private List<HashMap<String, String>> data;
+    private List<DeviceModel> data;
     private final DeviceAdapter.OnItemClickListener listener;
 
     private static final int ITEM_TYPE_DATA = 0;
     private static final int ITEM_TYPE_HEADER = 1;
 
-    public DeviceAdapter(List<HashMap<String, String>> data, DeviceAdapter.OnItemClickListener listener) {
+    public DeviceAdapter(List<DeviceModel> data, DeviceAdapter.OnItemClickListener listener) {
         this.data = data;
         this.listener = listener;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if((data.get(position)).get("type").equals("header")) {
+        if(!(data.get(position)).getHeader().equals(DeviceModel.NO_HEADER)) {
             return ITEM_TYPE_HEADER;
         } else {
             return ITEM_TYPE_DATA;
@@ -54,7 +54,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        HashMap<String, String> response = data.get(position);
+        DeviceModel response = data.get(position);
 
         final int itemType = getItemViewType(position);
 
@@ -94,10 +94,10 @@ public class DeviceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             viewForeground = itemView.findViewById(R.id.view_foreground);
         }
 
-        public void bindData(final HashMap<String, String> model) {
-            name.setText( Html.fromHtml( model.get("UserRealName")) );
-            email.setText( Html.fromHtml( model.get("email") ));
-            serial.setText( Html.fromHtml( model.get("ComputerSerial") ));
+        public void bindData(final DeviceModel model) {
+            name.setText( Html.fromHtml( model.getUserRealName()) );
+            email.setText( Html.fromHtml( model.getEmail() ));
+            serial.setText( Html.fromHtml( model.getComputerSerial() ));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -113,11 +113,11 @@ public class DeviceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         HeaderViewHolder(View itemView) {
             super(itemView);
-            title = (TextView)itemView.findViewById(R.id.title);
+            title = itemView.findViewById(R.id.title);
         }
 
-        public void bindData(HashMap<String, String> model) {
-            title.setText( Html.fromHtml( model.get("title") ));
+        public void bindData(DeviceModel model) {
+            title.setText( Html.fromHtml( model.getHeader() ));
         }
     }
 
@@ -129,14 +129,14 @@ public class DeviceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         notifyItemRemoved(position);
     }
 
-    public void restoreItem(HashMap<String, String> item, int position) {
+    public void restoreItem(DeviceModel item, int position) {
         data.add(position, item);
         // notify item added by position
         notifyItemInserted(position);
     }
 
     public interface OnItemClickListener {
-        void onItemClick(HashMap<String, String> item);
+        void onItemClick(DeviceModel item);
     }
 
 

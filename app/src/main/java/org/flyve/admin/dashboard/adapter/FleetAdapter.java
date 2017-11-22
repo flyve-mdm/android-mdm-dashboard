@@ -17,12 +17,14 @@ import java.util.List;
 public class FleetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private List<HashMap<String, String>> data;
+    private final FleetAdapter.OnItemClickListener listener;
 
     private static final int ITEM_TYPE_DATA = 0;
     private static final int ITEM_TYPE_HEADER = 1;
 
-    public FleetAdapter(List<HashMap<String, String>> data) {
+    public FleetAdapter(List<HashMap<String, String>> data, FleetAdapter.OnItemClickListener listener) {
         this.data = data;
+        this.listener = listener;
     }
 
     @Override
@@ -86,10 +88,17 @@ public class FleetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             name = itemView.findViewById(R.id.name);
         }
 
-        public void bindData(HashMap<String, String> model) {
+        public void bindData(final HashMap<String, String> model) {
             name.setText( Html.fromHtml( model.get("name")) );
             viewBackground = itemView.findViewById(R.id.view_background);
             viewForeground = itemView.findViewById(R.id.view_foreground);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(model);
+                }
+            });
         }
     }
 
@@ -98,7 +107,7 @@ public class FleetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
         HeaderViewHolder(View itemView) {
             super(itemView);
-            title = (TextView)itemView.findViewById(R.id.title);
+            title = itemView.findViewById(R.id.title);
         }
 
         public void bindData(HashMap<String, String> model) {
@@ -119,5 +128,10 @@ public class FleetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         // notify item added by position
         notifyItemInserted(position);
     }
+
+    public interface OnItemClickListener {
+        void onItemClick(HashMap<String, String> item);
+    }
+
 
 }

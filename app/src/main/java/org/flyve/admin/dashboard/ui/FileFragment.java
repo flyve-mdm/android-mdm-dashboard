@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import org.flyve.admin.dashboard.R;
 import org.flyve.admin.dashboard.adapter.FileAdapter;
 import org.flyve.admin.dashboard.adapter.FileTouchHelper;
+import org.flyve.admin.dashboard.model.FileModel;
 import org.flyve.admin.dashboard.utils.FlyveLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -32,7 +33,7 @@ public class FileFragment extends Fragment {
 
     private ProgressBar pb;
     private RecyclerView lst;
-    private List<HashMap<String, String>> data;
+    private List<FileModel> data;
     private FileAdapter mAdapter;
 
     @Override
@@ -66,10 +67,10 @@ public class FileFragment extends Fragment {
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
                 if (viewHolder instanceof FileAdapter.DataViewHolder) {
                     // get the removed item name to display it in snack bar
-                    String name = data.get(viewHolder.getAdapterPosition()).get("name");
+                    String name = data.get(viewHolder.getAdapterPosition()).getName();
 
                     // backup of removed item for undo purpose
-                    final HashMap<String, String> deletedItem = data.get(viewHolder.getAdapterPosition());
+                    final FileModel deletedItem = data.get(viewHolder.getAdapterPosition());
                     final int deletedIndex = viewHolder.getAdapterPosition();
 
                     // remove the item from recycler view
@@ -125,22 +126,22 @@ public class FileFragment extends Fragment {
             for (int y = 0; y < items.length(); y++) {
 
                 JSONObject obj = items.getJSONObject(y);
-                HashMap<String, String> c = new HashMap<>();
 
-                c.put("type", "data"); // clasify the item if data or header
-                c.put("name", obj.getString("PluginFlyvemdmFile.name"));
+                FileModel model = new FileModel(FileModel.NO_HEADER);
+
+                model.setName(obj.getString("PluginFlyvemdmFile.name"));
 
                 long fileKb = Long.parseLong(obj.getString("PluginFlyvemdmFile.filesize")) / 1024;
-                c.put("size", String.valueOf(fileKb) + " KB");
+                model.setSize(String.valueOf(fileKb) + " KB");
 
-                data.add(c);
+                data.add(model);
             }
 
             pb.setVisibility(View.GONE);
 
             mAdapter = new FileAdapter(data, new FileAdapter.OnItemClickListener() {
                 @Override
-                public void onItemClick(HashMap<String, String> item) {
+                public void onItemClick(FileModel item) {
                     openDetail(item);
                 }
             });
@@ -153,7 +154,7 @@ public class FileFragment extends Fragment {
         }
     }
 
-    private void openDetail(HashMap<String, String> item) {
+    private void openDetail(FileModel item) {
         Intent miIntent = new Intent(FileFragment.this.getActivity(), FileDetailActivity.class);
         FileFragment.this.startActivity(miIntent);
     }

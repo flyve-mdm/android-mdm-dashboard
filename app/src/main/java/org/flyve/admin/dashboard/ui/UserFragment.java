@@ -146,7 +146,7 @@ public class UserFragment extends Fragment {
             mAdapter = new UserAdapter(data, new UserAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(HashMap<String, String> item) {
-                    openUserDetail(item);
+                    openDetail(item);
                 }
             });
             lst.setAdapter(mAdapter);
@@ -157,7 +157,7 @@ public class UserFragment extends Fragment {
         }
     }
 
-    private void openUserDetail(HashMap<String, String> item) {
+    private void openDetail(HashMap<String, String> item) {
         Intent miIntent = new Intent(UserFragment.this.getActivity(), UserDetailActivity.class);
         UserFragment.this.startActivity(miIntent);
     }

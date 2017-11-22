@@ -1,5 +1,6 @@
 package org.flyve.admin.dashboard.ui;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -134,13 +135,23 @@ public class FleetFragment extends Fragment {
 
             pb.setVisibility(View.GONE);
 
-            mAdapter = new FleetAdapter(data);
+            mAdapter = new FleetAdapter(data, new FleetAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(HashMap<String, String> item) {
+                    openDetail(item);
+                }
+            });
             lst.setAdapter(mAdapter);
 
         } catch (Exception ex) {
             pb.setVisibility(View.GONE);
             FlyveLog.e(ex.getMessage());
         }
-
     }
+
+    private void openDetail(HashMap<String, String> item) {
+        Intent miIntent = new Intent(FleetFragment.this.getActivity(), FleetDetailActivity.class);
+        FleetFragment.this.startActivity(miIntent);
+    }
+
 }

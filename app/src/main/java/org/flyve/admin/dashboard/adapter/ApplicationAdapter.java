@@ -19,12 +19,14 @@ import java.util.List;
 public class ApplicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private List<HashMap<String, String>> data;
+    private final ApplicationAdapter.OnItemClickListener listener;
 
     private static final int ITEM_TYPE_DATA = 0;
     private static final int ITEM_TYPE_HEADER = 1;
 
-    public ApplicationAdapter(List<HashMap<String, String>> data) {
+    public ApplicationAdapter(List<HashMap<String, String>> data, ApplicationAdapter.OnItemClickListener listener) {
         this.data = data;
+        this.listener = listener;
     }
 
     @Override
@@ -95,7 +97,7 @@ public class ApplicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             viewForeground = itemView.findViewById(R.id.view_foreground);
         }
 
-        public void bindData(HashMap<String, String> model) {
+        public void bindData(final HashMap<String, String> model) {
 
             byte[] decodedString = Base64.decode( model.get("icon").getBytes(), Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
@@ -104,6 +106,14 @@ public class ApplicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             name.setText( Html.fromHtml( model.get("name")) );
             packages.setText( Html.fromHtml( model.get("package") ));
             version.setText( Html.fromHtml( "v." +  model.get("version") ));
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(model);
+                }
+            });
+
         }
     }
 
@@ -133,5 +143,10 @@ public class ApplicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         // notify item added by position
         notifyItemInserted(position);
     }
+
+    public interface OnItemClickListener {
+        void onItemClick(HashMap<String, String> item);
+    }
+
 
 }

@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import org.flyve.admin.dashboard.R;
 import org.flyve.admin.dashboard.adapter.UserAdapter;
 import org.flyve.admin.dashboard.adapter.UserTouchHelper;
+import org.flyve.admin.dashboard.model.UserModel;
 import org.flyve.admin.dashboard.utils.FlyveLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,14 +26,13 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class UserFragment extends Fragment {
 
     private ProgressBar pb;
     private RecyclerView lst;
-    private List<HashMap<String, String>> data;
+    private List<UserModel> data;
     UserAdapter mAdapter;
 
     @Override
@@ -66,10 +66,10 @@ public class UserFragment extends Fragment {
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
                 if (viewHolder instanceof UserAdapter.DataViewHolder) {
                     // get the removed item name to display it in snack bar
-                    String name = data.get(viewHolder.getAdapterPosition()).get("name");
+                    String name = data.get(viewHolder.getAdapterPosition()).getName();
 
                     // backup of removed item for undo purpose
-                    final HashMap<String, String> deletedItem = data.get(viewHolder.getAdapterPosition());
+                    final UserModel deletedItem = data.get(viewHolder.getAdapterPosition());
                     final int deletedIndex = viewHolder.getAdapterPosition();
 
                     // remove the item from recycler view
@@ -125,19 +125,17 @@ public class UserFragment extends Fragment {
             for (int y = 0; y < items.length(); y++) {
 
                 JSONObject obj = items.getJSONObject(y);
-                HashMap<String, String> c = new HashMap<>();
 
-                c.put("type", "data"); // clasify the item if data or header
-                c.put("email", obj.getString("User.name"));
-
+                UserModel model = new UserModel(UserModel.NO_HEADER);
+                model.setEmail(obj.getString("User.name"));
                 if(obj.getString("User.realname").trim().equalsIgnoreCase("")) {
-                    c.put("UserRealName", "without name");
+                    model.setName("without name");
                 } else {
-                    c.put("UserRealName", obj.getString("User.realname"));
+                    model.setName(obj.getString("User.realname"));
                 }
 
                 if(!obj.getString("User.realname").equalsIgnoreCase("null")) {
-                    data.add(c);
+                    data.add(model);
                 }
             }
 
@@ -145,7 +143,7 @@ public class UserFragment extends Fragment {
 
             mAdapter = new UserAdapter(data, new UserAdapter.OnItemClickListener() {
                 @Override
-                public void onItemClick(HashMap<String, String> item) {
+                public void onItemClick(UserModel item) {
                     openDetail(item);
                 }
             });
@@ -157,7 +155,7 @@ public class UserFragment extends Fragment {
         }
     }
 
-    private void openDetail(HashMap<String, String> item) {
+    private void openDetail(UserModel item) {
         Intent miIntent = new Intent(UserFragment.this.getActivity(), UserDetailActivity.class);
         UserFragment.this.startActivity(miIntent);
     }

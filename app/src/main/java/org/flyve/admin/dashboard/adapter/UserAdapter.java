@@ -9,27 +9,27 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.flyve.admin.dashboard.R;
+import org.flyve.admin.dashboard.model.UserModel;
 
-import java.util.HashMap;
 import java.util.List;
 
 
 public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private List<HashMap<String, String>> data;
+    private List<UserModel> data;
     private final OnItemClickListener listener;
 
     private static final int ITEM_TYPE_DATA = 0;
     private static final int ITEM_TYPE_HEADER = 1;
 
-    public UserAdapter(List<HashMap<String, String>> data, OnItemClickListener listener) {
+    public UserAdapter(List<UserModel> data, OnItemClickListener listener) {
         this.data = data;
         this.listener = listener;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if((data.get(position)).get("type").equals("header")) {
+        if(!(data.get(position)).getHeader().equals(UserModel.NO_HEADER)) {
             return ITEM_TYPE_HEADER;
         } else {
             return ITEM_TYPE_DATA;
@@ -54,7 +54,7 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        HashMap<String, String> response = data.get(position);
+        UserModel response = data.get(position);
 
         final int itemType = getItemViewType(position);
 
@@ -91,9 +91,9 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             viewForeground = itemView.findViewById(R.id.view_foreground);
         }
 
-        public void bindData(final HashMap<String, String> model) {
-            name.setText( Html.fromHtml( model.get("UserRealName")) );
-            email.setText( Html.fromHtml( model.get("email") ));
+        public void bindData(final UserModel model) {
+            name.setText( Html.fromHtml( model.getName() ));
+            email.setText( Html.fromHtml( model.getEmail() ));
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -111,8 +111,8 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             title = itemView.findViewById(R.id.title);
         }
 
-        public void bindData(HashMap<String, String> model) {
-            title.setText( Html.fromHtml( model.get("title") ));
+        public void bindData(UserModel model) {
+            title.setText( Html.fromHtml( model.getHeader() ));
         }
     }
 
@@ -124,14 +124,14 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         notifyItemRemoved(position);
     }
 
-    public void restoreItem(HashMap<String, String> item, int position) {
+    public void restoreItem(UserModel item, int position) {
         data.add(position, item);
         // notify item added by position
         notifyItemInserted(position);
     }
 
     public interface OnItemClickListener {
-        void onItemClick(HashMap<String, String> item);
+        void onItemClick(UserModel item);
     }
 
 }

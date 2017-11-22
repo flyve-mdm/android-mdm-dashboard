@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import org.flyve.admin.dashboard.R;
 import org.flyve.admin.dashboard.adapter.ApplicationAdapter;
 import org.flyve.admin.dashboard.adapter.ApplicationTouchHelper;
+import org.flyve.admin.dashboard.model.ApplicationModel;
 import org.flyve.admin.dashboard.utils.FlyveLog;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -32,7 +33,7 @@ public class ApplicationFragment extends Fragment {
 
     private ProgressBar pb;
     private RecyclerView lst;
-    private List<HashMap<String, String>> data;
+    private List<ApplicationModel> data;
     private ApplicationAdapter mAdapter;
 
     @Override
@@ -66,10 +67,10 @@ public class ApplicationFragment extends Fragment {
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
                 if (viewHolder instanceof ApplicationAdapter.DataViewHolder) {
                     // get the removed item name to display it in snack bar
-                    String name = data.get(viewHolder.getAdapterPosition()).get("name");
+                    String name = data.get(viewHolder.getAdapterPosition()).getName();
 
                     // backup of removed item for undo purpose
-                    final HashMap<String, String> deletedItem = data.get(viewHolder.getAdapterPosition());
+                    final ApplicationModel deletedItem = data.get(viewHolder.getAdapterPosition());
                     final int deletedIndex = viewHolder.getAdapterPosition();
 
                     // remove the item from recycler view
@@ -125,22 +126,22 @@ public class ApplicationFragment extends Fragment {
             for (int y = 0; y < items.length(); y++) {
 
                 JSONObject obj = items.getJSONObject(y);
-                HashMap<String, String> c = new HashMap<>();
 
-                c.put("type", "data"); // clasify the item if data or header
-                c.put("name", obj.getString("PluginFlyvemdmPackage.alias"));
-                c.put("package", obj.getString("PluginFlyvemdmPackage.name"));
-                c.put("icon", obj.getString("PluginFlyvemdmPackage.icon"));
-                c.put("version", obj.getString("PluginFlyvemdmPackage.version"));
+                ApplicationModel model = new ApplicationModel(ApplicationModel.NO_HEADER);
 
-                data.add(c);
+                model.setName(obj.getString("PluginFlyvemdmPackage.alias"));
+                model.setPackages(obj.getString("PluginFlyvemdmPackage.name"));
+                model.setIcon(obj.getString("PluginFlyvemdmPackage.icon"));
+                model.setVersion(obj.getString("PluginFlyvemdmPackage.version"));
+
+                data.add(model);
             }
 
             pb.setVisibility(View.GONE);
 
             mAdapter = new ApplicationAdapter(data, new ApplicationAdapter.OnItemClickListener() {
                 @Override
-                public void onItemClick(HashMap<String, String> item) {
+                public void onItemClick(ApplicationModel item) {
                     openDetail(item);
                 }
             });
@@ -152,7 +153,7 @@ public class ApplicationFragment extends Fragment {
         }
     }
 
-    private void openDetail(HashMap<String, String> item) {
+    private void openDetail(ApplicationModel item) {
         Intent miIntent = new Intent(ApplicationFragment.this.getActivity(), ApplicationDetailActivity.class);
         ApplicationFragment.this.startActivity(miIntent);
     }

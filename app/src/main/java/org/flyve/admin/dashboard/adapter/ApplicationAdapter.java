@@ -11,27 +11,29 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import org.flyve.admin.dashboard.R;
-import java.util.HashMap;
+import org.flyve.admin.dashboard.model.ApplicationModel;
+
 import java.util.List;
 
 
 public class ApplicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private List<HashMap<String, String>> data;
+    private List<ApplicationModel> data;
     private final ApplicationAdapter.OnItemClickListener listener;
 
     private static final int ITEM_TYPE_DATA = 0;
     private static final int ITEM_TYPE_HEADER = 1;
 
-    public ApplicationAdapter(List<HashMap<String, String>> data, ApplicationAdapter.OnItemClickListener listener) {
+    public ApplicationAdapter(List<ApplicationModel> data, ApplicationAdapter.OnItemClickListener listener) {
         this.data = data;
         this.listener = listener;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if((data.get(position)).get("type").equals("header")) {
+        if(!(data.get(position)).getHeader().equals(ApplicationModel.NO_HEADER)) {
             return ITEM_TYPE_HEADER;
         } else {
             return ITEM_TYPE_DATA;
@@ -56,7 +58,7 @@ public class ApplicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        HashMap<String, String> response = data.get(position);
+        ApplicationModel response = data.get(position);
 
         final int itemType = getItemViewType(position);
 
@@ -97,15 +99,15 @@ public class ApplicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             viewForeground = itemView.findViewById(R.id.view_foreground);
         }
 
-        public void bindData(final HashMap<String, String> model) {
+        public void bindData(final ApplicationModel model) {
 
-            byte[] decodedString = Base64.decode( model.get("icon").getBytes(), Base64.DEFAULT);
+            byte[] decodedString = Base64.decode( model.getIcon().getBytes(), Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             img.setImageBitmap(decodedByte);
 
-            name.setText( Html.fromHtml( model.get("name")) );
-            packages.setText( Html.fromHtml( model.get("package") ));
-            version.setText( Html.fromHtml( "v." +  model.get("version") ));
+            name.setText( Html.fromHtml( model.getName()) );
+            packages.setText( Html.fromHtml( model.getPackages() ));
+            version.setText( Html.fromHtml( "v." +  model.getVersion() ));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -125,8 +127,8 @@ public class ApplicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             title = itemView.findViewById(R.id.title);
         }
 
-        public void bindData(HashMap<String, String> model) {
-            title.setText( Html.fromHtml( model.get("title") ));
+        public void bindData(ApplicationModel model) {
+            title.setText( Html.fromHtml( model.getHeader() ));
         }
     }
 
@@ -138,14 +140,14 @@ public class ApplicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         notifyItemRemoved(position);
     }
 
-    public void restoreItem(HashMap<String, String> item, int position) {
+    public void restoreItem(ApplicationModel item, int position) {
         data.add(position, item);
         // notify item added by position
         notifyItemInserted(position);
     }
 
     public interface OnItemClickListener {
-        void onItemClick(HashMap<String, String> item);
+        void onItemClick(ApplicationModel item);
     }
 
 

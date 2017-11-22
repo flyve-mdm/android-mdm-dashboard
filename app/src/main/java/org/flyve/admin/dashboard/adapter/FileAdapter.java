@@ -15,12 +15,14 @@ import java.util.List;
 public class FileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private List<HashMap<String, String>> data;
+    private final DeviceAdapter.OnItemClickListener listener;
 
     private static final int ITEM_TYPE_DATA = 0;
     private static final int ITEM_TYPE_HEADER = 1;
 
-    public FileAdapter(List<HashMap<String, String>> data) {
+    public FileAdapter(List<HashMap<String, String>> data, DeviceAdapter.OnItemClickListener listener) {
         this.data = data;
+        this.listener = listener;
     }
 
     @Override
@@ -89,9 +91,17 @@ public class FileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
         }
 
-        public void bindData(HashMap<String, String> model) {
+        public void bindData(final HashMap<String, String> model) {
             name.setText( Html.fromHtml( model.get("name")) );
             size.setText( Html.fromHtml( model.get("size") ));
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(model);
+                }
+            });
+
         }
     }
 
@@ -120,6 +130,10 @@ public class FileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         data.add(position, item);
         // notify item added by position
         notifyItemInserted(position);
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(HashMap<String, String> item);
     }
 
 }

@@ -1,7 +1,7 @@
 repository:
   name: flyve-mdm-android-admin-dashboard
   description: Flyve MDM Mobile Dashboard for Android
-  homepage: http://flyve.org/flyve-mdm-android-admin-dashboard/
+  homepage: http://flyve.org/android-mdm-dashboard/
   topics: flyve-mdm, android, mobile-dashboard
   private: false
   has_issues: true

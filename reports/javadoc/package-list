@@ -1,4 +1,5 @@
-org.flyve.admin.dashboard
 org.flyve.admin.dashboard.adapter
 org.flyve.admin.dashboard.data
+org.flyve.admin.dashboard.model
+org.flyve.admin.dashboard.ui
 org.flyve.admin.dashboard.utils

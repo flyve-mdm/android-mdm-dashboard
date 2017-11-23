@@ -1,7 +1,4 @@
----
-layout: coverage
----
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../resources/report.css" type="text/css"/><link rel="shortcut icon" href="../resources/report.gif" type="image/gif"/><title>FleetAdapter.java</title><link rel="stylesheet" href="../resources/prettify.css" type="text/css"/><script type="text/javascript" src="../resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debugAndroidTest</a> &gt; <a href="index.source.html" class="el_package">org.flyve.admin.dashboard.adapter</a> &gt; <span class="el_source">FleetAdapter.java</span></div><h1>FleetAdapter.java</h1><pre class="source lang-java linenums">package org.flyve.admin.dashboard.adapter;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>FleetAdapter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debugAndroidTest</a> &gt; <a href="index.source.html" class="el_package">org.flyve.admin.dashboard.adapter</a> &gt; <span class="el_source">FleetAdapter.java</span></div><h1>FleetAdapter.java</h1><pre class="source lang-java linenums">package org.flyve.admin.dashboard.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -12,71 +9,73 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.flyve.admin.dashboard.R;
+import org.flyve.admin.dashboard.model.FleetModel;
 
-import java.util.HashMap;
 import java.util.List;
 
 
 public class FleetAdapter extends RecyclerView.Adapter&lt;RecyclerView.ViewHolder&gt;{
 
-    private List&lt;HashMap&lt;String, String&gt;&gt; data;
+    private List&lt;FleetModel&gt; data;
+    private final FleetAdapter.OnItemClickListener listener;
 
     private static final int ITEM_TYPE_DATA = 0;
     private static final int ITEM_TYPE_HEADER = 1;
 
-<span class="nc" id="L24">    public FleetAdapter(List&lt;HashMap&lt;String, String&gt;&gt; data) {</span>
-<span class="nc" id="L25">        this.data = data;</span>
-<span class="nc" id="L26">    }</span>
+<span class="nc" id="L25">    public FleetAdapter(List&lt;FleetModel&gt; data, FleetAdapter.OnItemClickListener listener) {</span>
+<span class="nc" id="L26">        this.data = data;</span>
+<span class="nc" id="L27">        this.listener = listener;</span>
+<span class="nc" id="L28">    }</span>
 
     @Override
     public int getItemViewType(int position) {
-<span class="nc bnc" id="L30" title="All 2 branches missed.">        if((data.get(position)).get(&quot;type&quot;).equals(&quot;header&quot;)) {</span>
-<span class="nc" id="L31">            return ITEM_TYPE_HEADER;</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">        if(!(data.get(position)).getHeader().equals(FleetModel.NO_HEADER)) {</span>
+<span class="nc" id="L33">            return ITEM_TYPE_HEADER;</span>
         } else {
-<span class="nc" id="L33">            return ITEM_TYPE_DATA;</span>
+<span class="nc" id="L35">            return ITEM_TYPE_DATA;</span>
         }
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
-<span class="nc bnc" id="L40" title="All 2 branches missed.">        if(viewType == ITEM_TYPE_DATA) {</span>
-<span class="nc" id="L41">            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_fleet_item, viewGroup, false);</span>
-<span class="nc" id="L42">            return new DataViewHolder(v);</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if(viewType == ITEM_TYPE_DATA) {</span>
+<span class="nc" id="L43">            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_fleet_item, viewGroup, false);</span>
+<span class="nc" id="L44">            return new DataViewHolder(v);</span>
         }
 
-<span class="nc bnc" id="L45" title="All 2 branches missed.">        else if (viewType == ITEM_TYPE_HEADER) {</span>
-<span class="nc" id="L46">            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_fleet_header, viewGroup, false);</span>
-<span class="nc" id="L47">            return new HeaderViewHolder(v);</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        else if (viewType == ITEM_TYPE_HEADER) {</span>
+<span class="nc" id="L48">            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_fleet_header, viewGroup, false);</span>
+<span class="nc" id="L49">            return new HeaderViewHolder(v);</span>
         }
 
-<span class="nc" id="L50">        return null;</span>
+<span class="nc" id="L52">        return null;</span>
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-<span class="nc" id="L55">        HashMap&lt;String, String&gt; response = data.get(position);</span>
+<span class="nc" id="L57">        FleetModel response = data.get(position);</span>
 
-<span class="nc" id="L57">        final int itemType = getItemViewType(position);</span>
+<span class="nc" id="L59">        final int itemType = getItemViewType(position);</span>
 
-<span class="nc bnc" id="L59" title="All 2 branches missed.">        if(itemType == ITEM_TYPE_DATA) {</span>
-<span class="nc" id="L60">            ((DataViewHolder)holder).bindData( response );</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        if(itemType == ITEM_TYPE_DATA) {</span>
+<span class="nc" id="L62">            ((DataViewHolder)holder).bindData( response );</span>
         }
 
-<span class="nc bnc" id="L63" title="All 2 branches missed.">        if(itemType == ITEM_TYPE_HEADER) {</span>
-<span class="nc" id="L64">            ((HeaderViewHolder)holder).bindData( response );</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        if(itemType == ITEM_TYPE_HEADER) {</span>
+<span class="nc" id="L66">            ((HeaderViewHolder)holder).bindData( response );</span>
         }
-<span class="nc" id="L66">    }</span>
+<span class="nc" id="L68">    }</span>
 
     @Override
     public int getItemCount() {
-<span class="nc" id="L70">        return data.size();</span>
+<span class="nc" id="L72">        return data.size();</span>
     }
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-<span class="nc" id="L75">        super.onAttachedToRecyclerView(recyclerView);</span>
-<span class="nc" id="L76">    }</span>
+<span class="nc" id="L77">        super.onAttachedToRecyclerView(recyclerView);</span>
+<span class="nc" id="L78">    }</span>
 
     public class DataViewHolder extends RecyclerView.ViewHolder {
         TextView name;
@@ -84,44 +83,56 @@ public class FleetAdapter extends RecyclerView.Adapter&lt;RecyclerView.ViewHolde
         public RelativeLayout viewForeground;
 
 
-<span class="nc" id="L84">        DataViewHolder(View itemView) {</span>
-<span class="nc" id="L85">            super(itemView);</span>
-<span class="nc" id="L86">            name = itemView.findViewById(R.id.name);</span>
-<span class="nc" id="L87">        }</span>
+<span class="nc" id="L86">        DataViewHolder(View itemView) {</span>
+<span class="nc" id="L87">            super(itemView);</span>
+<span class="nc" id="L88">            name = itemView.findViewById(R.id.name);</span>
+<span class="nc" id="L89">        }</span>
 
-        public void bindData(HashMap&lt;String, String&gt; model) {
-<span class="nc" id="L90">            name.setText( Html.fromHtml( model.get(&quot;name&quot;)) );</span>
-<span class="nc" id="L91">            viewBackground = itemView.findViewById(R.id.view_background);</span>
-<span class="nc" id="L92">            viewForeground = itemView.findViewById(R.id.view_foreground);</span>
-<span class="nc" id="L93">        }</span>
+        public void bindData(final FleetModel model) {
+<span class="nc" id="L92">            name.setText( Html.fromHtml( model.getName()) );</span>
+<span class="nc" id="L93">            viewBackground = itemView.findViewById(R.id.view_background);</span>
+<span class="nc" id="L94">            viewForeground = itemView.findViewById(R.id.view_foreground);</span>
+
+<span class="nc" id="L96">            itemView.setOnClickListener(new View.OnClickListener() {</span>
+                @Override
+                public void onClick(View view) {
+<span class="nc" id="L99">                    listener.onItemClick(model);</span>
+<span class="nc" id="L100">                }</span>
+            });
+<span class="nc" id="L102">        }</span>
     }
 
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
         TextView title;
 
-<span class="nc" id="L99">        HeaderViewHolder(View itemView) {</span>
-<span class="nc" id="L100">            super(itemView);</span>
-<span class="nc" id="L101">            title = (TextView)itemView.findViewById(R.id.title);</span>
-<span class="nc" id="L102">        }</span>
+<span class="nc" id="L108">        HeaderViewHolder(View itemView) {</span>
+<span class="nc" id="L109">            super(itemView);</span>
+<span class="nc" id="L110">            title = itemView.findViewById(R.id.title);</span>
+<span class="nc" id="L111">        }</span>
 
-        public void bindData(HashMap&lt;String, String&gt; model) {
-<span class="nc" id="L105">            title.setText( Html.fromHtml( model.get(&quot;title&quot;) ));</span>
-<span class="nc" id="L106">        }</span>
+        public void bindData(FleetModel model) {
+<span class="nc" id="L114">            title.setText( Html.fromHtml( model.getHeader() ));</span>
+<span class="nc" id="L115">        }</span>
     }
 
     public void removeItem(int position) {
-<span class="nc" id="L110">        data.remove(position);</span>
+<span class="nc" id="L119">        data.remove(position);</span>
         // notify the item removed by position
         // to perform recycler view delete animations
         // NOTE: don't call notifyDataSetChanged()
-<span class="nc" id="L114">        notifyItemRemoved(position);</span>
-<span class="nc" id="L115">    }</span>
+<span class="nc" id="L123">        notifyItemRemoved(position);</span>
+<span class="nc" id="L124">    }</span>
 
-    public void restoreItem(HashMap&lt;String, String&gt; item, int position) {
-<span class="nc" id="L118">        data.add(position, item);</span>
+    public void restoreItem(FleetModel item, int position) {
+<span class="nc" id="L127">        data.add(position, item);</span>
         // notify item added by position
-<span class="nc" id="L120">        notifyItemInserted(position);</span>
-<span class="nc" id="L121">    }</span>
+<span class="nc" id="L129">        notifyItemInserted(position);</span>
+<span class="nc" id="L130">    }</span>
+
+    public interface OnItemClickListener {
+        void onItemClick(FleetModel item);
+    }
+
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span>Generated by the Android Gradle plugin 3.0.0</div></body></html>

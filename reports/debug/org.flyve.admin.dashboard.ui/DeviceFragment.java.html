@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DeviceFragment.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debugAndroidTest</a> &gt; <a href="index.source.html" class="el_package">org.flyve.admin.dashboard.ui</a> &gt; <span class="el_source">DeviceFragment.java</span></div><h1>DeviceFragment.java</h1><pre class="source lang-java linenums">package org.flyve.admin.dashboard.ui;
+
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
+
+import org.flyve.admin.dashboard.R;
+import org.flyve.admin.dashboard.adapter.DeviceAdapter;
+import org.flyve.admin.dashboard.adapter.DeviceTouchHelper;
+import org.flyve.admin.dashboard.model.DeviceModel;
+import org.flyve.admin.dashboard.utils.FlyveLog;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+<span class="nc" id="L31">public class DeviceFragment extends Fragment {</span>
+
+    private ProgressBar pb;
+    private RecyclerView lst;
+    private List&lt;DeviceModel&gt; data;
+    private DeviceAdapter mAdapter;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+<span class="nc" id="L41">        View v = inflater.inflate(R.layout.fragment_device, container, false);</span>
+
+<span class="nc" id="L43">        pb = v.findViewById(R.id.pb);</span>
+<span class="nc" id="L44">        pb.setVisibility(View.VISIBLE);</span>
+
+<span class="nc" id="L46">        lst = v.findViewById(R.id.lst);</span>
+
+<span class="nc" id="L48">        LinearLayoutManager llm = new LinearLayoutManager(DeviceFragment.this.getActivity());</span>
+<span class="nc" id="L49">        lst.setLayoutManager(llm);</span>
+
+<span class="nc" id="L51">        lst.setItemAnimator(new DefaultItemAnimator());</span>
+<span class="nc" id="L52">        lst.addItemDecoration(new DividerItemDecoration(DeviceFragment.this.getContext(), DividerItemDecoration.VERTICAL));</span>
+
+        // adding item touch helper
+        // only ItemTouchHelper.LEFT added to detect Right to Left swipe
+        // if you want both Right -&gt; Left and Left -&gt; Right
+        // add pass ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT as param
+<span class="nc" id="L58">        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new DeviceTouchHelper(0, ItemTouchHelper.LEFT, new DeviceTouchHelper.RecyclerItemTouchHelperListener() {</span>
+
+            /**
+             * callback when recycler view is swiped
+             * item will be removed on swiped
+             * undo option will be provided in snackbar to restore the item
+             */
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+<span class="nc bnc" id="L67" title="All 2 branches missed.">                if (viewHolder instanceof DeviceAdapter.DataViewHolder) {</span>
+                    // get the removed item name to display it in snack bar
+<span class="nc" id="L69">                    String name = data.get(viewHolder.getAdapterPosition()).getUserRealName();</span>
+
+                    // backup of removed item for undo purpose
+<span class="nc" id="L72">                    final DeviceModel deletedItem = data.get(viewHolder.getAdapterPosition());</span>
+<span class="nc" id="L73">                    final int deletedIndex = viewHolder.getAdapterPosition();</span>
+
+                    // remove the item from recycler view
+<span class="nc" id="L76">                    mAdapter.removeItem(viewHolder.getAdapterPosition());</span>
+
+                    // showing snack bar with Undo option
+<span class="nc" id="L79">                    Snackbar snackbar = Snackbar</span>
+<span class="nc" id="L80">                            .make(DeviceFragment.this.getView(), name + &quot; removed from list&quot;, Snackbar.LENGTH_LONG);</span>
+<span class="nc" id="L81">                    snackbar.setAction(&quot;UNDO&quot;, new View.OnClickListener() {</span>
+                        @Override
+                        public void onClick(View view) {
+
+                            // undo is selected, restore the deleted item
+<span class="nc" id="L86">                            mAdapter.restoreItem(deletedItem, deletedIndex);</span>
+<span class="nc" id="L87">                        }</span>
+                    });
+<span class="nc" id="L89">                    snackbar.setActionTextColor(Color.YELLOW);</span>
+<span class="nc" id="L90">                    snackbar.show();</span>
+                }
+<span class="nc" id="L92">            }</span>
+        });
+<span class="nc" id="L94">        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(lst);</span>
+
+
+<span class="nc" id="L97">        load(loadJSONFromAsset());</span>
+
+<span class="nc" id="L99">        return v;</span>
+    }
+
+    public String loadJSONFromAsset() {
+        String json;
+        try {
+<span class="nc" id="L105">            InputStream is = getActivity().getAssets().open(&quot;json/agents.json&quot;);</span>
+<span class="nc" id="L106">            int size = is.available();</span>
+<span class="nc" id="L107">            byte[] buffer = new byte[size];</span>
+<span class="nc" id="L108">            is.read(buffer);</span>
+<span class="nc" id="L109">            is.close();</span>
+<span class="nc" id="L110">            json = new String(buffer, &quot;UTF-8&quot;);</span>
+<span class="nc" id="L111">        } catch (IOException ex) {</span>
+<span class="nc" id="L112">            FlyveLog.e(ex.getMessage());</span>
+<span class="nc" id="L113">            return null;</span>
+<span class="nc" id="L114">        }</span>
+<span class="nc" id="L115">        return json;</span>
+    }
+
+    public void load(String jsonStr) {
+
+<span class="nc" id="L120">        data = new ArrayList&lt;&gt;();</span>
+
+        try {
+<span class="nc" id="L123">            JSONObject json = new JSONObject(jsonStr);</span>
+
+<span class="nc" id="L125">            JSONArray items = json.getJSONArray(&quot;data&quot;);</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">            for (int y = 0; y &lt; items.length(); y++) {</span>
+
+<span class="nc" id="L128">                JSONObject obj = items.getJSONObject(y);</span>
+
+<span class="nc" id="L130">                DeviceModel model = new DeviceModel(DeviceModel.NO_HEADER);</span>
+
+<span class="nc" id="L132">                model.setId(obj.getString(&quot;PluginFlyvemdmAgent.id&quot;));</span>
+<span class="nc" id="L133">                model.setEmail(obj.getString(&quot;PluginFlyvemdmAgent.name&quot;));</span>
+<span class="nc" id="L134">                model.setFleetName(obj.getString(&quot;PluginFlyvemdmAgent.PluginFlyvemdmFleet.name&quot;));</span>
+<span class="nc" id="L135">                model.setComputerId(obj.getString(&quot;PluginFlyvemdmAgent.Computer.id&quot;));</span>
+<span class="nc" id="L136">                model.setComputerSerial(obj.getString(&quot;PluginFlyvemdmAgent.Computer.serial&quot;));</span>
+<span class="nc" id="L137">                model.setUserId(obj.getString(&quot;PluginFlyvemdmAgent.Computer.User.id&quot;));</span>
+<span class="nc" id="L138">                model.setFleetId(obj.getString(&quot;PluginFlyvemdmAgent.PluginFlyvemdmFleet.id&quot;));</span>
+<span class="nc" id="L139">                model.setLastContact(obj.getString(&quot;PluginFlyvemdmAgent.last_contact&quot;));</span>
+<span class="nc" id="L140">                model.setUserRealName(obj.getString(&quot;PluginFlyvemdmAgent.Computer.User.realname&quot;));</span>
+<span class="nc" id="L141">                model.setAgentVersion(obj.getString(&quot;PluginFlyvemdmAgent.version&quot;));</span>
+<span class="nc" id="L142">                model.setIsOnline(obj.getString(&quot;PluginFlyvemdmAgent.is_online&quot;));</span>
+
+<span class="nc" id="L144">                data.add(model);</span>
+            }
+
+<span class="nc" id="L147">            pb.setVisibility(View.GONE);</span>
+
+<span class="nc" id="L149">            mAdapter = new DeviceAdapter(data, new DeviceAdapter.OnItemClickListener() {</span>
+                @Override
+                public void onItemClick(DeviceModel item) {
+<span class="nc" id="L152">                    openDetail(item)</span>
+<span class="nc" id="L153">;                }</span>
+            });
+<span class="nc" id="L155">            lst.setAdapter(mAdapter);</span>
+
+<span class="nc" id="L157">        } catch (Exception ex) {</span>
+<span class="nc" id="L158">            pb.setVisibility(View.GONE);</span>
+<span class="nc" id="L159">            FlyveLog.e(ex.getMessage());</span>
+<span class="nc" id="L160">        }</span>
+<span class="nc" id="L161">    }</span>
+
+    private void openDetail(DeviceModel item) {
+<span class="nc" id="L164">        Intent miIntent = new Intent(DeviceFragment.this.getActivity(), DeviceDetailActivity.class);</span>
+<span class="nc" id="L165">        DeviceFragment.this.startActivity(miIntent);</span>
+<span class="nc" id="L166">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span>Generated by the Android Gradle plugin 3.0.0</div></body></html>

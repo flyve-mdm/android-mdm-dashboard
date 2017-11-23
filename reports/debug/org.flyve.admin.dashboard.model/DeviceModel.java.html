@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DeviceModel.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debugAndroidTest</a> &gt; <a href="index.source.html" class="el_package">org.flyve.admin.dashboard.model</a> &gt; <span class="el_source">DeviceModel.java</span></div><h1>DeviceModel.java</h1><pre class="source lang-java linenums">package org.flyve.admin.dashboard.model;
+
+/*
+ *   Copyright © 2017 Teclib. All rights reserved.
+ *
+ *   This file is part of flyve-mdm-android
+ *
+ * flyve-mdm-android is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author    Rafael Hernandez
+ * @date      21/11/17
+ * @copyright Copyright © 2017 Teclib. All rights reserved.
+ * @license   GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link      https://github.com/flyve-mdm/flyve-mdm-android
+ * @link      https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
+public class DeviceModel {
+
+    public final static String NO_HEADER = &quot;&quot;;
+
+    private String header;
+    private String id;
+    private String email;
+    private String fleetName;
+    private String computerId;
+    private String computerSerial;
+    private String userId;
+    private String fleetId;
+    private String lastContact;
+    private String userRealName;
+    private String agentVersion;
+    private String isOnline;
+
+<span class="nc" id="L46">    public DeviceModel(String header) {</span>
+<span class="nc" id="L47">        this.header = header;</span>
+<span class="nc" id="L48">    }</span>
+
+    public String getHeader() {
+<span class="nc" id="L51">        return header;</span>
+    }
+
+    public void setHeader(String header) {
+<span class="nc" id="L55">        this.header = header;</span>
+<span class="nc" id="L56">    }</span>
+
+    public String getId() {
+<span class="nc" id="L59">        return id;</span>
+    }
+
+    public void setId(String id) {
+<span class="nc" id="L63">        this.id = id;</span>
+<span class="nc" id="L64">    }</span>
+
+    public String getEmail() {
+<span class="nc" id="L67">        return email;</span>
+    }
+
+    public void setEmail(String email) {
+<span class="nc" id="L71">        this.email = email;</span>
+<span class="nc" id="L72">    }</span>
+
+    public String getFleetName() {
+<span class="nc" id="L75">        return fleetName;</span>
+    }
+
+    public void setFleetName(String fleetName) {
+<span class="nc" id="L79">        this.fleetName = fleetName;</span>
+<span class="nc" id="L80">    }</span>
+
+    public String getComputerId() {
+<span class="nc" id="L83">        return computerId;</span>
+    }
+
+    public void setComputerId(String computerId) {
+<span class="nc" id="L87">        this.computerId = computerId;</span>
+<span class="nc" id="L88">    }</span>
+
+    public String getComputerSerial() {
+<span class="nc" id="L91">        return computerSerial;</span>
+    }
+
+    public void setComputerSerial(String computerSerial) {
+<span class="nc" id="L95">        this.computerSerial = computerSerial;</span>
+<span class="nc" id="L96">    }</span>
+
+    public String getUserId() {
+<span class="nc" id="L99">        return userId;</span>
+    }
+
+    public void setUserId(String userId) {
+<span class="nc" id="L103">        this.userId = userId;</span>
+<span class="nc" id="L104">    }</span>
+
+    public String getFleetId() {
+<span class="nc" id="L107">        return fleetId;</span>
+    }
+
+    public void setFleetId(String fleetId) {
+<span class="nc" id="L111">        this.fleetId = fleetId;</span>
+<span class="nc" id="L112">    }</span>
+
+    public String getLastContact() {
+<span class="nc" id="L115">        return lastContact;</span>
+    }
+
+    public void setLastContact(String lastContact) {
+<span class="nc" id="L119">        this.lastContact = lastContact;</span>
+<span class="nc" id="L120">    }</span>
+
+    public String getUserRealName() {
+<span class="nc" id="L123">        return userRealName;</span>
+    }
+
+    public void setUserRealName(String userRealName) {
+<span class="nc" id="L127">        this.userRealName = userRealName;</span>
+<span class="nc" id="L128">    }</span>
+
+    public String getAgentVersion() {
+<span class="nc" id="L131">        return agentVersion;</span>
+    }
+
+    public void setAgentVersion(String agentVersion) {
+<span class="nc" id="L135">        this.agentVersion = agentVersion;</span>
+<span class="nc" id="L136">    }</span>
+
+    public String getIsOnline() {
+<span class="nc" id="L139">        return isOnline;</span>
+    }
+
+    public void setIsOnline(String isOnline) {
+<span class="nc" id="L143">        this.isOnline = isOnline;</span>
+<span class="nc" id="L144">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span>Generated by the Android Gradle plugin 3.0.0</div></body></html>

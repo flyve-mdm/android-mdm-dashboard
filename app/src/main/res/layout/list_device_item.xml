@@ -68,7 +68,7 @@
             android:id="@+id/serial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/size"
+            android:layout_below="@+id/email"
             android:layout_toRightOf="@+id/img"
             android:layout_marginLeft="15dp"
             />

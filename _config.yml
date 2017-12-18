@@ -1,9 +1,9 @@
 title: android admin dashboard
 email: ml-flyvemdm@teclib.com
 twitter: flyvemdm
-baseurl: "/flyve-mdm-android-admin-dashboard"
+baseurl: "/android-mdm-dashboard"
 url: "http://flyve.org"   
-image: http://flyve.org/flyve-mdm-android-admin-dashboard/images/logo2.png
+image: http://flyve.org/android-mdm-dashboard/images/logo2.png
 
 # Build settings
 markdown: kramdown
@@ -13,7 +13,7 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
 
-repository: flyve-mdm/flyve-mdm-android-admin-dashboard
+repository: flyve-mdm/android-mdm-dashboard
 
 prose:
 

@@ -1,9 +1,9 @@
 ---
 layout: post
-wiki: true
+howtos: true
 published: true
 title: How to Translate
-permalink: wiki/how-to-translate
+permalink: howtos/how-to-translate
 description: Translate from Transifex
 ---
 We use [Transifex](https://www.transifex.com/) to translate our projects

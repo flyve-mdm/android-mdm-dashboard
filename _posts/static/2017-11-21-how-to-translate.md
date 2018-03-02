@@ -2,15 +2,23 @@
 layout: post
 howtos: true
 published: true
-title: How to Translate
-permalink: howtos/how-to-translate
-description: Translate from Transifex
+title: Contribute Translating
+permalink: howtos/contribute-translating
+description: We translate with Transifex
 ---
-We use [Transifex](https://www.transifex.com/) to translate our projects
+### I know a lot of languages
 
-To start contributing with translations you require an account and request to join the team of Flyve MDM
+Great! You can help us translating the project. We are currently translating to Korean, Spanish, French, Portuguese, Russian and Japanese.
 
-After you are accepted you can now go to the Flyve MDM organization where you'll see all the projects listed to your left and a graphic with the statics of Source Strings translations
+### But wait, I'm an expert in a different language
+
+If you are an expert in a language we are not currently translating, you can request the new translation in Transifex and help us to reach more customers in their native language.
+
+### Let's Translate
+
+We use [Transifex](https://www.transifex.com/) to translate our projects. To start contributing with translations you require an account and request to join the team of Flyve MDM.
+
+After you are accepted you can now go to the Flyve MDM organization where you'll see all the projects listed to your left and a graphic with the statics of Source Strings translations.
 
 <img src="https://i.imgur.com/5GVBzbu.png" alt="All projects">
 
@@ -39,4 +47,3 @@ Select the word to translate, save changes and done.
 Thank you for your contribution!
 
 For more information about Transifex checkout their [Help Center Documentation](https://docs.transifex.com/)
-

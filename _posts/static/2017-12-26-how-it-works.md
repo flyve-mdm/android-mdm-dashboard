@@ -5,6 +5,8 @@ published: true
 title: How it works
 permalink: howtos/how-it-works
 description: A brief introduction
+category: user
+date: 2017-12-19
 ---
 The Android MDM Dashboard allows you to manage your mobile fleet with the same features of our Web Dashboard but from the comfort of your Android device.
 

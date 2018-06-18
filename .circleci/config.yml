@@ -145,20 +145,8 @@ jobs:
           name: Setup environment
           command: source ci/scripts/ci_setup.sh
       - run:
-          name: Update version and code
-          command: source ci/scripts/ci_updateversion.sh
-      - run:
-          name: Update about information
-          command: source ci/scripts/ci_about.sh
-      - run:
-          name: Transifex
-          command: source ci/scripts/ci_transifex.sh
-      - run:
-          name: Create apk
-          command: ./gradlew assemble
-      - run:
-          name: Deploy to Google Play
-          command: source ci/scripts/ci_fastlane.sh "beta"
+          name: Deploy Beta
+          command: source ci/scripts/ci_deploy_beta.sh
       - save_cache:
           paths:
             - ~/.gradle
@@ -178,20 +166,8 @@ jobs:
             name: Setup environment
             command: source ci/scripts/ci_setup.sh
         - run:
-            name: Update version and code
-            command: source ci/scripts/ci_updateversion.sh
-        - run:
-            name: Update about information
-            command: source ci/scripts/ci_about.sh
-        - run:
-            name: Create apk
-            command: ./gradlew assemble
-        - run:
-            name: Deploy to Google Play
-            command: source ci/scripts/ci_fastlane.sh "playstore"
-        - run:
-            name: Create a github release
-            command: source ci/scripts/ci_github_release.sh
+            name: Deploy production
+            command: source ci/scripts/ci_deploy_production.sh
         - save_cache:
             paths:
               - ~/.gradle
@@ -226,11 +202,8 @@ jobs:
               sleep 30
               adb shell input keyevent 82
         - run:
-            name: Coverage
-            command: source ci/scripts/ci_coverage.sh
-        - run:
-            name: Javadoc
-            command: source ci/scripts/ci_javadoc.sh
+            name: Generate documentation
+            command: source ci/scripts/ci_documentation.sh
         - save_cache:
             paths:
               - ~/.gradle
@@ -244,21 +217,17 @@ workflows:
       - test_api_v16:
           requires:
             - build
-          filters:
-            branches:
-              only:
-                - develop
-      - test_api_v25:
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - develop
+    #   - test_api_v25:
+    #       requires:
+    #         - build
+    #       filters:
+    #         branches:
+    #           only:
+    #             - develop
       - deploy_beta:
           requires:
             - test_api_v16
-            - test_api_v25
+            # - test_api_v25
           filters:
             branches:
               only:
@@ -266,12 +235,14 @@ workflows:
       - documentation:
           requires:
             - test_api_v16
-            - test_api_v25
+            # - test_api_v25
           filters:
             branches:
               only:
                 - develop
       - deploy_production:
+          requires:
+            - build
           filters:
             branches:
               only:

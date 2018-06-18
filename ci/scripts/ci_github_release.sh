@@ -25,5 +25,27 @@
 #  @link      https://flyve-mdm.com/
 #  ------------------------------------------------------------------------------
 #
+
 # push tag to github
-conventional-github-releaser -t $GH_TOKEN -r 0
+yarn conventional-github-releaser -p angular -t $GITHUB_TOKEN -r 0 2> /dev/null || true
+
+# get tag number
+GIT_TAG=$(jq -r ".version" package.json)
+
+# find path to apk
+FILE=$(find ./app/build/outputs/apk/release -name '*.apk')
+
+# Update release name
+yarn github-release edit \
+--user $CIRCLE_PROJECT_USERNAME \
+--repo $CIRCLE_PROJECT_REPONAME \
+--tag ${GIT_TAG} \
+--name "MDM Dashboard v${GIT_TAG}" \
+
+# Upload example code release
+yarn github-release upload \
+--user $CIRCLE_PROJECT_USERNAME \
+--repo $CIRCLE_PROJECT_REPONAME \
+--tag ${GIT_TAG} \
+--name "MDMDashboard-${GIT_TAG}.apk" \
+--file ${FILE}

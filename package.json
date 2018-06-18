@@ -26,9 +26,9 @@
   },
   "homepage": "https://github.com/flyve-mdm/flyve-mdm-android-admin-dashboard#readme",
   "devDependencies": {
+    "conventional-github-releaser": "^3.0.0",
+    "gh-pages": "^1.2.0",
+    "node-github-release": "^0.1.1",
     "standard-version": "^4.3.0"
-  },
-  "dependencies": {
-    "conventional-github-releaser": "^3.0.0"
   }
 }

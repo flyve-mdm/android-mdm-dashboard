@@ -25,23 +25,34 @@
 #  @link      https://flyve-mdm.com/
 #  ------------------------------------------------------------------------------
 #
+
 # increment version code, need to be unique to send to store
 # this factor is used if you need increase you version code to deploy on Google Play by default is 0
-export BUILD_INCREMENT_FACTOR=1
 
-./gradlew updateVersionCode -P vCode=$(($CIRCLE_BUILD_NUM + $BUILD_INCREMENT_FACTOR))
+# increment version code, need to be unique to send to store
+./gradlew updateVersionCode -P vCode=$(($CIRCLE_BUILD_NUM))
 
-# increment version on package.json, create tag and commit with changelog
-npm run release -- -m "ci(release): generate CHANGELOG.md for version %s"
+# remove any local tag
+git tag | xargs git tag -d
 
-# Get version number from package.json
-export GIT_TAG=$(jq -r ".version" package.json)
+# increment version name on package.json, create tag and commit with changelog
+yarn run release -m "ci(release): generate CHANGELOG.md for version"
 
-# update version name generate on package json
-./gradlew updateVersionName -P vName=$GIT_TAG
+if [[ $CIRCLE_BRANCH == *"master"* ]]; then
+    # push changes to gh-pages
+    yarn gh-pages --dist ./ --src CHANGELOG.md --dest ./_includes/ --add -m "docs(changelog): update changelog$1 with version ${GIT_TAG}"
 
-# git add app/src/main/AndroidManifest.xml
-#
-# git commit -m "ci(release): update version ($GIT_TAG) and code number ($CIRCLE_BUILD_NUM)"
-#
-# git push origin $CIRCLE_BRANCH
+    # Get version number from package.json
+    export GIT_TAG=$(jq -r ".version" package.json)
+
+    # update version name generate on package json
+    ./gradlew updateVersionName -P vName=$GIT_TAG
+fi
+
+git add app/src/main/AndroidManifest.xml
+git commit -m "ci(release): update version on android manifest"
+
+# avoid commits in develop branch
+if [[ $CIRCLE_BRANCH == *"master"* ]]; then
+    git push origin $CIRCLE_BRANCH
+fi

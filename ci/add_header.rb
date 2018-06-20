@@ -25,8 +25,8 @@
 #  ------------------------------------------------------------------------------
 #
 
-# Add header to all files on the folder reports/javadoc
-Dir.glob("reports/debug/**/*.html") do |search_file| # note one extra "*"
+# Add header to all files on the folder development/coverage
+Dir.glob("development/coverage/**/*.html") do |search_file| # note one extra "*"
     file = File.open("#{search_file}", "r+")
     buffer = file.read
     file.rewind
@@ -48,8 +48,8 @@ Dir.glob("reports/debug/**/*.html") do |search_file| # note one extra "*"
 
 end
 
-# Add header to all files on the folder androidTests
-Dir.glob("reports/androidTests/**/*.html") do |search_file| # note one extra "*"
+# Add header to all files on the folder developmenttest-reports
+Dir.glob("development/test-reports/**/*.html") do |search_file| # note one extra "*"
     file = File.open("#{search_file}", "r+")
     buffer = file.read
     file.rewind
@@ -60,8 +60,8 @@ Dir.glob("reports/androidTests/**/*.html") do |search_file| # note one extra "*"
     file.close
 end
 
-# Add header to all files on the folder reports/javadoc
-Dir.glob("reports/javadoc/**/*.html") do |search_file| # note one extra "*"
+# Add header to all files on the folder development/code-documentation
+Dir.glob("development/code-documentation/**/*.html") do |search_file| # note one extra "*"
     file = File.open("#{search_file}", "r+")
     buffer = file.read
     file.rewind
@@ -71,14 +71,3 @@ Dir.glob("reports/javadoc/**/*.html") do |search_file| # note one extra "*"
     file.print buffer
     file.close
 end
-
-# add CHANGELOG header
-    file = File.open("CHANGELOG.md", "r+")
-    buffer = file.read
-    file.rewind
-    file.puts "---"
-    file.puts "layout: modal"
-    file.puts "title: changelog"
-    file.puts "---"
-    file.print buffer
-    file.close

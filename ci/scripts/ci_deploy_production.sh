@@ -25,24 +25,30 @@
 #  @link      https://flyve-mdm.com/
 #  ------------------------------------------------------------------------------
 #
-# install transifex CLI
-sudo apt-get -y install python-pip
-sudo pip install transifex-client
-sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_API_TOKEN"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc
 
-# get transifex status
-tx status
+GH_COMMIT_MESSAGE=$(git log --pretty=oneline -n 1 $CIRCLE_SHA1)
 
-# push local files to transifex
-tx push --source --no-interactive
+if [[ $GH_COMMIT_MESSAGE != *"ci(release): generate CHANGELOG.md for version"* && $GH_COMMIT_MESSAGE != *"build(properties): add new properties values"* && $GH_COMMIT_MESSAGE != *"ci(release): update version on android manifest"* ]]; then
 
-# pull all the new language with 80% complete
-tx pull --all --force
+# run update version script
+./ci/scripts/ci_updateversion.sh
 
-# # add all changes
-# git add .
-#
-# # commit this changes
-# git commit -m "ci(transifex): update locales files"
-#
-# git push origin $CIRCLE_BRANCH
+# run about script
+./ci/scripts/ci_about.sh
+
+# run transifex script
+./ci/scripts/ci_transifex.sh
+
+# CREATE APK
+./gradlew assemble
+
+# run push changes script
+./ci/scripts/ci_push_changes.sh
+
+# run fastlane script
+./ci/scripts/ci_fastlane.sh
+
+# run github release script
+./ci/scripts/ci_github_release.sh
+
+fi

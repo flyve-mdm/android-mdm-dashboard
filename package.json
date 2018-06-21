@@ -1,5 +1,5 @@
 {
-  "name": "@teclib/flyve-mdm-android-admin-dashboard",
+  "name": "@teclib/android-mdm-dashboard",
   "version": "1.0.0",
   "description": "Flyve MDM Admin Dashboard for Android",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/flyve-mdm/flyve-mdm-android-admin-dashboard.git"
+    "url": "git+https://github.com/flyve-mdm/android-mdm-dashboard.git"
   },
   "keywords": [
     "Android",
@@ -22,9 +22,9 @@
   "author": "Rafael Hernandez <rhernandez@teclib.com> (https://flyve-mdm.com)",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/flyve-mdm/flyve-mdm-android-admin-dashboard/issues"
+    "url": "https://github.com/flyve-mdm/android-mdm-dashboard/issues"
   },
-  "homepage": "https://github.com/flyve-mdm/flyve-mdm-android-admin-dashboard#readme",
+  "homepage": "http://flyve.org/android-mdm-dashboard",
   "devDependencies": {
     "conventional-github-releaser": "^3.0.0",
     "gh-pages": "^1.2.0",

@@ -44,7 +44,7 @@ git checkout develop
 git pull origin develop
 
 # merge with master
-git merge master
+git rebase master
 
 # push develop
 git push origin develop --force

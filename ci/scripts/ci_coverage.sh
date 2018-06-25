@@ -45,11 +45,7 @@ mv development/coverage/.resources development/coverage/resources
 # replace .sessions
 mv development/coverage/.sessions.html development/coverage/sessions.html
 
-# add code coverage and test result
-git add development -f
-
-# temporal commit
-git commit -m "tmp development"
+yarn gh-pages --dist ./development/ --dest ./development/ --add -m "docs(coverage): update code coverage and test reports"
 
 # get gh-pages branch
 git fetch origin gh-pages
@@ -59,12 +55,6 @@ git checkout gh-pages
 
 # clean
 sudo git clean -fdx
-
-# remove report folder
-sudo rm -R development
-
-# get documentation folder
-git checkout $CIRCLE_BRANCH development
 
 # remove css
 sudo rm ./development/coverage/resources/report.css
@@ -77,15 +67,10 @@ cp ./css/testReports.css ./development/test-reports/css/style.css
 touch ./development/test-reports/css/base-style.css
 
 # add
-git add ./development/coverage/resources/report.css
-git add ./development/test-reports/css/style.css
-git add ./development/test-reports/css/base-style.css
-
-# create commit
-git commit -m "docs(coverage): update code coverage and test reports"
+git add ./development/ && git commit --amend --no-edit
 
 # push to branch
-git push origin gh-pages
+git push --force origin gh-pages
 
 # got back to original branch
 git checkout $CIRCLE_BRANCH

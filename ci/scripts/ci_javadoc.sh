@@ -34,23 +34,13 @@ sudo rm ./development/code-documentation/index.html
 # rename the overview-summary.html file to index.html
 mv ./development/code-documentation/overview-summary.html ./development/code-documentation/index.html
 
-# add reports
-git add development -f
-
-# create commit with temporary report folder
-git commit -m "tmp development commit"
+yarn gh-pages --dist ./development/code-documentation/ --dest ./development/code-documentation/ --add -m "docs(development): update code documentation"
 
 # get gh-pages branch
 git fetch origin gh-pages
 
 # move to gh-pages
 git checkout gh-pages
-
-# delete old javadoc folder
-sudo rm -R development/code-documentation
-
-# get fresh javadoc folder
-git checkout $CIRCLE_BRANCH development/code-documentation
 
 # remove default stylesheet.css
 sudo rm ./development/code-documentation/stylesheet.css
@@ -59,22 +49,16 @@ sudo rm ./development/code-documentation/stylesheet.css
 cp ./css/codeDocumentation.css ./development/code-documentation/stylesheet.css
 
 # git add javadoc folder
-git add development/code-documentation
+git add development/code-documentation/ && git commit --amend --no-edit
 
-# git add
-git add ./development/code-documentation/stylesheet.css
-
-# create commit for documentation
-git commit -m "docs(development): update code documentation"
+#
+git push --force origin gh-pages
 
 # change headers
 ruby ci/add_header.rb
 
 # git add
-git add .
-
-# git commit
-git commit -m "docs(headers): update headers"
+git add . && git commit -m "docs(headers): update headers"
 
 # push to branch
 git push origin gh-pages

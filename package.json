@@ -23,10 +23,10 @@
   },
   "homepage": "http://flyve.org/android-mdm-dashboard/",
   "devDependencies": {
-    "eslint": "^4.7.2",
+    "eslint": "^5.6.0",
     "eslint-config-google": "^0.9.1",
-    "htmlhint": "^0.9.13",
-    "sass-lint": "^1.11.1",
+    "htmlhint": "^0.10.1",
+    "sass-lint": "^1.12.1",
     "yaml-lint": "^1.0.0"
   }
 }

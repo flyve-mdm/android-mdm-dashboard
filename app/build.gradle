@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "org.flyve.admin.dashboard"
@@ -29,6 +29,10 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 
     defaultConfig {
         multiDexEnabled true
@@ -52,6 +56,16 @@ dependencies {
     implementation 'com.orhanobut:logger:2.1.1'
     implementation 'com.android.support:multidex:1.0.2'
 
+
+
+    def withoutMTP = {
+        exclude group: 'org.mobicents.protocols.ss7.mtp', module: 'mtp-api'
+        exclude group: 'org.mobicents.protocols.ss7.mtp', module: 'mtp'
+        exclude group: 'org.mobicents.protocols.ss7.sccp', module: 'sccp-api'
+        exclude group: 'org.mobicents.protocols.ss7.sccp', module: 'sccp'
+    }
+    implementation 'org.mobicents.protocols.ss7.map:map-impl:8.0.112', withoutMTP
+    testImplementation 'junit:junit:4.12'
 }
 
 import java.util.regex.Pattern

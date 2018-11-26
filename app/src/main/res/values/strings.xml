@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">Admin Dashboard</string>
-
+    <string name="app_name">Amdin Dashboard</string>
     <string name="drawer_dashboard">Dashboard</string>
     <string name="drawer_devices">Devices</string>
     <string name="drawer_fleets">Fleets</string>
@@ -9,4 +8,25 @@
     <string name="drawer_users">Users</string>
     <string name="drawer_settings">Settings</string>
     <string name="drawer_about">About</string>
+
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_item_pick_contact">MENU_ITEM_PICK_CONTACT</string>
+    <string name="menu_item_clear_history">MENU_ITEM_CLEAR_HISTORY</string>
+    <string name="recieve_ping_data_messages">Recieve ping (Data) messages</string>
+    <string name="data_messages_storage">Data Messages Storage</string>
+
+    <!-- Strings for SMS -->
+    <string name="drawer_sms">SMS ping</string>
+    <string name="send">SEND</string>
+    <string name="phonenumber">+34</string>
+    <string name="delivered">DELIVERED: PHONE ONLINE</string>
+    <string name="offline">DELIVERY FAILED: PHONE OFFLINE</string>
+    <string name="sent">THE REQUEST IS SENT …</string>
+    <string name="notsent">FAILED TO SEND REQUEST</string>
+    <string name="title_history">History:</string>
+    <string name="result_pdu_details">Result PDU details</string>
+
 </resources>

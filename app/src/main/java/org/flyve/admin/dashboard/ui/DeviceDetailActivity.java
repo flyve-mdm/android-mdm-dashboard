@@ -32,8 +32,11 @@ import org.mobicents.protocols.ss7.map.api.smstpdu.SmsTpduType;
 import org.mobicents.protocols.ss7.map.api.smstpdu.Status;
 import org.mobicents.protocols.ss7.map.smstpdu.SmsTpduImpl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class DeviceDetailActivity extends AppCompatActivity {
@@ -58,7 +61,7 @@ public class DeviceDetailActivity extends AppCompatActivity {
     PendingIntent deliveryPI;
 
     EditText phoneNumber;
-    TextView statusText, resultText, name_ID;
+    TextView statusText, resultText, date;
     ImageButton resultPduDetails;
 
     @Override
@@ -71,6 +74,7 @@ public class DeviceDetailActivity extends AppCompatActivity {
         statusText = findViewById(R.id.sendStatus);
         resultText = findViewById(R.id.resultStatus);
         resultPduDetails = findViewById(R.id.resultPduDetails);
+        date = findViewById(R.id.date);
 
         preferences = this.getPreferences(Context.MODE_PRIVATE);
         phoneNumber.setText(preferences.getString(PREF_LAST_NUMBER, getString(R.string.phonenumber)));
@@ -81,6 +85,10 @@ public class DeviceDetailActivity extends AppCompatActivity {
             if (this.checkPermissions() && !TextUtils.isEmpty(phoneNum) && Patterns.PHONE.matcher(phoneNum).matches()) {
                 resultText.setText(null);
                 SmsManager.getDefault().sendDataMessage(phoneNum, null, (short) 9200, payload, sentPI, deliveryPI);
+
+                //Get  date
+                Date hourdateFormat = new Date();
+                date.setText("Date " + hourdateFormat);
             }
         });
 

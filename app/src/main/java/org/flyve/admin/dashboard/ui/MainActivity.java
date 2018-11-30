@@ -1,8 +1,6 @@
 package org.flyve.admin.dashboard.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -15,7 +13,6 @@ import android.widget.TextView;
 
 import org.flyve.admin.dashboard.R;
 import org.flyve.admin.dashboard.adapter.DrawerAdapter;
-import org.flyve.admin.dashboard.sms.FragmentSMS;
 import org.flyve.admin.dashboard.utils.FlyveLog;
 
 import java.util.ArrayList;
@@ -50,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mFragmentManager = getSupportFragmentManager();
+
+
+
 
         // Setup Drawer Toggle of the Toolbar
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
@@ -123,13 +123,6 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.containerView, f).commit();
         }
 
-        //New feature
-        //SMS ping
-         if (item.get("id").equals("9")) {
-            FragmentSMS f = new FragmentSMS();
-            fragmentTransaction.replace(R.id.containerView, f).commit();
-        }
-
     }
 
     /**
@@ -196,13 +189,6 @@ public class MainActivity extends AppCompatActivity {
         map.put("img", "ic_about");
         arrDrawer.add(map);
 
-        //New feature
-        //SMS ping
-        map = new HashMap<>();
-        map.put("id","9");
-        map.put("name", getResources().getString(R.string.drawer_sms));
-        map.put("img", "ic_sms");
-        arrDrawer.add(map);
 
         try {
             // lad adapter

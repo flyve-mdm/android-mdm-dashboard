@@ -1,7 +1,9 @@
 package org.flyve.admin.dashboard.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -10,6 +12,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,7 @@ import org.flyve.admin.dashboard.adapter.DeviceTouchHelper;
 import org.flyve.admin.dashboard.model.DeviceModel;
 import org.flyve.admin.dashboard.utils.FlyveLog;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -146,12 +150,7 @@ public class DeviceFragment extends Fragment {
 
             pb.setVisibility(View.GONE);
 
-            mAdapter = new DeviceAdapter(data, new DeviceAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(DeviceModel item) {
-                    openDetail(item)
-;                }
-            });
+            mAdapter = new DeviceAdapter(data, item -> openDetail(item));
             lst.setAdapter(mAdapter);
 
         } catch (Exception ex) {
@@ -160,7 +159,7 @@ public class DeviceFragment extends Fragment {
         }
     }
 
-    private void openDetail(DeviceModel item) {
+    public void openDetail(DeviceModel item) {
         Intent miIntent = new Intent(DeviceFragment.this.getActivity(), DeviceDetailActivity.class);
         DeviceFragment.this.startActivity(miIntent);
     }

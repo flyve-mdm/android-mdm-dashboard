@@ -27,5 +27,14 @@
     <string name="notsent">FAILED TO SEND REQUEST</string>
     <string name="title_history">History:</string>
     <string name="result_pdu_details">Result PDU details</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- String related for Login -->
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="mdm_account">Use your Flyve MDM account to Sign in</string>
+    <string name="x">X</string>
+
 
 </resources>

@@ -25,6 +25,11 @@
     <!-- Allows connect to internet -->
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name=".ui.DashboardAgent"
         android:allowBackup="true"
@@ -40,19 +45,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-
         <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.UserDetailActivity" />
         <activity android:name=".ui.ApplicationDetailActivity" />
         <activity android:name=".ui.DeviceDetailActivity" />
         <activity android:name=".ui.FileDetailActivity" />
-        <activity android:name=".ui.FleetDetailActivity">
-        </activity>
-
-        <!-- Sms Changes -->
-
+        <activity android:name=".ui.FleetDetailActivity" />
+        <activity android:name=".login.LoginActivity" />
     </application>
 
 </manifest>

@@ -1,11 +1,13 @@
 package org.flyve.admin.dashboard.ui;
 
+import android.content.ClipData;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -27,10 +29,25 @@ public class MainActivity extends AppCompatActivity {
     private HashMap<String, String> selectedItem;
     private TextView txtToolbarTitle;
 
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //CardView setup
+        ArrayList<CardView> list = new ArrayList<>();
+        list.add(new CardView(R.drawable.ic_devices, "Devices", "0"));
+        list.add(new CardView(R.drawable.ic_fleets, "Fleets", "0"));
+        list.add(new CardView(R.drawable.ic_files,"Files","0"));
+        list.add(new CardView(R.drawable.ic_applications, "Applications", "0"));
+        list.add(new CardView(R.drawable.ic_users,"Users","0"));
+
+
 
         // Setup the DrawerLayout and NavigationView
         txtToolbarTitle = (TextView) findViewById(R.id.txtToolbarTitle);

@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import org.flyve.admin.dashboard.R;
+import org.flyve.admin.dashboard.login.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -25,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void openActivity() {
-        Intent miIntent = new Intent(SplashActivity.this, MainActivity.class);
+        Intent miIntent = new Intent(SplashActivity.this, LoginActivity.class);
         SplashActivity.this.startActivity(miIntent);
         SplashActivity.this.finish();
     }

@@ -20,7 +20,7 @@
     <!-- Strings for SMS -->
     <string name="drawer_sms">SMS ping</string>
     <string name="ping">PING</string>
-    <string name="phonenumber">+34</string>
+    <string name="sim_card_1">Sim Card 1</string>
     <string name="delivered">DELIVERED: PHONE ONLINE</string>
     <string name="offline">DELIVERY FAILED: PHONE OFFLINE</string>
     <string name="sent">THE REQUEST IS SENT …</string>

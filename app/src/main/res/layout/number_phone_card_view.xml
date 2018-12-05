@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="#14b6a6"
+    app:cardCornerRadius="10dp"
+    app:cardUseCompatPadding="true"
+    android:id="@+id/device_card">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/phoneNumberCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NumberPhone"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/emailCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email" />
+
+            <TextView
+                android:id="@+id/simcard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SimCard" />
+
+            <TextView
+                android:id="@+id/lastContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Last Contact" />
+
+        </LinearLayout>
+
+        <Button
+
+            android:id="@+id/editNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit" />
+
+        <Button
+            android:id="@+id/sendPing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ping" />
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

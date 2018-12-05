@@ -1,36 +1,55 @@
 package org.flyve.admin.dashboard.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.flyve.admin.dashboard.R;
+import org.flyve.admin.dashboard.ui.CardView;
+
+import java.util.ArrayList;
+
 public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.CardViewHolder> {
 
-    public ImageView mImageView;
-    public TextView titleTV;
-    public TextView NumberTextView;
+    private ArrayList<CardView> arrayCardList;
+
+    public static class CardViewHolder extends RecyclerView.ViewHolder {
+        public ImageView mImageView;
+        public TextView titleTV;
+        public TextView NumberTextView;
+
+        public CardViewHolder(View itemView) {
+            super(itemView);
+            mImageView = itemView.findViewById(R.id.imageView);
+            titleTV = itemView.findViewById(R.id.textName);
+            NumberTextView = itemView.findViewById(R.id.quantity);
+        }
+    }
+    public CardViewAdapter (ArrayList<CardView> CardList){
+        arrayCardList = CardList;
+    }
 
     @Override
     public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_layout, parent, false);
+        CardViewHolder cva = new CardViewHolder(v);
+        return cva;
     }
 
     @Override
     public void onBindViewHolder(CardViewHolder holder, int position) {
-
+        CardView currentItem = arrayCardList.get(position);
+        holder.mImageView.setImageResource(currentItem.getImageResource());
+        holder.titleTV.setText(currentItem.getNameText());
+        holder.NumberTextView.setText(currentItem.getQuantity());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return arrayCardList.size();
     }
 
-    public static class CardViewHolder extends RecyclerView.ViewHolder{
-
-        public CardViewHolder(View itemView) {
-            super(itemView);
-        }
-    }
 }

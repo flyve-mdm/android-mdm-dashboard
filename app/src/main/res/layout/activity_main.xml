@@ -42,11 +42,10 @@
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:padding="4dp"
             android:scrollbars="vertical"
-            android:id="@+id/recycler_view"
-            android:background="@android:color/darker_gray"/>
+            android:id="@+id/recycler_view"/>
 
 
         <FrameLayout

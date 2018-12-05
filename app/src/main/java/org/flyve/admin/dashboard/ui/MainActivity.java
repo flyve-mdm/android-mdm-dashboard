@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import org.flyve.admin.dashboard.R;
+import org.flyve.admin.dashboard.adapter.CardViewAdapter;
 import org.flyve.admin.dashboard.adapter.DrawerAdapter;
 import org.flyve.admin.dashboard.utils.FlyveLog;
 
@@ -47,7 +49,13 @@ public class MainActivity extends AppCompatActivity {
         list.add(new CardView(R.drawable.ic_applications, "Applications", "0"));
         list.add(new CardView(R.drawable.ic_users,"Users","0"));
 
+        mRecyclerView = findViewById(R.id.recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mAdapter = new CardViewAdapter(list);
 
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
 
         // Setup the DrawerLayout and NavigationView
         txtToolbarTitle = (TextView) findViewById(R.id.txtToolbarTitle);
@@ -64,9 +72,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mFragmentManager = getSupportFragmentManager();
-
-
-
 
         // Setup Drawer Toggle of the Toolbar
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
@@ -96,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         if (item.get("id").equals("1")) {
             DashboardFragment f = new DashboardFragment();
             fragmentTransaction.replace(R.id.containerView, f).commit();
+            mRecyclerView.setVisibility(View.VISIBLE);
             return;
         }
 
@@ -103,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         if (item.get("id").equals("2")) {
             DeviceFragment f = new DeviceFragment();
             fragmentTransaction.replace(R.id.containerView, f).commit();
+            mRecyclerView.setVisibility(View.GONE);
             return;
         }
 
@@ -110,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
         if (item.get("id").equals("3")) {
             FleetFragment f = new FleetFragment();
             fragmentTransaction.replace(R.id.containerView, f).commit();
+            mRecyclerView.setVisibility(View.GONE);
             return;
         }
 
@@ -117,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
         if (item.get("id").equals("4")) {
             FileFragment f = new FileFragment();
             fragmentTransaction.replace(R.id.containerView, f).commit();
+            mRecyclerView.setVisibility(View.GONE);
             return;
         }
 
@@ -124,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         if (item.get("id").equals("5")) {
             ApplicationFragment f = new ApplicationFragment();
             fragmentTransaction.replace(R.id.containerView, f).commit();
+            mRecyclerView.setVisibility(View.GONE);
             return;
         }
 
@@ -131,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
         if (item.get("id").equals("6")) {
             UserFragment f = new UserFragment();
             fragmentTransaction.replace(R.id.containerView, f).commit();
+            mRecyclerView.setVisibility(View.GONE);
             return;
         }
 
@@ -138,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
         if (item.get("id").equals("8")) {
             FragmentAbout f = new FragmentAbout();
             fragmentTransaction.replace(R.id.containerView, f).commit();
+            mRecyclerView.setVisibility(View.GONE);
         }
 
     }

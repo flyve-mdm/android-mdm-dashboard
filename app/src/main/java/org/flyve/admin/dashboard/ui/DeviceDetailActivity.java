@@ -14,10 +14,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -25,6 +28,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import org.flyve.admin.dashboard.R;
+import org.flyve.admin.dashboard.ping.NumberPhoneAdapter;
+import org.flyve.admin.dashboard.ping.NumberPhoneCardView;
 import org.flyve.admin.dashboard.utils.FlyveLog;
 import org.mobicents.protocols.ss7.map.api.smstpdu.SmsStatusReportTpdu;
 import org.mobicents.protocols.ss7.map.api.smstpdu.SmsTpdu;
@@ -64,10 +69,28 @@ public class DeviceDetailActivity extends AppCompatActivity {
     TextView statusText, resultText, date;
     ImageButton resultPduDetails;
 
+    private RecyclerView mRecyclerViewCard;
+    private RecyclerView.LayoutManager mLayoutManagerCard;
+    private RecyclerView.Adapter mAdapterCard;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_detail);
+
+        //Recycler View
+        ArrayList<NumberPhoneCardView> numberList = new ArrayList<>();
+        numberList.add(new NumberPhoneCardView("635207705","erikcr1995@gmail.com","SimCard1"));
+
+        mRecyclerViewCard = findViewById(R.id.recycler_view);
+        mRecyclerViewCard.setHasFixedSize(true);
+        mLayoutManagerCard = new LinearLayoutManager(this);
+        mAdapterCard = new NumberPhoneAdapter(numberList);
+
+        mRecyclerViewCard.setLayoutManager(mLayoutManagerCard);
+        mRecyclerViewCard.setAdapter(mAdapterCard);
+
+
 
         //SMS SILENT PING
         phoneNumber = findViewById(R.id.phoneNumber);
@@ -75,10 +98,6 @@ public class DeviceDetailActivity extends AppCompatActivity {
         resultText = findViewById(R.id.resultStatus);
         resultPduDetails = findViewById(R.id.resultPduDetails);
         date = findViewById(R.id.date);
-
-        preferences = this.getPreferences(Context.MODE_PRIVATE);
-        phoneNumber.setText(preferences.getString(PREF_LAST_NUMBER, getString(R.string.phonenumber)));
-
 
         findViewById(R.id.sendButton).setOnClickListener(e -> {
             final String phoneNum = phoneNumber.getText().toString();
@@ -241,5 +260,4 @@ public class DeviceDetailActivity extends AppCompatActivity {
 
         }
     };
-
 }

@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@android:style/Theme.WithActionBar"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="org.flyve.admin.dashboard.ui.UserDetailActivity">
 
@@ -12,7 +11,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:id="@+id/toolbar"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
@@ -29,7 +28,7 @@
             android:ems="10"
             android:gravity="center"
             android:inputType="phone|number"
-            android:text="@string/phonenumber" />
+            android:hint="@string/sim_card_1" />
 
         <Button
             android:id="@+id/sendButton"
@@ -78,6 +77,12 @@
             android:visibility="invisible" />
     </LinearLayout>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 
     <View
         android:layout_width="match_parent"

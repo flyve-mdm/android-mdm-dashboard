@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private CardViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private ArrayList<CardView> list;
+    private ArrayList<CardView> cardList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,19 +78,19 @@ public class MainActivity extends AppCompatActivity {
      * Loads card views
      */
     public  void createExampleList(){
-        list = new ArrayList<>();
-        list.add(new CardView(R.drawable.ic_devices, "Devices", "0"));
-        list.add(new CardView(R.drawable.ic_fleets, "Fleets", "0"));
-        list.add(new CardView(R.drawable.ic_files,"Files","0"));
-        list.add(new CardView(R.drawable.ic_applications, "Applications", "0"));
-        list.add(new CardView(R.drawable.ic_users,"Users","0"));
+        cardList = new ArrayList<>();
+        cardList.add(new CardView(R.drawable.ic_devices, "Devices", "0"));
+        cardList.add(new CardView(R.drawable.ic_fleets, "Fleets", "0"));
+        cardList.add(new CardView(R.drawable.ic_files,"Files","0"));
+        cardList.add(new CardView(R.drawable.ic_applications, "Applications", "0"));
+        cardList.add(new CardView(R.drawable.ic_users,"Users","0"));
     }
 
     public void buildRecyclerView(){
         mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new CardViewAdapter(list);
+        mAdapter = new CardViewAdapter(cardList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);

@@ -21,6 +21,7 @@ import org.flyve.admin.dashboard.utils.FlyveLog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,30 +33,18 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtToolbarTitle;
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private CardViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    private ArrayList<CardView> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //CardView setup
-        ArrayList<CardView> list = new ArrayList<>();
-        list.add(new CardView(R.drawable.ic_devices, "Devices", "0"));
-        list.add(new CardView(R.drawable.ic_fleets, "Fleets", "0"));
-        list.add(new CardView(R.drawable.ic_files,"Files","0"));
-        list.add(new CardView(R.drawable.ic_applications, "Applications", "0"));
-        list.add(new CardView(R.drawable.ic_users,"Users","0"));
-
-        mRecyclerView = findViewById(R.id.recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new CardViewAdapter(list);
-
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        createExampleList();
+        buildRecyclerView();
 
         // Setup the DrawerLayout and NavigationView
         txtToolbarTitle = (TextView) findViewById(R.id.txtToolbarTitle);
@@ -86,9 +75,83 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Loads card views
+     */
+    public  void createExampleList(){
+        list = new ArrayList<>();
+        list.add(new CardView(R.drawable.ic_devices, "Devices", "0"));
+        list.add(new CardView(R.drawable.ic_fleets, "Fleets", "0"));
+        list.add(new CardView(R.drawable.ic_files,"Files","0"));
+        list.add(new CardView(R.drawable.ic_applications, "Applications", "0"));
+        list.add(new CardView(R.drawable.ic_users,"Users","0"));
+    }
+
+    public void buildRecyclerView(){
+        mRecyclerView = findViewById(R.id.recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mAdapter = new CardViewAdapter(list);
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new CardViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+                // Devices
+                if (position == 0) {
+                    DeviceFragment f = new DeviceFragment();
+                    fragmentTransaction.replace(R.id.containerView, f).commit();
+                    mRecyclerView.setVisibility(View.GONE);
+                    txtToolbarTitle.setText("Devices");
+                    return;
+                }
+
+                // Fleets
+                if (position == 1) {
+                    FleetFragment f = new FleetFragment();
+                    fragmentTransaction.replace(R.id.containerView, f).commit();
+                    mRecyclerView.setVisibility(View.GONE);
+                    txtToolbarTitle.setText("Fleets");
+                    return;
+                }
+
+                // Files
+                if (position == 2) {
+                    FileFragment f = new FileFragment();
+                    fragmentTransaction.replace(R.id.containerView, f).commit();
+                    mRecyclerView.setVisibility(View.GONE);
+                    txtToolbarTitle.setText("Files");
+                    return;
+                }
+
+                // Application
+                if (position == 3) {
+                    ApplicationFragment f = new ApplicationFragment();
+                    fragmentTransaction.replace(R.id.containerView, f).commit();
+                    mRecyclerView.setVisibility(View.GONE);
+                    txtToolbarTitle.setText("Application");
+                    return;
+                }
+
+                // User
+                if (position == 4) {
+                    UserFragment f = new UserFragment();
+                    fragmentTransaction.replace(R.id.containerView, f).commit();
+                    mRecyclerView.setVisibility(View.GONE);
+                    txtToolbarTitle.setText("User");
+                    return;
+                }
+            }
+        });
+    }
+
+    /**
      * Loads the Fragment
      * @param item
      */
+
     private void loadFragment(HashMap<String, String> item) {
 
 

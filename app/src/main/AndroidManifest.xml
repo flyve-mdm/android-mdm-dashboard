@@ -52,6 +52,19 @@
         <activity android:name=".ui.FileDetailActivity" />
         <activity android:name=".ui.FleetDetailActivity" />
         <activity android:name=".login.LoginActivity" />
+
+        <receiver
+            android:name=".ping.PingSmsReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter android:priority="10">
+                <action android:name="android.intent.action.DATA_SMS_RECEIVED" />
+                <data
+                    android:host="*"
+                    android:scheme="sms" />
+            </intent-filter>
+        </receiver>
     </application>
+
 
 </manifest>

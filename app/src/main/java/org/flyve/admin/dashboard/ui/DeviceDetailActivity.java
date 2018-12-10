@@ -16,7 +16,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,7 +25,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,8 +38,6 @@ import org.mobicents.protocols.ss7.map.api.smstpdu.SmsTpduType;
 import org.mobicents.protocols.ss7.map.api.smstpdu.Status;
 import org.mobicents.protocols.ss7.map.smstpdu.SmsTpduImpl;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -62,13 +58,14 @@ public class DeviceDetailActivity extends AppCompatActivity {
     final IntentFilter wapDeliveryFilter = new IntentFilter("android.provider.Telephony.WAP_PUSH_DELIVER");
 
     SharedPreferences preferences;
+    public final static String PREF_DATA_SMS_STORE = "pref_data_sms_store";
     public final static String PREF_LAST_NUMBER = "pref_last_number";
     public final static String PREF_RECEIVE_DATA_SMS = "pref_receive_data_sms";
 
     PendingIntent sentPI;
     PendingIntent deliveryPI;
 
-    EditText phoneNumber;
+    EditText phoneNumberPing;
     TextView statusText, resultText, date;
     ImageButton resultPduDetails;
 
@@ -76,7 +73,7 @@ public class DeviceDetailActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerViewCard;
     private RecyclerView.LayoutManager mLayoutManagerCard;
-    private RecyclerView.Adapter mAdapterCard;
+    private NumberPhoneAdapter mAdapterCard;
 
 
     @Override
@@ -89,15 +86,15 @@ public class DeviceDetailActivity extends AppCompatActivity {
 
 
         //SMS SILENT PING
-        phoneNumber = findViewById(R.id.phoneNumber);
+        phoneNumberPing = findViewById(R.id.phoneNumberPing);
         statusText = findViewById(R.id.sendStatus);
         resultText = findViewById(R.id.resultStatus);
         resultPduDetails = findViewById(R.id.resultPduDetails);
         date = findViewById(R.id.date);
 
         findViewById(R.id.sendButton).setOnClickListener(e -> {
-            final String phoneNum = phoneNumber.getText().toString();
-            if (this.checkPermissions() && !TextUtils.isEmpty(phoneNum) && Patterns.PHONE.matcher(phoneNum).matches()) {
+            final String phoneNum = phoneNumberPing.getText().toString();
+            if (DeviceDetailActivity.this.checkPermissions() && !TextUtils.isEmpty(phoneNum) && Patterns.PHONE.matcher(phoneNum).matches()) {
                 resultText.setText(null);
                 SmsManager.getDefault().sendDataMessage(phoneNum, null, (short) 9200, payload, sentPI, deliveryPI);
 
@@ -154,19 +151,20 @@ public class DeviceDetailActivity extends AppCompatActivity {
         }
     }
 
-    public void insertItem(int position){
-        mNumberList.add(new NumberPhoneCardView("Add Number", "add email","Simcard"));
+    /**
+     * Create the card view and recycler view
+     * @param position
+     */
+
+    public void changeItem (int position, String text) {
+        mNumberList.get(position).changeContactText(text);
         mAdapterCard.notifyDataSetChanged();
-    }
-
-    public void removeItem(int position){
-
     }
 
     public void createNumberPhoneList(){
         mNumberList = new ArrayList<>();
-        mNumberList.add(new NumberPhoneCardView("635207705","erikcr1995@gmail.com","SimCard1"));
-        mNumberList.add(new NumberPhoneCardView("Add Number", "add email","Simcard"));
+        mNumberList.add(new NumberPhoneCardView("635207705","erikcr1995@gmail.com","SimCard1", "Last Contact"));
+        mNumberList.add(new NumberPhoneCardView("Add Number", "add email","Simcard","Last Contact"));
     }
 
     public void buildRecyclerView(){
@@ -177,9 +175,39 @@ public class DeviceDetailActivity extends AppCompatActivity {
 
         mRecyclerViewCard.setLayoutManager(mLayoutManagerCard);
         mRecyclerViewCard.setAdapter(mAdapterCard);
+
+        mAdapterCard.setOnItemClickListener(new NumberPhoneAdapter.OnItemClickListener() {
+            @Override
+            public void onEditClick(int position) {
+                Toast.makeText(DeviceDetailActivity.this, "editing", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onPingClick(int position) {
+                final String phoneNum = mNumberList.get(position).getPhone();
+                if (checkPermissions() && !TextUtils.isEmpty(phoneNum) && Patterns.PHONE.matcher(phoneNum).matches()) {
+                    resultText.setText(null);
+                    SmsManager.getDefault().sendDataMessage(phoneNum, null, (short) 9200, payload, sentPI, deliveryPI);
+
+                    //Get  date
+                    Date hourdateFormat = new Date();
+                    String finalDate = "Last Contact " + hourdateFormat;
+                    changeItem(position, finalDate);
+                }
+            }
+
+            @Override
+            public void onCallClick(int position) {
+                Toast.makeText(DeviceDetailActivity.this, "calling", Toast.LENGTH_SHORT).show();
+            }
+
+        });
     }
 
-    /*** SEND SMS SILENT PING ***/
+    /**
+     *  SEND SMS SILENT PING
+     *
+     */
     boolean checkPermissions() {
         List<String> missingPermissions = new ArrayList<>();
 
@@ -195,7 +223,7 @@ public class DeviceDetailActivity extends AppCompatActivity {
             missingPermissions.add(Manifest.permission.READ_PHONE_STATE);
         }
 
-        if (receiveSmsPermission != PackageManager.PERMISSION_GRANTED && preferences.getBoolean(PREF_RECEIVE_DATA_SMS, false)) {
+        if (receiveSmsPermission != PackageManager.PERMISSION_GRANTED /*&& preferences.getBoolean(PREF_RECEIVE_DATA_SMS, false)*/) {
             missingPermissions.add(Manifest.permission.RECEIVE_SMS);
         }
 

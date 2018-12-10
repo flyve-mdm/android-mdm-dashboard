@@ -22,7 +22,7 @@
         android:padding="5dp">
 
         <EditText
-            android:id="@+id/phoneNumber"
+            android:id="@+id/phoneNumberPing"
             android:layout_width="290dp"
             android:layout_height="wrap_content"
             android:ems="10"

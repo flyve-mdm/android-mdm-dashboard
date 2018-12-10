@@ -16,16 +16,19 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.flyve.admin.dashboard.R;
 import org.flyve.admin.dashboard.ping.NumberPhoneAdapter;
@@ -69,27 +72,20 @@ public class DeviceDetailActivity extends AppCompatActivity {
     TextView statusText, resultText, date;
     ImageButton resultPduDetails;
 
+    private ArrayList<NumberPhoneCardView> mNumberList;
+
     private RecyclerView mRecyclerViewCard;
     private RecyclerView.LayoutManager mLayoutManagerCard;
     private RecyclerView.Adapter mAdapterCard;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_detail);
 
-        //Recycler View
-        ArrayList<NumberPhoneCardView> numberList = new ArrayList<>();
-        numberList.add(new NumberPhoneCardView("635207705","erikcr1995@gmail.com","SimCard1"));
-
-        mRecyclerViewCard = findViewById(R.id.recycler_view);
-        mRecyclerViewCard.setHasFixedSize(true);
-        mLayoutManagerCard = new LinearLayoutManager(this);
-        mAdapterCard = new NumberPhoneAdapter(numberList);
-
-        mRecyclerViewCard.setLayoutManager(mLayoutManagerCard);
-        mRecyclerViewCard.setAdapter(mAdapterCard);
-
+        createNumberPhoneList();
+        buildRecyclerView();
 
 
         //SMS SILENT PING
@@ -118,6 +114,8 @@ public class DeviceDetailActivity extends AppCompatActivity {
 
         //TOOLBAR
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.inflateMenu(R.menu.device_menu_toolbar);
+
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             try {
@@ -135,6 +133,50 @@ public class DeviceDetailActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    /*** INFLATE MENU AND ADD OR REMOVE NEW LIST SIMCARDS ***/
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.device_menu_toolbar, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.itemAdd:
+                Toast.makeText(this, "Add", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.itemDelete:
+                Toast.makeText(this,"Delete", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                    return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void insertItem(int position){
+        mNumberList.add(new NumberPhoneCardView("Add Number", "add email","Simcard"));
+        mAdapterCard.notifyDataSetChanged();
+    }
+
+    public void removeItem(int position){
+
+    }
+
+    public void createNumberPhoneList(){
+        mNumberList = new ArrayList<>();
+        mNumberList.add(new NumberPhoneCardView("635207705","erikcr1995@gmail.com","SimCard1"));
+        mNumberList.add(new NumberPhoneCardView("Add Number", "add email","Simcard"));
+    }
+
+    public void buildRecyclerView(){
+        mRecyclerViewCard = findViewById(R.id.recycler_view);
+        mRecyclerViewCard.setHasFixedSize(true);
+        mLayoutManagerCard = new LinearLayoutManager(this);
+        mAdapterCard = new NumberPhoneAdapter(mNumberList);
+
+        mRecyclerViewCard.setLayoutManager(mLayoutManagerCard);
+        mRecyclerViewCard.setAdapter(mAdapterCard);
     }
 
     /*** SEND SMS SILENT PING ***/

@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.flyve.admin.dashboard.R;
@@ -14,17 +16,34 @@ public class NumberPhoneAdapter extends RecyclerView.Adapter<NumberPhoneAdapter.
 
     private ArrayList<NumberPhoneCardView> numberPhoneList;
 
+    public interface OnIteemClickListener{
+
+    }
+
     public static class NumberPhoneHolder extends RecyclerView.ViewHolder{
 
         public TextView numberPhone;
         public TextView email;
         public TextView simcard;
+        public ImageView editImage;
+        public ImageView sendPingImage;
+        public ImageView callNumberImage;
 
         public NumberPhoneHolder(View itemView){
             super(itemView);
+            editImage = itemView.findViewById(R.id.editNumber);
+            sendPingImage = itemView.findViewById(R.id.sendPing);
+            callNumberImage = itemView.findViewById(R.id.callNumber);
             numberPhone = itemView.findViewById(R.id.phoneNumberCard);
             email = itemView.findViewById(R.id.emailCard);
             simcard = itemView.findViewById(R.id.simcard);
+
+            editImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
         }
     }
 

@@ -11,6 +11,9 @@ public class CardView {
         nameText = text;
         quantity = number;
     }
+
+
+
     public int getImageResource(){
         return mImageResource;
     }

@@ -15,17 +15,39 @@ import java.util.ArrayList;
 public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.CardViewHolder> {
 
     private ArrayList<CardView> arrayCardList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
+
 
     public static class CardViewHolder extends RecyclerView.ViewHolder {
         public ImageView mImageView;
         public TextView titleTV;
         public TextView NumberTextView;
 
-        public CardViewHolder(View itemView) {
+        public CardViewHolder(View itemView, OnItemClickListener listener) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.imageView);
             titleTV = itemView.findViewById(R.id.textName);
             NumberTextView = itemView.findViewById(R.id.quantity);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if (position!= RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
     public CardViewAdapter (ArrayList<CardView> CardList){
@@ -35,7 +57,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.CardVi
     @Override
     public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_layout, parent, false);
-        CardViewHolder cva = new CardViewHolder(v);
+        CardViewHolder cva = new CardViewHolder(v, mListener);
         return cva;
     }
 

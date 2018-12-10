@@ -10,14 +10,14 @@
     android:id="@+id/device_card">
 
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="15dp">
+        android:padding="12dp">
 
         <LinearLayout
+            android:padding="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -49,18 +49,26 @@
 
         </LinearLayout>
 
-        <Button
-
+        <ImageView
+            android:padding="15dp"
+            android:src="@drawable/ic_edit"
             android:id="@+id/editNumber"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit" />
+            android:layout_height="wrap_content" />
 
-        <Button
+        <ImageView
+            android:padding="15dp"
+            android:src="@drawable/ic_sms"
             android:id="@+id/sendPing"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ping" />
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:padding="15dp"
+            android:src="@drawable/ic_call_icon"
+            android:id="@+id/callNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

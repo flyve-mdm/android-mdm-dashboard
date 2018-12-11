@@ -1,6 +1,7 @@
 package org.flyve.admin.dashboard.ping;
 
 public class NumberPhoneCardView{
+
     private String PhoneCard;
     private String mailCard;
     private String simCard;
@@ -13,12 +14,22 @@ public class NumberPhoneCardView{
         lastContact = contact;
     }
 
+    public void changePhoneNumber(String number){
+        PhoneCard = number;
+    }
+
+    public void changeEmail(String email){
+        mailCard = email;
+    }
+
+    public void changeSimCardNumber(String simcardnumber){
+        simCard = simcardnumber;
+    }
+
     public void changeContactText(String text){
         lastContact= text;
     }
-    public void getPhoneNumber(String number){
-        PhoneCard = number;
-    }
+
 
     public String getPhone(){
         return PhoneCard;

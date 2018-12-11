@@ -4,10 +4,12 @@ import android.Manifest;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -20,6 +22,7 @@ import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,7 +46,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public class DeviceDetailActivity extends AppCompatActivity {
+public class DeviceDetailActivity extends AppCompatActivity implements editSmsDialog.DialogListener {
 
     final byte[] payload = new byte[]{0x0A, 0x06, 0x03, (byte) 0xB0, (byte) 0xAF, (byte) 0x82, 0x03, 0x06, 0x6A, 0x00, 0x05};
     byte[] lastSendResultPDU = new byte[0];
@@ -152,11 +155,26 @@ public class DeviceDetailActivity extends AppCompatActivity {
     }
 
     /**
-     * Create the card view and recycler view
+     * CREATE THE CARD VIEW AND RECYCLER VIEW
      * @param position
      */
 
-    public void changeItem (int position, String text) {
+    public void changeNumber (int position, String number){
+        mNumberList.get(position).changePhoneNumber(number);
+        mAdapterCard.notifyDataSetChanged();
+    }
+
+    public void changeEmail(int position, String email){
+        mNumberList.get(position).changeEmail(email);
+        mAdapterCard.notifyDataSetChanged();
+    }
+
+    public void changeSimCard(int position, String simcardnumber){
+        mNumberList.get(position).changeSimCardNumber(simcardnumber);
+        mAdapterCard.notifyDataSetChanged();
+    }
+
+    public void changeLastContact (int position, String text) {
         mNumberList.get(position).changeContactText(text);
         mAdapterCard.notifyDataSetChanged();
     }
@@ -180,6 +198,7 @@ public class DeviceDetailActivity extends AppCompatActivity {
             @Override
             public void onEditClick(int position) {
                 Toast.makeText(DeviceDetailActivity.this, "editing", Toast.LENGTH_SHORT).show();
+                openDialog();
             }
 
             @Override
@@ -192,7 +211,7 @@ public class DeviceDetailActivity extends AppCompatActivity {
                     //Get  date
                     Date hourdateFormat = new Date();
                     String finalDate = "Last Contact " + hourdateFormat;
-                    changeItem(position, finalDate);
+                    changeLastContact(position, finalDate);
                 }
             }
 
@@ -202,6 +221,24 @@ public class DeviceDetailActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+
+
+    /**
+     * OPEN THE DIALOG
+     */
+
+    @Override
+    public void applyTexts(String numberDialog, String emailDialog, String simcardDialog) {
+        // Put the code to change the cardview's textview,
+        // for example : exampletextview.setText(numberDialog);
+        // for example : changeNumber(position, numberDialog);
+    }
+
+    public void openDialog(){
+        editSmsDialog editSmsDialog = new editSmsDialog();
+        editSmsDialog.show(getSupportFragmentManager(), "edit sms dialog");
     }
 
     /**

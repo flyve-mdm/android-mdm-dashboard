@@ -30,6 +30,13 @@
     <string name="result_pdu_details">Result PDU details</string>
     <string name="title_activity_login">Sign in</string>
 
+    <!-- Strings for Dialog -->
+    <string name="cancel">Cancel</string>
+    <string name="accept">Accept</string>
+    <string name="number_phone">Phone number</string>
+    <string name="email">Email</string>
+    <string name="sim_card_number">Sim card number</string>
+
     <!-- String related for Login -->
     <string name="username">Username</string>
     <string name="password">Password</string>

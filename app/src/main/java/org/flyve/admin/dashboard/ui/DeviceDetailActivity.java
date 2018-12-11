@@ -217,6 +217,9 @@ public class DeviceDetailActivity extends AppCompatActivity implements editSmsDi
 
             @Override
             public void onCallClick(int position) {
+                final String phoneNum = mNumberList.get(position).getPhone();
+                String dial = "tel: " + phoneNum;
+                startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(dial)));
                 Toast.makeText(DeviceDetailActivity.this, "calling", Toast.LENGTH_SHORT).show();
             }
 

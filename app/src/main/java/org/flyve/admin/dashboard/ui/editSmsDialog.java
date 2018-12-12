@@ -15,7 +15,7 @@ import org.flyve.admin.dashboard.R;
 public class editSmsDialog extends AppCompatDialogFragment {
 
     private EditText editNumberDialog;
-    private EditText editEmailDialog;
+    private EditText editIMEIDialog;
     private EditText editSimcarDialog;
 
     private DialogListener listener;
@@ -34,9 +34,9 @@ public class editSmsDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String numberDialog = editNumberDialog.getText().toString();
-                        String emailDialog = editEmailDialog.getText().toString();
+                        String imeiDialog = editIMEIDialog.getText().toString();
                         String simcardDialog = editSimcarDialog.getText().toString();
-                        listener.applyTexts(numberDialog, emailDialog, simcardDialog);
+                        listener.applyTexts(numberDialog, imeiDialog, simcardDialog);
                     }
                 }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
@@ -47,7 +47,7 @@ public class editSmsDialog extends AppCompatDialogFragment {
         });
 
         editNumberDialog = view.findViewById(R.id.editNumberDialog);
-        editEmailDialog = view.findViewById(R.id.editEmailDialog);
+        editIMEIDialog = view.findViewById(R.id.editIMEIDialog);
         editSimcarDialog = view.findViewById(R.id.editSimCardDialog);
 
         return builder.create();
@@ -65,6 +65,6 @@ public class editSmsDialog extends AppCompatDialogFragment {
     }
 
     public interface DialogListener{
-        void applyTexts(String numberDialog, String emailDialog, String simcardDialog);
+        void applyTexts(String numberDialog, String imeiDialog, String simcardDialog);
     }
 }

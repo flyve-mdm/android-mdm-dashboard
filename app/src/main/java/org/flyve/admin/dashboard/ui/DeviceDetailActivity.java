@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -22,7 +21,6 @@ import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -164,8 +162,8 @@ public class DeviceDetailActivity extends AppCompatActivity implements editSmsDi
         mAdapterCard.notifyDataSetChanged();
     }
 
-    public void changeEmail(int position, String email){
-        mNumberList.get(position).changeEmail(email);
+    public void changeIMEI(int position, String imei){
+        mNumberList.get(position).changeIMEI(imei);
         mAdapterCard.notifyDataSetChanged();
     }
 
@@ -181,8 +179,8 @@ public class DeviceDetailActivity extends AppCompatActivity implements editSmsDi
 
     public void createNumberPhoneList(){
         mNumberList = new ArrayList<>();
-        mNumberList.add(new NumberPhoneCardView("635207705","erikcr1995@gmail.com","SimCard1", "Last Contact"));
-        mNumberList.add(new NumberPhoneCardView("Add Number", "add email","Simcard","Last Contact"));
+        mNumberList.add(new NumberPhoneCardView("635207705","IMEI","SimCard1", "Last Contact"));
+        mNumberList.add(new NumberPhoneCardView("Add Number", "add IMEI","Simcard","Last Contact"));
     }
 
     public void buildRecyclerView(){
@@ -220,7 +218,6 @@ public class DeviceDetailActivity extends AppCompatActivity implements editSmsDi
                 final String phoneNum = mNumberList.get(position).getPhone();
                 String dial = "tel: " + phoneNum;
                 startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(dial)));
-                Toast.makeText(DeviceDetailActivity.this, "calling", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -233,7 +230,7 @@ public class DeviceDetailActivity extends AppCompatActivity implements editSmsDi
      */
 
     @Override
-    public void applyTexts(String numberDialog, String emailDialog, String simcardDialog) {
+    public void applyTexts(String numberDialog, String imeiDialog, String simcardDialog) {
         // Put the code to change the cardview's textview,
         // for example : exampletextview.setText(numberDialog);
         // for example : changeNumber(position, numberDialog);

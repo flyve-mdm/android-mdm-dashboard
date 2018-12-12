@@ -21,7 +21,7 @@
     <string name="drawer_sms">SMS ping</string>
     <string name="ping">PING</string>
     <string name="call">Call</string>
-    <string name="sim_card_1">Sim Card 1</string>
+    <string name="sim_card">Sim Card</string>
     <string name="delivered">DELIVERED: PHONE ONLINE</string>
     <string name="offline">DELIVERY FAILED: PHONE OFFLINE</string>
     <string name="sent">THE REQUEST IS SENT …</string>
@@ -29,12 +29,13 @@
     <string name="title_history">History:</string>
     <string name="result_pdu_details">Result PDU details</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="last_contact">Last Contact</string>
 
     <!-- Strings for Dialog -->
     <string name="cancel">Cancel</string>
     <string name="accept">Accept</string>
     <string name="number_phone">Phone number</string>
-    <string name="email">Email</string>
+    <string name="imei">IMEI</string>
     <string name="sim_card_number">Sim card number</string>
 
     <!-- String related for Login -->

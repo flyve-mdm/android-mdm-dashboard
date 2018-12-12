@@ -25,27 +25,27 @@
                 android:id="@+id/phoneNumberCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="NumberPhone"
-                android:textSize="20dp" />
+                android:text="@string/number_phone"
+                android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/emailCard"
+                android:id="@+id/imeiCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Email" />
+                android:text="@string/imei" />
 
             <TextView
                 android:id="@+id/simcard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="SimCard" />
+                android:text="@string/sim_card" />
 
             <TextView
                 android:id="@+id/lastContact"
-                android:textSize="13dp"
+                android:textSize="13sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Last Contact" />
+                android:text="@string/last_contact" />
 
         </LinearLayout>
 
@@ -54,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_gravity="center"
             android:layout_marginTop="0dp"
             android:orientation="vertical">

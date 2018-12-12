@@ -28,7 +28,7 @@
             android:ems="10"
             android:gravity="center"
             android:inputType="phone|number"
-            android:hint="@string/sim_card_1" />
+            android:hint="@string/sim_card" />
 
         <Button
             android:id="@+id/sendButton"

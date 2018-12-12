@@ -3,13 +3,13 @@ package org.flyve.admin.dashboard.ping;
 public class NumberPhoneCardView{
 
     private String PhoneCard;
-    private String mailCard;
+    private String imeiCard;
     private String simCard;
     private String lastContact;
 
-    public NumberPhoneCardView (String numberPhone, String email, String simcard, String contact){
+    public NumberPhoneCardView (String numberPhone, String imei, String simcard, String contact){
         PhoneCard = numberPhone;
-        mailCard = email;
+        imeiCard = imei;
         simCard = simcard;
         lastContact = contact;
     }
@@ -18,8 +18,8 @@ public class NumberPhoneCardView{
         PhoneCard = number;
     }
 
-    public void changeEmail(String email){
-        mailCard = email;
+    public void changeIMEI(String imei){
+        imeiCard = imei;
     }
 
     public void changeSimCardNumber(String simcardnumber){
@@ -35,8 +35,8 @@ public class NumberPhoneCardView{
         return PhoneCard;
     }
 
-    public String getMail() {
-        return mailCard;
+    public String getIMEI() {
+        return imeiCard;
     }
 
     public String getSim(){

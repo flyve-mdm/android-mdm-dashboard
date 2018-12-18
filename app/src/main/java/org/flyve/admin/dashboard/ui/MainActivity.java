@@ -2,13 +2,7 @@ package org.flyve.admin.dashboard.ui;
 
 import android.content.ClipData;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -23,9 +17,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class MainActivity extends AppCompatActivity {
 
-    private DrawerLayout mDrawerLayout;
+    private DrawerLayout drawerLayout;
     private FragmentManager mFragmentManager;
     private ListView lstDrawer;
     private ArrayList<HashMap<String, String>> arrDrawer;
@@ -47,14 +50,14 @@ public class MainActivity extends AppCompatActivity {
         buildRecyclerView();
 
         // Setup the DrawerLayout and NavigationView
-        txtToolbarTitle = (TextView) findViewById(R.id.txtToolbarTitle);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        txtToolbarTitle = findViewById(R.id.txtToolbarTitle);
+        drawerLayout = findViewById(R.id.drawerLayout);
 
-        lstDrawer = (ListView) findViewById(R.id.lstNV);
+        lstDrawer = findViewById(R.id.lstNV);
         lstDrawer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mDrawerLayout.closeDrawers();
+                drawerLayout.closeDrawers();
                 selectedItem = arrDrawer.get(position);
                 loadFragment(selectedItem);
             }
@@ -63,11 +66,11 @@ public class MainActivity extends AppCompatActivity {
         mFragmentManager = getSupportFragmentManager();
 
         // Setup Drawer Toggle of the Toolbar
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
-        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout, toolbar,R.string.app_name,
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,R.string.app_name,
                 R.string.app_name);
 
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        drawerLayout.setDrawerListener(mDrawerToggle);
 
         mDrawerToggle.syncState();
 
@@ -208,6 +211,12 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        // Settings
+        if (item.get("id").equals("7")){
+            SettingsFragment f = new SettingsFragment();
+            fragmentTransaction.replace(R.id.containerView, f).commit();
+            mRecyclerView.setVisibility(View.GONE);
+        }
         // About
         if (item.get("id").equals("8")) {
             FragmentAbout f = new FragmentAbout();

@@ -3,10 +3,12 @@ package org.flyve.admin.dashboard.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 
 import org.flyve.admin.dashboard.R;
 import org.flyve.admin.dashboard.login.LoginActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 
 public class SplashActivity extends AppCompatActivity {
 

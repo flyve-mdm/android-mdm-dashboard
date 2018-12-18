@@ -1,6 +1,6 @@
 package org.flyve.admin.dashboard.adapter;
 
-import android.support.v7.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +11,8 @@ import org.flyve.admin.dashboard.R;
 import org.flyve.admin.dashboard.ui.CardView;
 
 import java.util.ArrayList;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.CardViewHolder> {
 

@@ -1,87 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="#14b6a6"
-    app:cardCornerRadius="10dp"
-    app:cardUseCompatPadding="true"
-    android:id="@+id/device_card">
+    android:padding="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/device_card"
+        style="@style/Widget.MaterialComponents.CardView"
+        app:strokeWidth="3dp"
+        app:strokeColor="@color/colorPrimary"
+        app:cardBackgroundColor="@color/colorAccent"
+        app:cardCornerRadius="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:padding="12dp">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="5dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="8dp">
 
-            <TextView
-                android:id="@+id/phoneNumberCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/number_phone"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/imeiCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/imei" />
-
-            <TextView
-                android:id="@+id/simcard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/sim_card" />
-
-            <TextView
-                android:id="@+id/lastContact"
-                android:textSize="13sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/last_contact" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="0dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/editNumber"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:src="@drawable/ic_edit" />
+                android:orientation="vertical"
+                android:padding="5dp">
 
-            <ImageView
-                android:id="@+id/sendPing"
+                <TextView
+                    android:textColor="@color/colorPrimaryDark"
+                    android:id="@+id/phoneNumberCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/number_phone"
+                    android:fontFamily="sans-serif"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:textColor="@color/colorPrimaryDark"
+                    android:id="@+id/imeiCard"
+                    android:fontFamily="sans-serif"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/imei" />
+
+                <TextView
+                    android:textColor="@color/colorPrimaryDark"
+                    android:id="@+id/simcard"
+                    android:fontFamily="sans-serif"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sim_card" />
+
+                <TextView
+                    android:textColor="@color/colorPrimaryDark"
+                    android:id="@+id/lastContact"
+                    android:fontFamily="sans-serif"
+                    android:textSize="13sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/last_contact" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:src="@drawable/ic_sms" />
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/callNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:src="@drawable/ic_call_icon" />
+                <ImageView
+                    android:id="@+id/editNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_edit" />
 
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/sendPing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_sms" />
 
-    </RelativeLayout>
+                <ImageView
+                    android:id="@+id/callNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_call_icon" />
 
-</android.support.v7.widget.CardView>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>
+

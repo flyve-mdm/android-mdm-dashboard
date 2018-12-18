@@ -6,25 +6,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:hint="@string/number_phone"
-        android:id="@+id/editNumberDialog"
-        android:inputType="number"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:hint="@string/number_phone">
 
-    <EditText
-        android:hint="@string/imei"
-        android:id="@+id/editIMEIDialog"
-        android:inputType="textEmailAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editNumberDialog"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:hint="@string/sim_card_number"
-        android:id="@+id/editSimCardDialog"
-        android:inputType="text"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:hint="@string/imei">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editIMEIDialog"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/sim_card_number">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editSimCardDialog"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 </LinearLayout>

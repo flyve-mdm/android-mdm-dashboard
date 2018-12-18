@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+
 import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -37,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -113,7 +115,9 @@ public class DeviceDetailActivity extends AppCompatActivity implements editSmsDi
         deliveryPI = PendingIntent.getBroadcast(this, 0x1337, new Intent(DELIVER), PendingIntent.FLAG_CANCEL_CURRENT);
 
         //TOOLBAR
+
         Toolbar toolbar = findViewById(R.id.toolbar);
+
         toolbar.inflateMenu(R.menu.device_menu_toolbar);
 
         if (toolbar != null) {
@@ -223,9 +227,8 @@ public class DeviceDetailActivity extends AppCompatActivity implements editSmsDi
             }
 
         });
+
     }
-
-
 
     /**
      * OPEN THE DIALOG
@@ -281,6 +284,7 @@ public class DeviceDetailActivity extends AppCompatActivity implements editSmsDi
         }
         return sb.toString();
     }
+
 
     @Override
     public void onResume() {

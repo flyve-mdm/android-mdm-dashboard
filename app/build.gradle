@@ -1,7 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
+
     compileSdkVersion 28
+
     buildToolsVersion '28.0.3'
 
     defaultConfig {
@@ -50,7 +52,9 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation 'com.google.android.material:material:1.0.0'
+
     implementation 'com.orhanobut:logger:2.1.1'
 
 

@@ -9,6 +9,7 @@ import org.flyve.admin.dashboard.login.LoginActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 public class SplashActivity extends AppCompatActivity {
 
     private static final int SPLASH_TIME = 3000;

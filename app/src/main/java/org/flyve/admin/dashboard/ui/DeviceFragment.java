@@ -1,8 +1,11 @@
 package org.flyve.admin.dashboard.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.nfc.Tag;
 import android.os.Bundle;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,7 @@ import org.flyve.admin.dashboard.adapter.DeviceTouchHelper;
 import org.flyve.admin.dashboard.model.DeviceModel;
 import org.flyve.admin.dashboard.utils.FlyveLog;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;

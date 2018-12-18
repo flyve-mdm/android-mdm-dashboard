@@ -1,0 +1,98 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
+
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        setProperty("archivesBaseName", "glpi-api-client")
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        buildTypes.each {
+            def glpi_user_val = glpi_user ?: "\"\""
+            def glpi_password_val = glpi_password ?: "\"\""
+            def glpi_url_val = glpi_url ?: "\"\""
+
+            it.buildConfigField 'String', 'GLPI_USER', glpi_user_val
+            it.buildConfigField 'String', 'GLPI_PASSWORD', glpi_password_val
+            it.buildConfigField 'String', 'GLPI_URL', glpi_url_val
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            testCoverageEnabled true
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+android.libraryVariants.all  { variant ->
+    def name = variant.buildType.name
+    if (!name.equals("debug")) {
+        def task = project.tasks.create  "jar${name.capitalize()}", Jar
+        task.dependsOn variant.javaCompile
+        task.from  variant.javaCompile.destinationDir
+        artifacts.add('archives', task);
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.4'
+}
+
+Properties properties = new Properties()
+if(project.rootProject.file('local.properties').exists()) {
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+}
+
+ext {
+    bintrayName = 'java-library-glpi'
+    bintrayRepo = 'teclib-repository'
+    bintrayUserOrg = "glpi-project"
+
+    publishedGroupId = 'org.glpi'
+    libraryName = 'api'
+    artifact = 'api'
+
+    libraryDescription = 'GLPI API Client Library for Java provides functionality common to all GLPI APIs, for example HTTP transport, error handling, authentication, JSON parsing, media download/upload, and batching.'
+
+    siteUrl = 'https://github.com/glpi-project/java-library-glpi/'
+    gitUrl = 'https://github.com/glpi-project/java-library-glpi.git'
+
+    libraryVersion = properties.getProperty("version")
+
+    developerId = 'ivans51'
+    developerName = 'Ivan Del Pino'
+    developerEmail = 'idelpino@teclib.com'
+
+    licenseName = 'GNU GENERAL PUBLIC LICENSE, Version 3.0'
+    licenseUrl = 'https://www.gnu.org/licenses/gpl-3.0.html'
+    allLicenses = ["GPL-3.0"]
+}
+
+apply from: 'bintray.gradle'
+apply from: 'install.gradle'

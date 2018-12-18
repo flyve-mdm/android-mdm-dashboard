@@ -56,6 +56,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
     implementation 'com.orhanobut:logger:2.1.1'
+    implementation 'com.android.support:multidex:1.0.2'
+    implementation project(':glpi')
+
 
 
 
@@ -89,13 +92,6 @@ task updateVersionCode {
         }
     }
 }
-
-
-
-
-
-
-
 
 task updateVersionName {
     doLast {

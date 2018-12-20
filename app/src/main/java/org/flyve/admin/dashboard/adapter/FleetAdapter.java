@@ -1,6 +1,5 @@
 package org.flyve.admin.dashboard.adapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,8 @@ import org.flyve.admin.dashboard.R;
 import org.flyve.admin.dashboard.model.FleetModel;
 
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 
 public class FleetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{

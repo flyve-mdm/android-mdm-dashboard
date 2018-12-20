@@ -2,7 +2,6 @@ package org.flyve.admin.dashboard.adapter;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -16,6 +15,8 @@ import org.flyve.admin.dashboard.R;
 import org.flyve.admin.dashboard.model.ApplicationModel;
 
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 
 public class ApplicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{

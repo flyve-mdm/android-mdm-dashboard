@@ -11,5 +11,5 @@
         android:title="add"
         android:id="@+id/itemAdd"
         app:showAsAction="always"
-        android:icon="@drawable/ic_add" />
+        android:icon="@drawable/ic_add_circle_outline_white" />
 </menu>

@@ -11,11 +11,11 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Telephony;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-
 import org.flyve.admin.dashboard.ui.DeviceDetailActivity;
+
+import androidx.core.app.NotificationCompat;
 
 import static org.flyve.admin.dashboard.ui.DeviceDetailActivity.PREF_DATA_SMS_STORE;
 import static org.flyve.admin.dashboard.ui.DeviceDetailActivity.PREF_RECEIVE_DATA_SMS;

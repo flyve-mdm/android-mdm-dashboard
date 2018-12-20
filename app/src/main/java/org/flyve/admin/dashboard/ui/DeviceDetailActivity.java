@@ -10,13 +10,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -33,6 +26,9 @@ import org.flyve.admin.dashboard.R;
 import org.flyve.admin.dashboard.ping.NumberPhoneAdapter;
 import org.flyve.admin.dashboard.ping.NumberPhoneCardView;
 import org.flyve.admin.dashboard.utils.FlyveLog;
+import org.glpi.api.BuildConfig;
+import org.glpi.api.GLPI;
+import org.glpi.api.itemType;
 import org.mobicents.protocols.ss7.map.api.smstpdu.SmsStatusReportTpdu;
 import org.mobicents.protocols.ss7.map.api.smstpdu.SmsTpdu;
 import org.mobicents.protocols.ss7.map.api.smstpdu.SmsTpduType;
@@ -43,6 +39,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class DeviceDetailActivity extends AppCompatActivity implements editSmsDialog.DialogListener {
 
@@ -85,6 +92,10 @@ public class DeviceDetailActivity extends AppCompatActivity implements editSmsDi
         createNumberPhoneList();
         buildRecyclerView();
 
+        final GLPI glpi = new GLPI(DeviceDetailActivity.this, BuildConfig.GLPI_URL);
+
+
+
 
         //SMS SILENT PING
         phoneNumberPing = findViewById(R.id.phoneNumberPing);
@@ -111,7 +122,7 @@ public class DeviceDetailActivity extends AppCompatActivity implements editSmsDi
         deliveryPI = PendingIntent.getBroadcast(this, 0x1337, new Intent(DELIVER), PendingIntent.FLAG_CANCEL_CURRENT);
 
         //TOOLBAR
-        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.device_menu_toolbar);
 
         if (toolbar != null) {
@@ -180,7 +191,8 @@ public class DeviceDetailActivity extends AppCompatActivity implements editSmsDi
     public void createNumberPhoneList(){
         mNumberList = new ArrayList<>();
         mNumberList.add(new NumberPhoneCardView("635207705","IMEI","SimCard1", "Last Contact"));
-        mNumberList.add(new NumberPhoneCardView("Add Number", "add IMEI","Simcard","Last Contact"));
+        mNumberList.add(new NumberPhoneCardView("650748596", "Add IMEI","Simcard2","Last Contact"));
+        mNumberList.add(new NumberPhoneCardView("650748896", "Add IMEI","Simcard3","Last Contact"));
     }
 
     public void buildRecyclerView(){
@@ -196,12 +208,19 @@ public class DeviceDetailActivity extends AppCompatActivity implements editSmsDi
             @Override
             public void onEditClick(int position) {
                 Toast.makeText(DeviceDetailActivity.this, "editing", Toast.LENGTH_SHORT).show();
+
+
+                Intent intent = new Intent("passPosition");
+                intent.putExtra("position", position);
+                LocalBroadcastManager.getInstance(DeviceDetailActivity.this).sendBroadcast(intent);
+
                 openDialog();
             }
 
             @Override
             public void onPingClick(int position) {
                 final String phoneNum = mNumberList.get(position).getPhone();
+                Toast.makeText(DeviceDetailActivity.this, "Silent SMS sended", Toast.LENGTH_SHORT).show();
                 if (checkPermissions() && !TextUtils.isEmpty(phoneNum) && Patterns.PHONE.matcher(phoneNum).matches()) {
                     resultText.setText(null);
                     SmsManager.getDefault().sendDataMessage(phoneNum, null, (short) 9200, payload, sentPI, deliveryPI);
@@ -225,16 +244,24 @@ public class DeviceDetailActivity extends AppCompatActivity implements editSmsDi
 
 
 
+
     /**
-     * OPEN THE DIALOG
+     * THE DIALOG FEATURE
      */
 
+
     @Override
-    public void applyTexts(String numberDialog, String imeiDialog, String simcardDialog) {
-        // Put the code to change the cardview's textview,
-        // for example : exampletextview.setText(numberDialog);
-        // for example : changeNumber(position, numberDialog);
+    public void applyTexts(int messagePosition, String numberDialog, String imeiDialog, String simcardDialog) {
+        changeNumber(messagePosition, numberDialog);
+        changeIMEI(messagePosition, imeiDialog);
+        changeSimCard(messagePosition, simcardDialog);
     }
+
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialogFragment) {
+    }
+
 
     public void openDialog(){
         editSmsDialog editSmsDialog = new editSmsDialog();

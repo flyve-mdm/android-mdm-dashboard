@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">GLPI</string>
+    <string name="error_session_token_empty">Session token is empty, please init session first</string>
+    <string name="error_range">The min value needs to be lower than max value</string>
+    <string name="kill_session_success">Session is closed</string>
+    <string name="change_active_profile_success">Change active profile success</string>
+    <string name="change_active_entities_success">Change active entities success</string>
+    <string name="lost_password_success">Request success</string>
+    <string name="recovery_password_success">Recovery success</string>
+    <string name="error_generic">Fail</string>
+</resources>

@@ -41,6 +41,7 @@ public class ServiceGenerator {
 
     Retrofit retrofit;
 
+
     /**
      * Initial connection configuration
      *

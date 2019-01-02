@@ -92,11 +92,6 @@ public class DeviceDetailActivity extends AppCompatActivity implements editSmsDi
         createNumberPhoneList();
         buildRecyclerView();
 
-        final GLPI glpi = new GLPI(DeviceDetailActivity.this, BuildConfig.GLPI_URL);
-
-
-
-
         //SMS SILENT PING
         phoneNumberPing = findViewById(R.id.phoneNumberPing);
         statusText = findViewById(R.id.sendStatus);

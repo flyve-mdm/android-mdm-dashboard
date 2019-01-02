@@ -42,7 +42,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
 
-            android:inputType="textPassword"
+            android:inputType="text"
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -55,5 +55,19 @@
         android:text="@string/login"
         android:layout_width="150dp"
         android:layout_height="wrap_content" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewApi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

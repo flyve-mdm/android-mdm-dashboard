@@ -4,9 +4,7 @@ buildscript {
     repositories {
         jcenter()
         google()
-        maven{
-            url "https://dl.bintray.com/glpi-project/maven-repository"
-        }
+
 
     }
     dependencies {
@@ -23,6 +21,9 @@ allprojects {
     repositories {
         jcenter()
         google()
+        maven{
+            url "https://dl.bintray.com/glpi-project/maven-repository"
+        }
     }
 }
 

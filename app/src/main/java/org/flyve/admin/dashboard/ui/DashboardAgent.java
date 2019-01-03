@@ -30,7 +30,6 @@ package org.flyve.admin.dashboard.ui;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -39,6 +38,9 @@ import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 
 import org.flyve.admin.dashboard.data.DataStorage;
+import org.glpi.api.GLPI;
+
+import androidx.multidex.MultiDex;
 
 /**
  * All the application configuration

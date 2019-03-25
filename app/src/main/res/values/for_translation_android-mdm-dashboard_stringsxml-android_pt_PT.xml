@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Amdin Dashboard</string>
+
+    <string name="drawer_dashboard">painel de controlo</string>
+    <string name="drawer_devices">dispositivos</string>
+    <string name="drawer_fleets">frota</string>
+    <string name="drawer_files">ficheiros</string>
+    <string name="drawer_applications">aplicações</string>
+    <string name="drawer_users">utilizadores</string>
+    <string name="drawer_settings">definições</string>
+    <string name="drawer_about">sobre</string>
+</resources>
